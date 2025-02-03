@@ -34,10 +34,6 @@ Welcome to the **Awesome-Learning4Safe-Contact-rich-tasks** repository! This pro
 <summary>highly related survey or review</summary>
 <details open>
 <summary>other related survey or review</summary>
-- [News](#news)
-- [Benchmark](#benchmark)
-- [Cite](#cite)
--
 
 
 ## News
