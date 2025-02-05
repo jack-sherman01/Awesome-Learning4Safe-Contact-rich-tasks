@@ -51,6 +51,3 @@ bibtex
 ```
 ## License
 MIT
-
-## Acknowledgement
-Templated from [Awesome-AI-Scientist-Papers](https://github.com/universea/Awesome-AI-Scientist-Papers)
