@@ -22,7 +22,9 @@ Welcome to the **Awesome-Learning4Safe-Contact-rich-tasks** repository! This pro
 - [Cite](#cite)
 
 ## Surveys
--
+- [Safe Learning in Robotics: From Learning-Based Control to Safe Reinforcement Learning](https://www.annualreviews.org/content/journals/10.1146/annurev-control-042920-020211),Lukas Brunke, Melissa Greeff, Adam W. Hall, Zhaocong Yuan, Siqi Zhou, Jacopo Panerati, and Angela P. Schoellig et al., Annual Review of Control, Robotics, and Autonomous Systems, 2022
+- [A survey of robot manipulation in contact](https://www.sciencedirect.com/science/article/pii/S0921889022001312), M Suomalainen, Y Karayiannidis, V Kyrki, Robotics and Autonomous Systems, 2022
+- [A review of compliant mechanisms for contact robotics applications](https://www.sciencedirect.com/science/article/pii/S0921889024002860),Z Samadikhoshkho, E Saive, MG Lipsett,Robotics and Autonomous Systems, 2024
 
 ## Papers
 <details open>
