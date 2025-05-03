@@ -7,11 +7,11 @@
 
 Welcome to the **Awesome-Learning4Safe-Contact-rich-tasks** repository! This project collecting research papers in area of learning based methods for safe contact-rich robotics tasks. For more details, please refer to our survey paper : [SESE](https://scholar.google.com/) Authers, target to IJRR, 2025. Any contribution is welcome!
 
-This is a comprehensive collection of safe learning for contact-rich robotic tasks, aiming to contribute to the robotics and embodied AI communities. The main contributions are as below: 
+This is a comprehensive paper collection of safe learning for contact-rich robotic tasks, aiming to contribute to the robotics and embodied AI communities. The main contributions are as below: 
 <p align="center">
-  <img src="docs/images/framework.jpg" alt="framework">
+  <img src="docs/images/overview.png" alt="framework">
   <br>
-  <em>Framework of the Survey: Left: Right: . Our contribution: </em>
+  <em>Framework of the Survey: will be updated soon. Our contribution: </em>
 
 </p>
 
