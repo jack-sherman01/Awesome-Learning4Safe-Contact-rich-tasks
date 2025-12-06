@@ -21,6 +21,7 @@ This is a comprehensive paper collection of safe learning for contact-rich robot
   - [Surveys](#surveys)
   - [Papers](#papers)
   - [News](#news)
+  - [Simulation](#simulation)
   - [Benchmark](#benchmark)
   - [Cite](#cite)
   - [License](#license)
@@ -53,9 +54,10 @@ This is a comprehensive paper collection of safe learning for contact-rich robot
 ## Papers
 <details open>
 <summary>Safe Exploration</summary>
+Papers in this sction are about safe exploration, especially before contact.
 <details open>
 <summary>Safe Execution</summary>
-- [Survey](#survey)
+
 <details open>
 <summary>highly related survey or review</summary>
 <details open>
@@ -65,7 +67,7 @@ This is a comprehensive paper collection of safe learning for contact-rich robot
 ## News
 -
 
-
+## Simulation
 ## Benchmark
 - 
 
