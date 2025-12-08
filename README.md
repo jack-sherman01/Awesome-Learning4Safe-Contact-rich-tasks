@@ -5,14 +5,28 @@
 ![Visitors](https://api.visitorbadge.io/api/visitors?path=https%3A%2F%2Fgithub.com%2Funiversea%2FAwesome-Learning4Safe-Contact-rich-tasks.git&label=Visitors&countColor=%2337d67a&style=flat&labelStyle=none)
 [![GitHub license](https://img.shields.io/github/license/universea/Awesome-AI-Scientist-Papers)](https://github.com/jack-sherman01/Awesome-Learning4Safe-Contact-rich-tasks/blob/main/LICENSE)
 
-Welcome to the **Awesome-Learning4Safe-Contact-rich-tasks** repository! This project collecting research papers in area of learning based methods for safe contact-rich robotics tasks. For more details, please refer to our survey paper : [SE](https://scholar.google.com/) Authers, target to IJRR, 2025. Any contribution is welcome!
+Welcome to the **Awesome-Learning4Safe-Contact-rich-tasks** repository! This project collecting research papers in area of learning based methods for safe contact-rich robotics tasks. For more details, please refer to our survey paper : [Safe Learning for Contact-Rich Robot Tasks: A Survey from classical Learning-Based Methods to Safe Foundation Models](https://www.techrxiv.org/doi/full/10.36227/techrxiv.176472870.03980379/v1/) Authers: Heng Zhang,Rui Dai,Gokhan Solak,Pokuang Zhou,Yu She,Arash Ajoudani, in submission to IJRR, 2025. Any contribution is welcome!
 
 This is a comprehensive paper collection of safe learning for contact-rich robotic tasks, aiming to contribute to the robotics and embodied AI communities. The main contributions are as below: 
-<p align="center">
+<p style="text-align: justify;">
   <img src="docs/images/overview.png" alt="framework">
   <br>
-  <em>Framework of the Survey: will be updated soon. Our contribution: </em>
-
+  <em>Our contribution: </em>
+  <br>
+  <strong>A Safety-Centric Taxonomy</strong>
+  We introduce a structured taxonomy that categorizes safe learning approaches based on key dimensions, including learning phase (exploration vs. execution), level of safety integration (planning, control, or end-to-end), and modalities used (force/torque, vision, etc.). This survey provides a comprehensive lens through which researchers can analyze existing methods and identify safety design trade-offs.
+  <br><br>
+  <img src="docs/images/taxonomy.png" alt="taxonomy">
+  <br>
+  <strong>Contextualization Within Contact-Rich Tasks</strong>
+  Beyond general safe learning, we focus on its application to contact-rich robotic tasks such as insertion, polishing, and assembly. We detail how safety constraints are embedded in these tasks, and map the methods used to specific operational challenges (e.g., compliance, contact-inavatiable tasks, collision avoidance, and force control).
+  <br><br>
+  <img src="docs/images/task_cate.png" alt="overview2">
+  <br>
+  <strong>Identification of Gaps, Challenges, and Future Directions</strong>
+  We synthesize open research questions and outline critical challenges such as sim-to-real transfer under safety constraints, the scarcity of standardized benchmarks, and the need for provably safe generalization. We also discuss underexplored directions, including hybrid control-learning frameworks and human-in-the-loop safety mechanisms. Most importantly, we highlight the challenges and future opportunities in integrating safe contact-rich learning with large robotic foundation models, particularly VLM and VLA.
+  <br><br>
+  <img src="docs/images/future.png" alt="future">
 </p>
 
 ## Table of Contents
