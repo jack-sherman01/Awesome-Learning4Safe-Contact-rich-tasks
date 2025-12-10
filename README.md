@@ -8,35 +8,41 @@
 Welcome to the **Awesome-Learning4Safe-Contact-rich-tasks** repository! This project collecting research papers in area of learning based methods for safe contact-rich robotics tasks. For more details, please refer to our survey paper : [Safe Learning for Contact-Rich Robot Tasks: A Survey from classical Learning-Based Methods to Safe Foundation Models](https://www.techrxiv.org/doi/full/10.36227/techrxiv.176472870.03980379/v1/) Authers: Heng Zhang,Rui Dai,Gokhan Solak,Pokuang Zhou,Yu She,Arash Ajoudani, in submission to IJRR, 2025. Any contribution is welcome!
 
 This is a comprehensive paper collection of safe learning for contact-rich robotic tasks, aiming to contribute to the robotics and embodied AI communities. The main contributions are as below: 
+## Our contribution:
 <p style="text-align: justify;">
-  <img src="docs/images/overview.png" alt="framework">
+  <img src="docs/images/trend.jpg" alt="framework">
   <br>
-  <em>Our contribution: </em>
+
   <br>
   <strong>A Safety-Centric Taxonomy</strong>
   We introduce a structured taxonomy that categorizes safe learning approaches based on key dimensions, including learning phase (exploration vs. execution), level of safety integration (planning, control, or end-to-end), and modalities used (force/torque, vision, etc.). This survey provides a comprehensive lens through which researchers can analyze existing methods and identify safety design trade-offs.
   <br><br>
-  <img src="docs/images/taxonomy.png" alt="taxonomy">
+  <!-- <img src="docs/images/taxonomy.png" alt="taxonomy"> -->
   <br>
   <strong>Contextualization Within Contact-Rich Tasks</strong>
   Beyond general safe learning, we focus on its application to contact-rich robotic tasks such as insertion, polishing, and assembly. We detail how safety constraints are embedded in these tasks, and map the methods used to specific operational challenges (e.g., compliance, contact-inavatiable tasks, collision avoidance, and force control).
   <br><br>
-  <img src="docs/images/task_cate.png" alt="overview2">
+  <img src="docs/images/task.jpg" alt="overview2">
   <br>
   <strong>Identification of Gaps, Challenges, and Future Directions</strong>
   We synthesize open research questions and outline critical challenges such as sim-to-real transfer under safety constraints, the scarcity of standardized benchmarks, and the need for provably safe generalization. We also discuss underexplored directions, including hybrid control-learning frameworks and human-in-the-loop safety mechanisms. Most importantly, we highlight the challenges and future opportunities in integrating safe contact-rich learning with large robotic foundation models, particularly VLM and VLA.
   <br><br>
-  <img src="docs/images/future.png" alt="future">
+  <img src="docs/images/vla.png" alt="future">
 </p>
 
 ## Table of Contents
 - [Awesome-Learning4Safe-Contact-rich-tasks](#awesome-learning4safe-contact-rich-tasks)
+  - [Our contribution:](#our-contribution)
   - [Table of Contents](#table-of-contents)
   - [Surveys](#surveys)
   - [Papers](#papers)
-  - [News](#news)
-  - [Simulation](#simulation)
-  - [Benchmark](#benchmark)
+    - [safe learning for contact-rich robotic tasks](#safe-learning-for-contact-rich-robotic-tasks)
+    - [Contact-rich tasks](#contact-rich-tasks)
+    - [Sensing And Policy Modalities](#sensing-and-policy-modalities)
+    - [Data Acquisition](#data-acquisition)
+    - [Safety Evaluation Metrics](#safety-evaluation-metrics)
+    - [Safety Abstraction Level](#safety-abstraction-level)
+    - [Safety Enforcement Spaces](#safety-enforcement-spaces)
   - [Cite](#cite)
   - [License](#license)
 
@@ -66,24 +72,92 @@ This is a comprehensive paper collection of safe learning for contact-rich robot
 - [Robots in manufacturing: Programming, control, and safety standards](https://www.sciencedirect.com/science/chapter/edited-volume/pii/B9780443138126000117), Srinivasan Lakshminarayanan, Sreekanth Kana, Alberto De San Bernabe, Sri Harsha Turlapati, Dino Accoto, Domenico Campolo, in Digital Manufacturing (Elsevier), 2024
 
 ## Papers
+### safe learning for contact-rich robotic tasks
 <details open>
 <summary>Safe Exploration</summary>
-Papers in this sction are about safe exploration, especially before contact.
+This section introduces safe learning before executing the task, highlighting
+its importance in ensuring reliable and risk-free performance
+prior to real execution.
+<!-- <details open> -->
+
 <details open>
 <summary>Safe Execution</summary>
+Safe execu-
+tion is crucial in contact-rich robotic tasks, as robots must
+interact not only with complex and uncertain environments
+but often also in close proximity to humans . This section
+focuses on learning methods that ensure safety during the execution of contact-rich tasks, addressing challenges such as safe contact, force control, and compliance.
+
+<details open>
+<summary>Provable Safety Methods</summary>
+
+<details open>
+<summary>Safe foundation models</summary>
 
 <details open>
 <summary>highly related survey or review</summary>
 <details open>
 <summary>other related survey or review</summary>
 
+### Contact-rich tasks
+<details open>
+<summary>Assembly and Insertion</summary>
+<details open>
+<summary>Surface Interaction</summary>
+<details open>
+<summary>Object Manipulation</summary>
+<details open>
+<summary>Physical HRI</summary>
+<details open>
+<summary>Other tasks</summary>
 
-## News
--
+### Sensing And Policy Modalities
+<details open>
+<summary>Pose and Proprioceptive</summary> 
+<details open>
+<summary>Force and Torque sensing</summary>
+<details open>
+<summary>Vision Sensing</summary>
+<details open>
+<summary>Tactile Sensing</summary>
 
-## Simulation
-## Benchmark
-- 
+### Data Acquisition
+<details open>
+<summary>Simulation-Based Data Generation </summary>
+<details open>
+<summary>Real-World Data Collection</summary>
+<details open>
+<summary>Hybrid Data Approaches</summary>
+<!-- ## Simulation
+## Benchmark -->
+
+### Safety Evaluation Metrics
+<details open>
+<summary>Safety, Efficiency and Task Objectives </summary>
+<details open>
+<summary>Trade-off Between Objectives</summary>
+<details open>
+<summary>improved Evaluation</summary>
+
+### Safety Abstraction Level
+<details open>
+<summary>High-Level Safety Constraints</summary>
+- <details open>
+<summary>Low-Level Safety Implementations</summary>
+- <details open>
+<summary>End-to-End Safety Enhancement</summary>
+- <details open>
+<summary>Hybrid Safety Approaches</summary>
+
+### Safety Enforcement Spaces
+<details open>
+<summary>Task Space</summary>
+- <details open>
+<summary>Joint Space </summary>
+- <details open>
+<summary>Dual-Space Safety Enforcement </summary>
+- <details open>
+<summary>Policy Spaces</summary>
 
 ## Cite
 ```
