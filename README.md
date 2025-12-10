@@ -75,18 +75,12 @@ This is a comprehensive paper collection of safe learning for contact-rich robot
 ### safe learning for contact-rich robotic tasks
 <details open>
 <summary>Safe Exploration</summary>
-This section introduces safe learning before executing the task, highlighting
-its importance in ensuring reliable and risk-free performance
-prior to real execution.
+This section introduces safe learning before executing the task, highlighting its importance in ensuring reliable and risk-free performance prior to real execution.
 <!-- <details open> -->
 
 <details open>
 <summary>Safe Execution</summary>
-Safe execu-
-tion is crucial in contact-rich robotic tasks, as robots must
-interact not only with complex and uncertain environments
-but often also in close proximity to humans . This section
-focuses on learning methods that ensure safety during the execution of contact-rich tasks, addressing challenges such as safe contact, force control, and compliance.
+Safe execution is crucial in contact-rich robotic tasks, as robots must interact not only with complex and uncertain environments but often also in close proximity to humans . This section focuses on learning methods that ensure safety during the execution of contact-rich tasks, addressing challenges such as safe contact, force control, and compliance.
 
 <details open>
 <summary>Provable Safety Methods</summary>
