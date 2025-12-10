@@ -88,7 +88,11 @@ Papers in this sction are about safe exploration, especially before contact.
 ## Cite
 ```
 bibtex
-@article{
+@article{zhang2025safe,
+  title={Safe Learning for Contact-Rich Robot Tasks: A Survey From Classical Learning-Based Methods to Safe Foundation Models},
+  author={Zhang, Heng and Dai, Rui and Solak, Gokhan and Zhou, Pokuang and She, Yu and Ajoudani, Arash}
+  year={2025},
+  journal={TechRxiv}
 }
 ```
 ## License
