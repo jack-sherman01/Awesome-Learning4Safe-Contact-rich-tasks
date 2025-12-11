@@ -119,6 +119,25 @@ Safe execution is crucial in contact-rich robotic tasks, as robots must interact
 
 <details open>
 <summary>Physical HRI</summary>
+
+- [A Learning Control Strategy for Robot-assisted Bathing via Impedance Sliding Mode Technique With Non-repetitive Tasks](https://link.springer.com/article/10.1007/s12555-022-0436-6), Xu et al., International Journal of Control, Automation and Systems, 2024
+- [Force-Constrained Visual Policy: Safe Robot-Assisted Dressing via Multi-Modal Sensing](https://ieeexplore.ieee.org/abstract/document/10465608/), Sun et al., IEEE Robotics and Automation Letters, 2024
+- [Task-oriented safety field for robot control in human-robot collaborative assembly based on residual learning](https://www.sciencedirect.com/science/article/pii/S095741742302448X), Zhu et al., Expert Systems with Applications, 2024
+- [Impedance learning for human-guided robots in contact with unknown environments](https://ieeexplore.ieee.org/abstract/document/10160165/), Xing et al., IEEE Transactions on Robotics, 2023
+- Study on force control for robot massage with a model-based reinforcement learning algorithm
+, Xiao et al., Intelligent Service Robotics, 2023
+- [Research on Robot Massage Force Control Based on Residual Reinforcement Learning](https://ieeexplore.ieee.org/abstract/document/10374025/), Xiao et al., IEEE Access, 2024
+- [Impedance Learning-Based Adaptive Control for Human–Robot Interaction](https://ieeexplore.ieee.org/abstract/document/9531394), Sharifi et al., IEEE Transactions on Control Systems Technology, 2021
+- [Learning Variable Impedance Control for Robotic Massage With Deep Reinforcement Learning: A Novel Learning Framework](https://ieeexplore.ieee.org/abstract/document/10385222/), Li et al., IEEE Systems, Man, and Cybernetics Magazine, 2024
+- [Text2Interaction: Establishing Safe and Preferable Human-Robot Interaction](https://arxiv.org/abs/2408.06105), Thumm et al., Conference on Robot Learning (CoRL), 2024
+- [The path towards contact-based physical human–robot interaction](https://www.sciencedirect.com/science/article/pii/S0921889024002136), Farajtabar et al., Robotics and Autonomous Systems, 2024
+- [A human-centered safe robot reinforcement learning framework with interactive behaviors](https://www.frontiersin.org/journals/neurorobotics/articles/10.3389/fnbot.2023.1280341), Gu et al., Frontiers in Neurorobotics, 2023
+- [Q-Learning-based model predictive variable impedance control for physical human-robot collaboration](https://www.sciencedirect.com/science/article/pii/S0004370222001114), Roveda et al., Artificial Intelligence, 2022 
+- [Adaptive Safety-Critical Control With Uncertainty Estimation for Human–Robot Collaboration](https://ieeexplore.ieee.org/abstract/document/10281398), Zhang et al., IEEE TASE, 2023
+- [Model-Based Actor-Critic Learning of Robotic Impedance Control in Complex Interactive Environment](https://ieeexplore.ieee.org/abstract/document/9652099), Zhao et al., IEEE Transactions on Industrial Electronics, 2021
+- [Assistive Gym: A Physics Simulation Framework for Assistive Robotics](https://ieeexplore.ieee.org/abstract/document/9197411), Erickson et al., IEEE International Conference on Robotics and Automation (ICRA), 2020
+
+
 </details>
 
 <details open>
@@ -147,6 +166,9 @@ Safe execution is crucial in contact-rich robotic tasks, as robots must interact
 
 <details open>
 <summary>Simulation-Based Data Generation </summary>
+
+- [Assistive Gym: A Physics Simulation Framework for Assistive Robotics](https://ieeexplore.ieee.org/abstract/document/9197411), Erickson et al., IEEE International Conference on Robotics and Automation (ICRA), 2020
+
 </details>
 
 <details open>
