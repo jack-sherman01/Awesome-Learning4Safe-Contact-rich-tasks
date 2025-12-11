@@ -111,6 +111,27 @@ Safe execution is crucial in contact-rich robotic tasks, as robots must interact
 
 <details open>
 <summary>Surface Interaction</summary>
+
+- [CHEQ-ing the Box: Safe Variable Impedance Learning for Robotic Polishing](https://arxiv.org/abs/2501.07985), Cramer et al., arXiv, 2025
+- [Deep reinforcement learning-based variable impedance control for grinding workpieces with complex geometry](https://www.emerald.com/insight/content/doi/10.1108/RIA-09-2024-0207), Li et al., Robotic Intelligence and Automation, 2024
+- [A Contact Model based on Denoising Diffusion to Learn Variable Impedance Control for Contact-rich Manipulation](https://arxiv.org/abs/2403.13221), Okada et al., arXiv, 2024
+- [Adaptive Compliance Policy: Learning Approximate Compliance for Diffusion Guided Control](https://ieeexplore.ieee.org/abstract/document/11128452), Hou et al., IEEE International Conference on Robotics and Automation (ICRA), 2025
+- [Learning Diffusion Policies from Demonstrations For Compliant Contact-rich Manipulation](https://arxiv.org/abs/2410.19235), Aburub et al., arXiv (preprint), 2024
+- [Safe contact-based robot active search using Bayesian optimization and control barrier functions](https://www.frontiersin.org/articles/10.3389/frobt.2024.1344367), Vinter-Hviid et al., Frontiers in Robotics and AI, 2024 
+- [A Passivity-Based Variable Impedance Controller for Incremental Learning of Periodic Interactive Tasks](https://arxiv.org/abs/2408.10580), Dalle-Vedove et al., arXiv (preprint), 2024
+- [Adaptive Neural Network Force Tracking Control of Flexible Joint Robot With an Uncertain Environment](https://ieeexplore.ieee.org/abstract/document/10173753/), Xinbo et al., IEEE Transactions on Industrial Electronics, 2024 
+- [Impedance control and parameter optimization of surface polishing robot based on reinforcement learning](https://journals.sagepub.com/doi/abs/10.1177/09544054221100004), Ding et al., Journal of Engineering Manufacture, 2022
+- [A Contact-Safe Reinforcement Learning Framework for Contact-Rich Robot Manipulation](https://ieeexplore.ieee.org/abstract/document/9981185/), Zhu et al., IROS, 2022
+- [Online Optimization Method of Controller Parameters for Robot Constant Force Grinding Based on Deep Reinforcement Learning Rainbow](https://link.springer.com/article/10.1007/s10846-022-01688-z), Zhang et al., Journal of Intelligent & Robotic Systems, 2022 
+- [Uncertainty-Aware Contact-Safe Model-Based Reinforcement Learning](https://ieeexplore.ieee.org/abstract/document/9376242), Kuo et al., IEEE Robotics and Automation Letters, 2021
+- [Safe Online Gain Optimization for Cartesian Space Variable Impedance Control](https://ieeexplore.ieee.org/abstract/document/9926697), Wang et al., IEEE CASE, 2022
+- [Model-Free Adaptive Impedance Control for Autonomous Robotic Sanding](https://ieeexplore.ieee.org/abstract/document/9618655), Huo et al., IEEE TASE, 2021
+- [Variable Impedance Control in End-Effector Space: An Action Space for Reinforcement Learning in Contact-Rich Tasks](https://ieeexplore.ieee.org/abstract/document/8968201), Martín-Martín et al., IEEE/RSJ IROS, 2019
+
+
+
+
+
 </details>
 
 <details open>
