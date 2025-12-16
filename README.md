@@ -83,6 +83,24 @@ This section introduces safe learning before executing the task, highlighting it
 <details open>
 <summary>Safe Execution</summary>
 Safe execution is crucial in contact-rich robotic tasks, as robots must interact not only with complex and uncertain environments but often also in close proximity to humans . This section focuses on learning methods that ensure safety during the execution of contact-rich tasks, addressing challenges such as safe contact, force control, and compliance.
+
+- [Safe robot execution in model-based reinforcement learning](https://ieeexplore.ieee.org/abstract/document/7354232), Martínez et al., IEEE/RSJ IROS, 2015
+- [Reinforcement learning on variable impedance controller for high-precision robotic assembly](https://ieeexplore.ieee.org/abstract/document/8793506), Luo et al., IEEE ICRA, 2019
+- [Robotic assembly control reconfiguration based on transfer reinforcement learning for objects with different geometric features](http://dx.doi.org/10.1016/j.engappai.2023.107576), Gai et al., Engineering Applications of Artificial Intelligence, 2024
+- [Meta reinforcement learning for robust and adaptable robotic assembly tasks](http://dx.doi.org/10.1109/icces54031.2021.9686128), Hafez et al., IEEE ICCES, 2021
+- [Reinforcement learning for assembly robots: A review](https://www.proquest.com/docview/2486868134), Stan et al., Proceedings in Manufacturing Systems, 2020
+- [Variable impedance skill learning for contact-rich manipulation](https://ieeexplore.ieee.org/abstract/document/9812508), Yang et al., IEEE Robotics and Automation Letters, 2022
+- [Impedance learning-based adaptive control for human–robot interaction](https://ieeexplore.ieee.org/abstract/document/9531394), Sharifi et al., IEEE Transactions on Control Systems Technology, 2021
+- [Safety compliant control for robotic manipulator with task and input constraints](https://ieeexplore.ieee.org/abstract/document/9802700), Murtaza et al., IEEE Robotics and Automation Letters, 2022
+- [Adaptive admittance control for safety-critical physical human robot collaboration](https://doi.org/10.1016/j.ifacol.2023.10.1772), Sun et al., IFAC-PapersOnLine, 2023
+- [Adaptive admittance control for physical human-robot interaction based on imitation and reinforcement learning](https://doi.org/10.1109/m2vip58386.2023.10413438), Guo et al., IEEE M2VIP, 2023
+- [A perturbation-robust framework for admittance control of robotic systems with high-stiffness contacts and heavy payload](https://doi.org/10.1109/lra.2024.3406055), Samuel et al., IEEE Robotics and Automation Letters, 2024
+- [A review of compliant mechanisms for contact robotics applications](https://www.sciencedirect.com/science/article/pii/S0921889024002860), Samadikhoshkho et al., Robotics and Autonomous Systems, 2025
+- [Learning for contact-rich tasks with cobots](https://lup.lub.lu.se/student-papers/search/publication/9120389), Cruz-Oliver, Master's thesis, 2024
+- [A survey of optimization-based task and motion planning: From classical to learning approaches](https://ieeexplore.ieee.org/abstract/document/10705419), Zhao et al., IEEE/ASME Transactions on Mechatronics, 2024
+- [SRL-VIC: A variable stiffness-based safe reinforcement learning for contact-rich robotic tasks](https://ieeexplore.ieee.org/abstract/document/10517382), Zhang et al., IEEE Robotics and Automation Letters, 2024
+
+
 </details>
 
 <details open>
