@@ -113,14 +113,6 @@ Safe execution is crucial in contact-rich robotic tasks, as robots must interact
 
 </details>
 
-<details open>
-<summary>highly related survey or review</summary>
-</details>
-
-<details open>
-<summary>other related survey or review</summary>
-</details>
-
 ### Contact-rich tasks
 
 <details open>
