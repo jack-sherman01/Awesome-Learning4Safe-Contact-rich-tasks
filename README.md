@@ -265,12 +265,12 @@ Safe execution is crucial in contact-rich robotic tasks, as robots must interact
 ## Cite
 ```
 bibtex
-@article{zhang2025safe,
-  title={Safe Learning for Contact-Rich Robot Tasks: A Survey From Classical Learning-Based Methods to Safe Foundation Models},
-  author={Zhang, Heng and Dai, Rui and Solak, Gokhan and Zhou, Pokuang and She, Yu and Ajoudani, Arash}
-  year={2025},
-  journal={TechRxiv}
-}
+@article{Zhang_2025,
+   title={Safe Learning for Contact-Rich Robot Tasks: A Survey From Classical Learning-Based Methods to Safe Foundation Models},
+   author={Zhang, Heng and Dai, Rui and Solak, Gokhan and Zhou, Pokuang and She, Yu and Ajoudani, Arash},
+   url={http://arxiv.org/abs/2512.11908},
+   journal={arXiv preprint},
+   year={2025} }
 ```
 ## License
 MIT
