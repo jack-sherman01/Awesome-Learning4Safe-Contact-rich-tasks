@@ -77,6 +77,7 @@ This is a comprehensive paper collection of safe learning for contact-rich robot
 <details open>
 <summary>Safe Exploration</summary>
 This section introduces safe learning before executing the task, highlighting its importance in ensuring reliable and risk-free performance prior to real execution.
+
 - [The Safety Filter: A Unified View of Safety-Critical Control in Autonomous Systems](https://doi.org/10.1146/annurev-control-071723-102940), Hsu et al., Annu. Rev. Control Robot. Auton. Syst., 2024
 - [Safety barrier functions and multi-camera tracking for human–robot shared environment](https://doi.org/10.1016/j.robot.2019.103388), Ferraguti et al., Rob. Auton. Syst., 2020
 - [Safety and Efficiency in Robotics: The Control Barrier Functions Approach](https://doi.org/10.1109/MRA.2022.3174699), Ferraguti et al., IEEE Robot. Autom. Mag., 2022
