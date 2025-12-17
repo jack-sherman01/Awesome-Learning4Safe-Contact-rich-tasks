@@ -106,6 +106,14 @@ Safe execution is crucial in contact-rich robotic tasks, as robots must interact
 <details open>
 <summary>Provable Safety Methods</summary>
 
+- [Safe and Optimal Variable Impedance Control via Certified Reinforcement Learning](http://arxiv.org/abs/2511.16330), Kumar et al., arXiv, 2025
+- [Data-Driven Safety Filters: Hamilton–Jacobi Reachability, Control Barrier Functions, and Predictive Methods for Uncertain Systems](https://ieeexplore.ieee.org/abstract/document/10266799), Wabersich et al., IEEE Control Systems Magazine, 2023
+- [An Actor-Critic Learning Framework Based on Lyapunov Stability for Automatic Assembly](https://link.springer.com/article/10.1007/s10489-022-03844-2), Li et al., Applied Intelligence, 2023
+- [Deep Reinforcement Learning-Based Variable Impedance Control for Grinding Workpieces with Complex Geometry](https://www.emerald.com/insight/content/doi/10.1108/RIA-09-2024-0207), Li et al., Robotic Intelligence and Automation, 2025
+- [Impedance Learning-Based Adaptive Force Tracking for Robot on Unknown Terrains](https://ieeexplore.ieee.org/document/10842469), Li et al., IEEE Transactions on Robotics, 2025
+- [Contact-Aware Safety in Soft Robots Using High-Order Control Barrier and Lyapunov Functions](https://arxiv.org/abs/2505.03841), Wong et al., arXiv, 2025
+- [High-Order Control Barrier Functions-Based Impedance Control of a Robotic Manipulator with Time-Varying Output Constraints](https://www.sciencedirect.com/science/article/abs/pii/S0019057822000726), Wang et al., ISA Transactions, 2022
+
 </details>
 
 <details open>
