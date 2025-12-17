@@ -77,7 +77,17 @@ This is a comprehensive paper collection of safe learning for contact-rich robot
 <details open>
 <summary>Safe Exploration</summary>
 This section introduces safe learning before executing the task, highlighting its importance in ensuring reliable and risk-free performance prior to real execution.
-
+- [The Safety Filter: A Unified View of Safety-Critical Control in Autonomous Systems](https://doi.org/10.1146/annurev-control-071723-102940), Hsu et al., Annu. Rev. Control Robot. Auton. Syst., 2024
+- [Safety barrier functions and multi-camera tracking for human–robot shared environment](https://doi.org/10.1016/j.robot.2019.103388), Ferraguti et al., Rob. Auton. Syst., 2020
+- [Safety and Efficiency in Robotics: The Control Barrier Functions Approach](https://doi.org/10.1109/MRA.2022.3174699), Ferraguti et al., IEEE Robot. Autom. Mag., 2022
+- [Safe Navigation and Obstacle Avoidance Using Differentiable Optimization Based Control Barrier Functions](https://arxiv.org/abs/2304.08586), Dai et al., IEEE Robot. Autom. Lett., 2023
+- [Robust Control Barrier Functions Using Uncertainty Estimation With Application to Mobile Robots](https://arxiv.org/abs/2401.01881), Das & Burdick, arXiv, 2024
+- [Robust Safe Learning and Control in an Unknown Environment: An Uncertainty-Separated Control Barrier Function Approach](https://doi.org/10.1109/LRA.2023.3309130), Li et al., IEEE Robot. Autom. Lett., 2023
+- [Safe and Robust Motion Planning for Dynamic Robotics via Control Barrier Functions](https://doi.org/10.1109/CDC45484.2021.9682803), Manjunath & Nguyen, IEEE CDC, 2021
+- [Flow shop scheduling with human–robot collaboration: a joint chance-constrained programming approach](https://doi.org/10.1080/00207543.2023.2181025), Wang & Zhang, Int. J. Prod. Res., 2024
+- [Probabilistic Collision Checking With Chance Constraints](https://doi.org/10.1109/TRO.2011.2116190), Du Toit & Burdick, IEEE Trans. Robot., 2011
+- [Solving Chance-Constrained Stochastic Programs via Sampling and Integer Programming](https://doi.org/10.1287/educ.1080.0048), Ahmed & Shapiro, in *State-of-the-Art Decision-Making Tools in the Information-Intensive Age*, 2008
+- [Safe Human–Robot Collaboration With Risk Tunable Control Barrier Functions](https://doi.org/10.1109/TMECH.2025.3572047), Sharma et al., IEEE/ASME Trans. Mechatron., 2025
 </details>
 
 <details open>
