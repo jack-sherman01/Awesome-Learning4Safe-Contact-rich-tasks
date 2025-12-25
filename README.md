@@ -129,6 +129,39 @@ Safe execution is crucial in contact-rich robotic tasks, as robots must interact
 
 <details open>
 <summary>Safe foundation models</summary>
+Foundation Models & General Large Models (e.g., VLMs, VLAs) have shown great potential in robotics, but ensuring their safety in contact-rich tasks remains a significant challenge. This section explores recent advancements in integrating safety mechanisms into foundation models for robotic applications.
+
+**surveys on safe foundation models:**
+  
+- [Towards safe robot foundation models](https://arxiv.org/abs/2503.07404), Tölle et al., arXiv, 2025
+- [Towards forceful robotic foundation models: a literature survey](https://arxiv.org/abs/2504.11827), Xie & Correll, arXiv, 2025
+- [A Comprehensive Survey on Physical Risk Control in the Era of Foundation Model-enabled Robotics](https://arxiv.org/abs/2505.12583), Kojima et al., arXiv, 2025
+- [Towards embodied agentic AI: Review and classification of LLM-and VLM-driven robot autonomy and interaction](https://arxiv.org/abs/2508.05294), Salimpour et al., arXiv, 2025
+  
+  
+**Recent Safe Foundation Models for Contact-Rich Tasks:**
+  
+- [SafeVLA: Towards Safety Alignment of Vision-Language-Action Model via Constrained Learning](https://arxiv.org/abs/2503.03480), Zhang et al., arXiv, 2025
+- [VTLA: Vision-Tactile-Language-Action Model with Preference Learning for Insertion Manipulation](https://arxiv.org/abs/2505.09577), Zhang et al., arXiv, 2025
+- [Audio-VLA: Adding Contact Audio Perception to Vision-Language-Action Model for Robotic Manipulation](https://arxiv.org/abs/2511.09958), Wei et al., arXiv, 2025
+- [SAFE: Multitask Failure Detection for Vision-Language-Action Models](https://arxiv.org/abs/2506.09937), Gu et al., arXiv, 2025
+- [ImpedanceGPT: VLM-driven Impedance Control of Swarm of Mini-drones for Intelligent Navigation in Dynamic Environment](https://arxiv.org/abs/2503.02723), Batool et al., arXiv, 2025
+- [PhysVLM: Enabling Visual Language Models to Understand Robotic Physical Reachability](https://arxiv.org/abs/2503.08481), Zhou et al., arXiv, 2025
+- [MLA: A Multisensory Language-Action Model for Multimodal Understanding and Forecasting in Robotic Manipulation](http://arxiv.org/abs/2509.26642), Liu et al., arXiv, 2025
+
+
+**Language Conditioned / Text-Guided / LLM Agents for Contact-Rich Tasks:**
+
+- [SayCan: Grounding Language in Robotic Affordances](https://arxiv.org/abs/2204.01691), Ahn et al., arXiv, 2022
+- [RT-2: Vision-Language-Action Model for Robotic Manipulation](https://arxiv.org/abs/2307.15818), Ahn et al., arXiv, 2023
+- [SafeAgentBench: A benchmark for safe task planning of embodied LLM agents](https://arxiv.org/abs/2412.13178), Yin et al., arXiv, 2024
+- [Text2Interaction: Establishing Safe and Preferable Human-Robot Interaction](https://arxiv.org/abs/2408.06105), Thumm et al., CoRL, 2024
+- [CALAMARI: Contact-aware and language conditioned spatial action MApping for contact-RIch manipulation](https://proceedings.mlr.press/v229/wi23a.html), Wi et al., arXiv, 2023
+- [Updating Robot Safety Representations Online From Natural Language Feedback](https://arxiv.org/abs/2409.14580), Santos et al., arXiv, 2025
+- [Toward Automated Programming for Robotic Assembly Using ChatGPT](https://arxiv.org/abs/2405.08216), Macaluso et al., arXiv, 2024
+- [Learning a High-Quality Robotic Wiping Policy Using Systematic Reward Analysis and Visual-Language Model Based Curriculum](https://arxiv.org/abs/2502.12599), Liu et al., arXiv, 2025
+- [OmniVIC: A Self-Improving Variable Impedance Controller with Vision-Language In-Context Learning for Safe Robotic Manipulation](https://arxiv.org/abs/2510.17150), Zhang et al., arXiv, 2025
+- [Text to Robotic Assembly of Multi Component Objects using 3D Generative AI and Vision Language Models](https://arxiv.org/abs/2511.02162), Alexander Htet Kyaw et al., arXiv, 2025
 
 </details>
 
@@ -235,6 +268,8 @@ Safe execution is crucial in contact-rich robotic tasks, as robots must interact
 
 <details open>
 <summary>Safety, Efficiency and Task Objectives </summary>
+
+
 </details>
 
 <details open>
