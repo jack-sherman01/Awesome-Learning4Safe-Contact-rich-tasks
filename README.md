@@ -453,6 +453,21 @@ Foundation Models & General Large Models (e.g., VLMs, VLAs) have shown great pot
 <summary>Simulation-Based Data Generation </summary>
 
 - [Assistive Gym: A Physics Simulation Framework for Assistive Robotics](https://ieeexplore.ieee.org/abstract/document/9197411), Erickson et al., IEEE International Conference on Robotics and Automation (ICRA), 2020
+- [Isaac Lab: A Unified Framework for Robot Learning in Physics Simulation](https://arxiv.org/abs/2412.03821), Mittal et al., arXiv, 2024
+- [Orbit: A Unified Simulation Framework for Interactive Robot Learning Environments](https://ieeexplore.ieee.org/document/10161365), Mittal et al., IEEE Robotics and Automation Letters, 2023
+- [Isaac Gym: High Performance GPU-Based Physics Simulation For Robot Learning](https://arxiv.org/abs/2108.10470), Makoviychuk et al., arXiv, 2021
+- [Genesis: A Generative and Universal Physics Engine for Robotics and Beyond](https://github.com/Genesis-Embodied-AI/Genesis), Genesis Authors, GitHub, 2024
+- [Mujoco playground](https://arxiv.org/abs/2502.08844), Zakka et al., arXiv, 2025
+- [Mujoco: A physics engine for model-based control](https://ieeexplore.ieee.org/document/6386109), Todorov et al., IEEE IROS, 2012
+- [Factory: Fast contact for robotic assembly](https://arxiv.org/abs/2205.03532), Narang et al., arXiv, 2022
+- [Difftactile: A physics-based differentiable tactile simulator for contact-rich robotic manipulation](https://arxiv.org/abs/2403.08716), Si et al., arXiv, 2024
+- [RoboVerse: Towards a unified platform, dataset and benchmark for scalable and generalizable robot learning](https://arxiv.org/abs/2504.18904), Geng et al., arXiv, 2025
+- [Assistive Gym: A Physics Simulation Framework for Assistive Robotics](https://ieeexplore.ieee.org/document/9197411), Erickson et al., IEEE ICRA, 2020
+- [robosuite: A modular simulation framework and benchmark for robot learning](https://arxiv.org/abs/2009.12293), Zhu et al., arXiv, 2020
+- [Safety gymnasium: A unified safe reinforcement learning benchmark](https://proceedings.neurips.cc/paper_files/paper/2023/hash/3b235c5679d549717c8e6c566747e17c-Abstract-Conference.html), Ji et al., NeurIPS, 2023
+- [Safe-control-gym: A unified benchmark suite for safe learning-based control and reinforcement learning in robotics](https://ieeexplore.ieee.org/document/9830856), Yuan et al., IEEE Robotics and Automation Letters, 2022
+- [Robust gymnasium: A unified modular benchmark for robust reinforcement learning](https://arxiv.org/abs/2502.19652), Gu et al., arXiv, 2025
+
 
 </details>
 
