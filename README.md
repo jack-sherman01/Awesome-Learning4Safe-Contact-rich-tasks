@@ -473,6 +473,17 @@ Foundation Models & General Large Models (e.g., VLMs, VLAs) have shown great pot
 
 <details open>
 <summary>Real-World Data Collection</summary>
+
+- [Evaluating Gemini Robotics Policies in the Real World](https://arxiv.org/abs/2512.10675), Gemini Robotics Team, arXiv, 2025
+- [Open X-Embodiment: Robotic Learning Datasets and RT-X Models](https://arxiv.org/abs/2310.08864), Padalkar et al., arXiv, 2023
+- [DROID: A Large-Scale In-The-Wild Robot Manipulation Dataset](https://arxiv.org/abs/2403.12945), Khazatsky et al., RSS, 2024
+- [Bridge Data V2: A Dataset for Robot Learning at Scale](https://arxiv.org/abs/2308.12952), Walke et al., CoRL, 2023
+- [Learning Fine-Grained Bimanual Manipulation with Low-Cost Hardware](https://arxiv.org/abs/2304.13705), Zhao et al., RSS, 2023
+- [Mobile ALOHA: Learning Bimanual Mobile Manipulation with Low-Cost Whole-Body Teleoperation](https://arxiv.org/abs/2401.02117), Fu et al., arXiv, 2024
+- [RH20T: A Comprehensive Robotic Dataset for Learning Complex Skills in Silver-Service Dining](https://rh20t.github.io/), Fang et al., arXiv, 2024
+- [MIME: Multimodal Interaction for Manipulation Intelligence](https://arxiv.org/abs/1810.06091), Smith et al., CoRL, 2018
+- [RoboNet: Large-Scale Multi-Robot Learning](https://arxiv.org/abs/1910.11215), Dasari et al., arXiv, 2020
+
 </details>
 
 <details open>
