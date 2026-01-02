@@ -431,6 +431,20 @@ Foundation Models & General Large Models (e.g., VLMs, VLAs) have shown great pot
 
 <details open>
 <summary>Tactile Sensing</summary>
+
+- [TacDiffusion: Force-Domain Diffusion Policy for Precise Tactile Manipulation](https://arxiv.org/abs/2409.11047), Wu et al., IEEE ICRA, 2025
+- [ManiFeel: A Tactile-Visual Robot Manipulator for Object Identification and Manipulation](https://arxiv.org/abs/2505.18472), Li et al., arXiv, 2024
+- [Generalize by touching: Tactile ensemble skill transfer for robotic furniture assembly](https://arxiv.org/abs/2404.17684), Lin et al., IEEE ICRA, 2024
+- [Learning tactile insertion in the real world](https://arxiv.org/abs/2405.00383), Palenicek et al., arXiv, 2024
+- [VTLA: Vision-Tactile-Language-Action Model with Preference Learning for Insertion Manipulation](https://arxiv.org/abs/2505.09577), Zhang et al., arXiv, 2025
+- [Making Sense of Vision and Touch: Self-Supervised Learning of Multimodal Representations for Contact-Rich Tasks](https://arxiv.org/abs/1810.10191), Calandra et al., IEEE ICRA, 2020
+- [Visuo-Tactile Pre-training for Robot Manipulation](https://arxiv.org/abs/2204.04336), Yang et al., arXiv, 2022
+- [Contact-Rich Object Insertion: Lessons for Zero-Shot Policy Transfer](https://openreview.net/pdf?id=Z0yOJaZUK_U), Brahmbhatt et al., ICRA Workshop, 2023
+- [Force-Constrained Visual Policy: Safe Robot-Assisted Dressing via Multi-Modal Sensing](https://arxiv.org/abs/2311.04390), Sun et al., IEEE Robotics and Automation Letters, 2024
+- [Robust multi-modal policies for industrial assembly via reinforcement learning and demonstrations: A large-scale study](https://arxiv.org/abs/2103.11512), Luo et al., arXiv, 2021
+- [Multimodality Driven Impedance-Based Sim2Real Transfer Learning for Robotic Multiple Peg-in-Hole Assembly](https://ieeexplore.ieee.org/document/10251991), Chen et al., IEEE Transactions on Cybernetics, 2024
+- [Multimodal Task Attention Residual Reinforcement Learning: Advancing Robotic Assembly in Unstructured Environment](https://ieeexplore.ieee.org/document/10909176), Lin et al., IEEE Robotics and Automation Letters, 2025
+
 </details>
 
 ### Data Acquisition
