@@ -398,6 +398,35 @@ Foundation Models & General Large Models (e.g., VLMs, VLAs) have shown great pot
 
 <details open>
 <summary>Vision Sensing</summary>
+
+- [Force-Constrained Visual Policy: Safe Robot-Assisted Dressing via Multi-Modal Sensing](https://arxiv.org/abs/2311.04390), Sun et al., IEEE Robotics and Automation Letters, 2024
+- [Sim-to-Real Transfer of Robotic Assembly with Visual Inputs Using CycleGAN and Force Control](https://ieeexplore.ieee.org/document/10011878), Yuan et al., IEEE ROBIO, 2022
+- [Making Sense of Vision and Touch: Self-Supervised Learning of Multimodal Representations for Contact-Rich Tasks](https://arxiv.org/abs/1810.10191), Calandra et al., IEEE ICRA, 2020
+- [Self-Supervised Multimodal Representation Learning for Dexterous Robotic Manipulation](https://ieeexplore.ieee.org/document/9196777), Liu et al., IEEE ICRA, 2020
+- [Visuo-Tactile Pre-training for Robot Manipulation](https://arxiv.org/abs/2204.04336), Yang et al., arXiv, 2022
+- [Learning to Combine Vision and Touch for Robotic Manipulation](https://arxiv.org/abs/2303.12076), Zhang et al., arXiv, 2023
+- [Proactive Action Visual Residual Reinforcement Learning for Contact-Rich Tasks Using a Torque-Controlled Robot](http://dx.doi.org/10.1109/icra48506.2021.9561162), Shi et al., IEEE ICRA, 2021
+- [EquiContact: A Hierarchical SE (3) Vision-to-Force Equivariant Policy for Spatially Generalizable Contact-rich Tasks](https://arxiv.org/abs/2507.10961), Seo et al., arXiv, 2025
+- [OmniVIC: A Self-Improving Variable Impedance Controller with Vision-Language In-Context Learning for Safe Robotic Manipulation](https://arxiv.org/abs/2510.17150), Zhang et al., arXiv, 2025
+- [Learning a High-Quality Robotic Wiping Policy Using Systematic Reward Analysis and Visual-Language Model Based Curriculum](https://arxiv.org/abs/2502.12599), Liu et al., arXiv, 2025
+- [RT-2: Vision-Language-Action Model for Robotic Manipulation](https://arxiv.org/abs/2307.15818), Ahn et al., arXiv, 2023
+- [SafeVLA: Towards Safety Alignment of Vision-Language-Action Model via Constrained Learning](https://arxiv.org/abs/2503.03480), Zhang et al., arXiv, 2025
+- [VTLA: Vision-Tactile-Language-Action Model with Preference Learning for Insertion Manipulation](https://arxiv.org/abs/2505.09577), Zhang et al., arXiv, 2025
+- [Audio-VLA: Adding Contact Audio Perception to Vision-Language-Action Model for Robotic Manipulation](https://arxiv.org/abs/2511.09958), Wei et al., arXiv, 2025
+- [SAFE: Multitask Failure Detection for Vision-Language-Action Models](https://arxiv.org/abs/2506.09937), Gu et al., arXiv, 2025
+- [PhysVLM: Enabling Visual Language Models to Understand Robotic Physical Reachability](https://arxiv.org/abs/2503.08481), Zhou et al., arXiv, 2025
+- [MLA: A Multisensory Language-Action Model for Multimodal Understanding and Forecasting in Robotic Manipulation](http://arxiv.org/abs/2509.26642), Liu et al., arXiv, 2025
+- [Safety barrier functions and multi-camera tracking for human–robot shared environment](https://doi.org/10.1016/j.robot.2019.103388), Ferraguti et al., Rob. Auton. Syst., 2020
+- [Multimodal Task Attention Residual Reinforcement Learning: Advancing Robotic Assembly in Unstructured Environment](https://ieeexplore.ieee.org/document/10909176), Lin et al., IEEE Robotics and Automation Letters, 2025
+- [Robust multi-modal policies for industrial assembly via reinforcement learning and demonstrations: A large-scale study](https://arxiv.org/abs/2103.11512), Luo et al., arXiv, 2021
+- [Deep reinforcement learning for robotic assembly of mixed deformable and rigid objects](https://ieeexplore.ieee.org/document/8594353), Luo et al., IEEE/RSJ IROS, 2018
+- [Multimodality Driven Impedance-Based Sim2Real Transfer Learning for Robotic Multiple Peg-in-Hole Assembly](https://ieeexplore.ieee.org/document/10251991), Chen et al., IEEE Transactions on Cybernetics, 2024
+- [Text to Robotic Assembly of Multi Component Objects using 3D Generative AI and Vision Language Models](https://arxiv.org/html/2511.02162v2), Kyaw et al., arXiv, 2025
+- [Toward Automated Programming for Robotic Assembly Using ChatGPT](https://arxiv.org/html/2405.08216v1), Macaluso et al., IEEE ICRA, 2024
+- [SayCan: Grounding Language in Robotic Affordances](https://arxiv.org/abs/2204.01691), Ahn et al., arXiv, 2022
+- [ImpedanceGPT: VLM-driven Impedance Control of Swarm of Mini-drones for Intelligent Navigation in Dynamic Environment](https://arxiv.org/abs/2503.02723), Batool et al., arXiv, 2025
+
+
 </details>
 
 <details open>
