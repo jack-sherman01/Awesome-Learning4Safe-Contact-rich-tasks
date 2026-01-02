@@ -349,6 +349,53 @@ Foundation Models & General Large Models (e.g., VLMs, VLAs) have shown great pot
 
 <details open>
 <summary>Force and Torque sensing</summary>
+
+- [A Review of Advanced Force Torque Control Strategies for Precise Nut-to-Bolt Mating in Robotic Assembly](https://pubs2.ascee.org/index.php/IJRCS/article/view/1604), Terence et al., International Journal of Robotics & Control Systems, 2025
+- [Reinforcement learning on variable impedance controller for high-precision robotic assembly](https://ieeexplore.ieee.org/abstract/document/8793506), Luo et al., IEEE ICRA, 2019
+- [Learning force control for contact-rich manipulation tasks with rigid position-controlled robots](https://ieeexplore.ieee.org/abstract/document/9145608), Beltran-Hernandez et al., IEEE Robotics and Automation Letters, 2020
+- [Robotic imitation of human assembly skills using hybrid trajectory and force learning](https://ieeexplore.ieee.org/abstract/document/9561619), Wang et al., IEEE ICRA, 2021
+- [Hybrid trajectory and force learning of complex assembly tasks: A combined learning framework](https://ieeexplore.ieee.org/document/9406007), Wang et al., IEEE Access, 2021
+- [A sim-to-real learning-based framework for contact-rich assembly by utilizing cyclegan and force control](https://ieeexplore.ieee.org/abstract/document/10018450), Shi et al., IEEE Transactions on Cognitive and Developmental Systems, 2023
+- [Safe peg-in-hole automatic assembly using virtual guiding force: A deep reinforcement learning solution](https://www.sciencedirect.com/science/article/abs/pii/S0921889024002781), Zang et al., Robotics and Autonomous Systems, 2025
+- [Generalizable Human-Robot Collaborative Assembly Using Imitation Learning and Force Control](http://dx.doi.org/10.23919/ecc57647.2023.10178330), Jha et al., ECC, 2023
+- [Impedance Learning-Based Adaptive Force Tracking for Robot on Unknown Terrains](https://ieeexplore.ieee.org/document/10842469), Li et al., IEEE Transactions on Robotics, 2025
+- [Force-Constrained Visual Policy: Safe Robot-Assisted Dressing via Multi-Modal Sensing](https://arxiv.org/abs/2311.04390), Sun et al., IEEE Robotics and Automation Letters, 2024
+- [Research on Robot Massage Force Control Based on Residual Reinforcement Learning](https://ieeexplore.ieee.org/document/10374025), Xiao et al., IEEE Access, 2024
+- [Adaptive Neural Network Force Tracking Control of Flexible Joint Robot With an Uncertain Environment](https://ieeexplore.ieee.org/abstract/document/10173753), Xinbo et al., IEEE Transactions on Industrial Electronics, 2024
+- [Online Optimization Method of Controller Parameters for Robot Constant Force Grinding Based on Deep Reinforcement Learning Rainbow](https://link.springer.com/article/10.1007/s10846-022-01688-z), Zhang et al., Journal of Intelligent & Robotic Systems, 2022
+- [End-to-end reinforcement learning for torque based variable height hopping](https://arxiv.org/abs/2307.16676), Soni et al., IEEE/RSJ IROS, 2023
+- [Towards forceful robotic foundation models: a literature survey](https://arxiv.org/abs/2504.11827), Xie & Correll, arXiv, 2025
+- [Neural networks enhanced optimal admittance control of robot--environment interaction using reinforcement learning](https://ieeexplore.ieee.org/document/9367005), Peng et al., IEEE Transactions on Neural Networks and Learning Systems, 2021
+- [Proactive Action Visual Residual Reinforcement Learning for Contact-Rich Tasks Using a Torque-Controlled Robot](http://dx.doi.org/10.1109/icra48506.2021.9561162), Shi et al., IEEE ICRA, 2021
+- [Learning robotic manipulation skills using an adaptive force-impedance action space](https://arxiv.org/abs/2110.09904), Ulmer et al., arXiv, 2021
+- [Robust Execution of Contact-Rich Motion Plans by Hybrid Force-Velocity Control](http://dx.doi.org/10.1109/icra.2019.8794366), Hou & Mason, IEEE ICRA, 2019
+- [Towards Real-World Force-Sensitive Robotic Assembly through Deep Reinforcement Learning in Simulations](http://dx.doi.org/10.1109/aim46487.2021.9517356), Hebecker et al., IEEE AIM, 2021
+- [Learning-Based Force Control of a Surgical Robot for Tool-Soft Tissue Interaction](http://dx.doi.org/10.1109/lra.2021.3093018), Ren et al., IEEE Robotics and Automation Letters, 2021
+- [Variable Admittance Control for Robotic Contact Force Tracking in Dynamic Environment Based on Reinforcement Learning](http://dx.doi.org/10.1109/rcar54675.2022.9872292), Zhou et al., IEEE RCAR, 2022
+- [Evaluation of Variable Impedance- and Hybrid Force/MotionControllers for Learning Force Tracking Skills](http://dx.doi.org/10.1109/sii52469.2022.9708826), Anand et al., IEEE/SICE SII, 2022
+- [Learning-Based High-Precision Force Estimation and Compliant Control for Small-Scale Continuum Robot](http://dx.doi.org/10.1109/tase.2023.3311179), Xiang et al., IEEE Transactions on Automation Science and Engineering, 2024
+- [Towards High Precision: An Adaptive Self-Supervised Learning Framework for Force-Based Verification](http://dx.doi.org/10.1109/case58245.2025.11163745), Duan et al., IEEE CASE, 2025
+- [TacDiffusion: Force-Domain Diffusion Policy for Precise Tactile Manipulation](http://dx.doi.org/10.1109/icra55743.2025.11127334), Wu et al., IEEE ICRA, 2025
+- [Safe Force/Position Tracking Control via Control Barrier Functions for Floating Base Mobile Manipulator Systems](http://dx.doi.org/10.23919/ecc64448.2024.10591297), Sharifi & Heshmati-Alamdari, ECC, 2024
+- [Control Barrier Function-Based Force Constrained Safety Compliance Control for Manipulator](http://dx.doi.org/10.1109/icac57885.2023.10275266), Liang et al., IEEE ICAC, 2023
+- [Flow with the Force Field: Learning 3D Compliant Flow Matching Policies from Force and Demonstration-Guided Simulation Data](https://arxiv.org/abs/2510.02738), Li et al., arXiv, 2025
+- [Forge: Force-guided exploration for robust contact-rich manipulation under uncertainty](https://arxiv.org/abs/2408.04587), Noseworthy et al., arXiv, 2024
+- [EquiContact: A Hierarchical SE (3) Vision-to-Force Equivariant Policy for Spatially Generalizable Contact-rich Tasks](https://arxiv.org/abs/2507.10961), Seo et al., arXiv, 2025
+- [A versatile door opening system with mobile manipulator through adaptive position-force control and reinforcement learning](https://www.sciencedirect.com/science/article/abs/pii/S0921889024001441), Kang et al., Robotics and Autonomous Systems, 2024
+- [Configuration and Force-field Aware Variable Impedance Control with Faster Re-learning](http://dx.doi.org/10.1007/s10846-023-02022-x), Jadav & Palanthandalam-Madapusi, Journal of Intelligent & Robotic Systems, 2023
+- [Passivity-based skill motion learning in stiffness-adaptive unified force-impedance control](https://ieeexplore.ieee.org/document/9981728), Karacan et al., IEEE/RSJ IROS, 2021
+- [Efficient Online Learning of Contact Force Models for Connector Insertion](http://dx.doi.org/10.1109/icra55743.2025.11127717), Tracy et al., IEEE ICRA, 2025
+- [Guarding Force: Safety-Critical Compliant Control for Robot-Environment Interaction](https://ieeexplore.ieee.org/document/11266955), Wang et al., arXiv, 2024
+- [Adaptive variable impedance position/force tracking control of fracture reduction robot](http://dx.doi.org/10.1002/rcs.2469), Zheng et al., The International Journal of Medical Robotics and Computer Assisted Surgery, 2022
+- [Multimodal Task Attention Residual Reinforcement Learning: Advancing Robotic Assembly in Unstructured Environment](http://dx.doi.org/10.1109/lra.2025.3547647), Lin et al., IEEE Robotics and Automation Letters, 2025
+- [Multimodality Driven Impedance-Based Sim2Real Transfer Learning for Robotic Multiple Peg-in-Hole Assembly](http://dx.doi.org/10.1109/tcyb.2023.3310505), Chen et al., IEEE Transactions on Cybernetics, 2024
+- [Robust multi-modal policies for industrial assembly via reinforcement learning and demonstrations: A large-scale study](https://arxiv.org/abs/2103.11512), Luo et al., arXiv, 2021
+- [Deep reinforcement learning for robotic assembly of mixed deformable and rigid objects](https://ieeexplore.ieee.org/document/8594353), Luo et al., IEEE/RSJ IROS, 2018
+- [Sim-to-Real Transfer of Robotic Assembly with Visual Inputs Using CycleGAN and Force Control](http://dx.doi.org/10.1109/robio55434.2022.10011878), Yuan et al., IEEE ROBIO, 2022
+- [Making Sense of Vision and Touch: Self-Supervised Learning of Multimodal Representations for Contact-Rich Tasks](https://arxiv.org/abs/1810.10191), Calandra et al., IEEE ICRA, 2020
+
+
+
 </details>
 
 <details open>
