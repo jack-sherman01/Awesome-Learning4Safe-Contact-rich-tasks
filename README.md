@@ -279,6 +279,27 @@ Foundation Models & General Large Models (e.g., VLMs, VLAs) have shown great pot
 
 <details open>
 <summary>Object Manipulation</summary>
+
+- [A review on reinforcement learning for contact-rich robotic manipulation tasks](https://doi.org/10.1016/j.rcim.2023.102517), Elguea-Aguinaco et al., Robotics and Computer-Integrated Manufacturing, 2023
+- [A Survey on Imitation Learning for Contact-Rich Tasks in Robotics](https://arxiv.org/abs/2506.13498), Tsuji et al., arXiv, 2025
+- [Variable impedance skill learning for contact-rich manipulation](https://ieeexplore.ieee.org/abstract/document/9812508), Yang et al., IEEE Robotics and Automation Letters, 2022
+- [Learning force control for contact-rich manipulation tasks with rigid position-controlled robots](https://ieeexplore.ieee.org/abstract/document/9145608), Beltran-Hernandez et al., IEEE Robotics and Automation Letters, 2020
+- [SRL-VIC: A variable stiffness-based safe reinforcement learning for contact-rich robotic tasks](https://ieeexplore.ieee.org/abstract/document/10517382), Zhang et al., IEEE Robotics and Automation Letters, 2024
+- [A Contact-Safe Reinforcement Learning Framework for Contact-Rich Robot Manipulation](https://ieeexplore.ieee.org/abstract/document/9981185/), Zhu et al., IEEE/RSJ IROS, 2022
+- [Learning Diffusion Policies from Demonstrations For Compliant Contact-rich Manipulation](https://arxiv.org/abs/2410.19235), Aburub et al., arXiv, 2024
+- [Should We Learn Contact-Rich Manipulation Policies From Sampling-Based Planners?](https://ieeexplore.ieee.org/abstract/document/10977833), Zhu et al., IEEE Robotics and Automation Letters, 2025
+- [CALAMARI: Contact-aware and language conditioned spatial action MApping for contact-RIch manipulation](https://proceedings.mlr.press/v229/wi23a.html), Wi et al., CoRL, 2023
+- - [Human-like dexterous manipulation for anthropomorphic five-fingered hands: A review](https://www.sciencedirect.com/science/article/pii/S2667379725000038), Huang et al., Biomimetic Intelligence and Robotics, 2025
+- [Deep reinforcement learning for robotic manipulation with asynchronous off-policy updates](https://ieeexplore.ieee.org/abstract/document/7989385), Gu et al., IEEE ICRA, 2017
+- [Learning dexterous in-hand manipulation](https://journals.sagepub.com/doi/full/10.1177/0278364919887447), OpenAI et al., The International Journal of Robotics Research, 2020
+- [Dexterous Manipulation with Reinforcement Learning: Efficient, General, and Low-Cost](https://ieeexplore.ieee.org/abstract/document/8793449), Zhu et al., IEEE ICRA, 2019
+- [Contact-Rich Manipulation with a Dexterous Hand](https://ieeexplore.ieee.org/abstract/document/9341163), Pitz et al., IEEE/RSJ IROS, 2020
+- - [Safe robot execution in model-based reinforcement learning](https://ieeexplore.ieee.org/abstract/document/7354232), Martínez et al., IEEE/RSJ IROS, 2015
+- [Safety compliant control for robotic manipulator with task and input constraints](https://ieeexplore.ieee.org/abstract/document/9802700), Murtaza et al., IEEE Robotics and Automation Letters, 2022
+- [Motion planner augmented reinforcement learning for robot manipulation in obstructed environments](https://proceedings.mlr.press/v155/yamada21a.html), Yamada et al., CoRL, 2021
+- [OmniVIC: A Self-Improving Variable Impedance Controller with Vision-Language In-Context Learning for Safe Robotic Manipulation](https://arxiv.org/abs/2510.17150), Zhang et al., arXiv, 2025
+- [Safe data-driven contact-rich manipulation](https://ieeexplore.ieee.org/abstract/document/9551366), Mitsioni et al., IEEE Humanoids, 2021
+
 </details>
 
 <details open>
