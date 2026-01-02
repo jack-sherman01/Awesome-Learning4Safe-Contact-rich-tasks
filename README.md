@@ -1,4 +1,4 @@
-# Awesome Safe Learning4Contact-rich tasks
+# Awesome Safe Learning for Contact-rich Robotic Tasks
 [![Awesome](https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg)](https://github.com/sindresorhus/awesome)
 ![PRs Welcome](https://img.shields.io/badge/PRs-Welcome-green) 
 ![Stars](https://img.shields.io/github/stars/jack-sherman01/Awesome-Learning4Safe-Contact-rich-tasks)
@@ -31,7 +31,7 @@ This is a comprehensive paper collection of safe learning for contact-rich robot
 </p>
 
 ## Table of Contents
-- [Awesome Safe Learning4Contact-rich tasks](#awesome-safe-learning4contact-rich-tasks)
+- [Awesome Safe Learning for Contact-rich Robotic Tasks](#awesome-safe-learning-for-contact-rich-robotic-tasks)
   - [Our contribution:](#our-contribution)
   - [Table of Contents](#table-of-contents)
   - [Surveys](#surveys)
