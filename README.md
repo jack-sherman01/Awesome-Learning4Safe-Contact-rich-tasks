@@ -169,6 +169,87 @@ Foundation Models & General Large Models (e.g., VLMs, VLAs) have shown great pot
 
 <details open>
 <summary>Assembly and Insertion</summary>
+
+**Learning-Based Assembly**
+- [Reinforcement learning on variable impedance controller for high-precision robotic assembly](https://ieeexplore.ieee.org/abstract/document/8793506), Luo et al., IEEE ICRA, 2019
+- [Meta reinforcement learning for robust and adaptable robotic assembly tasks](http://dx.doi.org/10.1109/icces54031.2021.9686128), Hafez et al., IEEE ICCES, 2021
+- [Robotic assembly control reconfiguration based on transfer reinforcement learning for objects with different geometric features](http://dx.doi.org/10.1016/j.engappai.2023.107576), Gai et al., Engineering Applications of Artificial Intelligence, 2024
+- [Skill learning for robotic insertion based on one-shot demonstration and reinforcement learning](https://link.springer.com/article/10.1007/s11633-020-1261-0), Li & Xu, International Journal of Automation and Computing, 2021
+- [An actor-critic learning framework based on Lyapunov stability for automatic assembly](https://link.springer.com/article/10.1007/s10489-022-03844-2), Li et al., Applied Intelligence, 2023
+- [Learning contact-rich assembly skills using residual admittance policy](https://ieeexplore.ieee.org/abstract/document/9636023), Spector & Zacksenhouse, IEEE/RSJ IROS, 2021
+- [Insertionnet-a scalable solution for insertion](https://ieeexplore.ieee.org/abstract/document/9476636), Spector & Di Castro, IEEE Robotics and Automation Letters, 2021
+- [Meta-reinforcement learning for robotic industrial insertion tasks](https://ieeexplore.ieee.org/abstract/document/9341094), Schoettler et al., IEEE/RSJ IROS, 2020
+- [Fuzzy logic-driven variable time-scale prediction-based reinforcement learning for robotic multiple peg-in-hole assembly](https://ieeexplore.ieee.org/abstract/document/9250533), Hou et al., IEEE Transactions on Automation Science and Engineering, 2020
+- [Multiple peg-in-hole compliant assembly based on a learning-accelerated deep deterministic policy gradient strategy](https://www.emerald.com/insight/content/doi/10.1108/IR-05-2021-0095/full/html), Li et al., Industrial Robot, 2022
+- [Variable compliance control for robotic peg-in-hole assembly: A deep-reinforcement-learning approach](https://www.mdpi.com/2076-3417/10/19/6923), Beltran-Hernandez et al., Applied Sciences, 2020
+- [Learning force control for contact-rich manipulation tasks with rigid position-controlled robots](https://ieeexplore.ieee.org/abstract/document/9145608), Beltran-Hernandez et al., IEEE Robotics and Automation Letters, 2020
+- [Robotic imitation of human assembly skills using hybrid trajectory and force learning](https://ieeexplore.ieee.org/abstract/document/9561619), Wang et al., IEEE ICRA, 2021
+- [Hybrid trajectory and force learning of complex assembly tasks: A combined learning framework](https://ieeexplore.ieee.org/abstract/document/9420285), Wang et al., IEEE Access, 2021
+- [IndustReal: Transferring Contact-Rich Assembly Tasks from Simulation to Reality](http://dx.doi.org/10.15607/rss.2023.xix.039), Tang et al., RSS, 2023
+- [Offline Meta-Reinforcement Learning for Industrial Insertion](https://ieeexplore.ieee.org/abstract/document/9812312), Zhao et al., IEEE ICRA, 2022
+- [A sim-to-real learning-based framework for contact-rich assembly by utilizing cyclegan and force control](https://ieeexplore.ieee.org/abstract/document/10025827), Shi et al., IEEE Transactions on Cognitive and Developmental Systems, 2023
+- [Efficient sim-to-real transfer of contact-rich manipulation skills with online admittance residual learning](https://proceedings.mlr.press/v229/zhang23c.html), Zhang et al., CoRL, 2023
+- [Safe peg-in-hole automatic assembly using virtual guiding force: A deep reinforcement learning solution](https://www.sciencedirect.com/science/article/pii/S0921889024002811), Zang et al., Robotics and Autonomous Systems, 2025
+- [Deep reinforcement learning on variable stiffness compliant control for programming-free robotic assembly in smart manufacturing](http://dx.doi.org/10.1080/00207543.2024.2318488), Ji et al., International Journal of Production Research, 2024
+- [Deep Reinforcement Learning of Robotic Precision Insertion Skill Accelerated by Demonstrations](https://ieeexplore.ieee.org/abstract/document/8842940), Wu et al., IEEE CASE, 2019
+- [Reinforcement Learning for Robotic Assembly Using Non-Diagonal Stiffness Matrix](https://ieeexplore.ieee.org/abstract/document/9361113), Oikawa et al., IEEE Robotics and Automation Letters, 2021
+- [Learning Robotic Assembly from CAD](https://ieeexplore.ieee.org/abstract/document/8460696), Thomas et al., IEEE ICRA, 2018
+- [Generating Manipulation Sequences using Reinforcement Learning and Behavior Trees for Peg-In-Hole Task](https://ieeexplore.ieee.org/abstract/document/9945269), Xu et al., IEEE SMC, 2022
+- [Robotic Peg-in-Hole Assembly Strategy Research Based on Reinforcement Learning Algorithm](https://www.mdpi.com/2076-3417/12/21/11149), Li et al., Applied Sciences, 2022
+- [Learning Assembly Tasks in a Few Minutes by Combining Impedance Control and Residual Recurrent Reinforcement Learning](https://onlinelibrary.wiley.com/doi/full/10.1002/aisy.202100095), Kulkarni et al., Advanced Intelligent Systems, 2021
+- [Data-efficient hierarchical reinforcement learning for robotic assembly control applications](https://ieeexplore.ieee.org/abstract/document/9205674), Hou et al., IEEE Transactions on Industrial Electronics, 2020
+- [Active compliance control of robot peg-in-hole assembly based on combined reinforcement learning](https://link.springer.com/article/10.1007/s10489-023-05156-5), Chen et al., Applied Intelligence, 2023
+- [An Adaptive Imitation Learning Framework for Robotic Complex Contact-Rich Insertion Tasks](https://www.frontiersin.org/articles/10.3389/frobt.2021.777363/full), Wang et al., Frontiers in Robotics and AI, 2022
+- [Generalizable Human-Robot Collaborative Assembly Using Imitation Learning and Force Control](https://ieeexplore.ieee.org/abstract/document/10178330), Jha et al., ECC, 2023
+- [Contact-Rich Object Insertion: Lessons for Zero-Shot Policy Transfer](https://openreview.net/forum?id=OhJTFH1zLZ), Brahmbhatt et al., ICRA Workshop, 2023
+- [Learning tactile insertion in the real world](https://arxiv.org/abs/2405.00383), Palenicek et al., arXiv, 2024
+
+**Multimodal and Force-Based Assembly**
+- [Multimodality Driven Impedance-Based Sim2Real Transfer Learning for Robotic Multiple Peg-in-Hole Assembly](https://ieeexplore.ieee.org/abstract/document/10247555), Chen et al., IEEE Transactions on Cybernetics, 2024
+- [Generalize by touching: Tactile ensemble skill transfer for robotic furniture assembly](https://ieeexplore.ieee.org/abstract/document/10610267), Lin et al., IEEE ICRA, 2024
+- [Robust multi-modal policies for industrial assembly via reinforcement learning and demonstrations: A large-scale study](https://arxiv.org/abs/2103.11512), Luo et al., arXiv, 2021
+- [Deep reinforcement learning for robotic assembly of mixed deformable and rigid objects](https://ieeexplore.ieee.org/abstract/document/8593837), Luo et al., IEEE/RSJ IROS, 2018
+- [Multimodal Task Attention Residual Reinforcement Learning: Advancing Robotic Assembly in Unstructured Environment](https://ieeexplore.ieee.org/abstract/document/10888889), Lin et al., IEEE Robotics and Automation Letters, 2025
+- [RoboMT: Human-Like Compliance Control for Assembly via a Bilateral Robotic Teleoperation and Hybrid Mamba-Transformer Framework](https://ieeexplore.ieee.org/abstract/document/11024316), Rundong et al., IEEE Robotics and Automation Letters, 2025
+
+**Sim-to-Real Transfer for Assembly**
+- [Bridging the Sim-to-Real Gap with Dynamic Compliance Tuning for Industrial Insertion](https://ieeexplore.ieee.org/abstract/document/10610707), Zhang et al., IEEE ICRA, 2024
+- [Sim-to-Real Transfer of Robotic Assembly with Visual Inputs Using CycleGAN and Force Control](https://ieeexplore.ieee.org/abstract/document/10011878), Yuan et al., IEEE ROBIO, 2022
+- [TRANS-AM: Transfer Learning by Aggregating Dynamics Models for Soft Robotic Assembly](https://ieeexplore.ieee.org/abstract/document/9561081), Tanaka et al., IEEE ICRA, 2021
+
+**Physics-Based Assembly Planning**
+- [Assemble them all: Physics-based planning for generalizable assembly by disassembly](https://dl.acm.org/doi/abs/10.1145/3550454.3555525), Tian et al., ACM Transactions on Graphics, 2022
+- [Factory: Fast contact for robotic assembly](https://arxiv.org/abs/2205.03532), Narang et al., arXiv, 2022
+- [RoboAssembly: Learning generalizable furniture assembly policy in a novel multi-robot contact-rich simulation environment](https://arxiv.org/abs/2112.10143), Yu et al., arXiv, 2021
+- [Multi-level Reasoning for Robotic Assembly: From Sequence Inference to Contact Selection](https://ieeexplore.ieee.org/abstract/document/10611259), Zhu et al., IEEE ICRA, 2024
+
+**Human-Robot Collaborative Assembly**
+- [Task-oriented safety field for robot control in human-robot collaborative assembly based on residual learning](https://www.sciencedirect.com/science/article/pii/S095741742302448X), Zhu et al., Expert Systems with Applications, 2024
+- [A flexible manufacturing assembly system with deep reinforcement learning](https://www.sciencedirect.com/science/article/pii/S0967066121002525), Li et al., Control Engineering Practice, 2022
+- [Deep Reinforcement Learning for Real-Time Assembly Planning in Robot-Based Prefabricated Construction](https://ieeexplore.ieee.org/abstract/document/10015730), Zhu et al., IEEE Transactions on Automation Science and Engineering, 2023
+
+**LLM/VLM-Guided Assembly**
+- [Toward Automated Programming for Robotic Assembly Using ChatGPT](https://ieeexplore.ieee.org/abstract/document/10610554), Macaluso et al., IEEE ICRA, 2024
+- [Text to Robotic Assembly of Multi Component Objects using 3D Generative AI and Vision Language Models](https://arxiv.org/abs/2511.02162), Kyaw et al., arXiv, 2025
+- [CALAMARI: Contact-aware and language conditioned spatial action MApping for contact-RIch manipulation](https://proceedings.mlr.press/v229/wi23a.html), Wi et al., CoRL, 2023
+- [Query-Centric Diffusion Policy for Generalizable Robotic Assembly](https://arxiv.org/abs/2509.18686), Xu et al., arXiv, 2025
+
+**Disassembly Tasks**
+- [Robotic disassembly task training and skill transfer using reinforcement learning](https://ieeexplore.ieee.org/abstract/document/10097918), Qu et al., IEEE Transactions on Industrial Informatics, 2023
+- [Learning and generalising object extraction skill for contact-rich disassembly tasks: an introductory study](https://link.springer.com/article/10.1007/s00170-022-10670-6), Serrano-Munoz et al., The International Journal of Advanced Manufacturing Technology, 2023
+- [Goal-Conditioned Reinforcement Learning within a Human-Robot Disassembly Environment](https://www.mdpi.com/2076-3417/12/22/11610), Elguea-Aguinaco et al., Applied Sciences, 2022
+
+**Impedance/Compliance Control for Assembly**
+- [Knowledge-guided robot learning on compliance control for robotic assembly task with predictive model](https://www.sciencedirect.com/science/article/pii/S0957417423019826), Liu et al., Expert Systems with Applications, 2023
+- [SCAPE: Learning stiffness control from augmented position control experiences](https://proceedings.mlr.press/v164/kim22b.html), Kim et al., CoRL, 2022
+- [Optimizing Non-diagonal Stiffness Matrix of Compliance Control for Robotic Assembly Using Deep Reinforcement Learning](https://iopscience.iop.org/article/10.1088/1742-6596/2402/1/012013), Liu et al., Journal of Physics: Conference Series, 2022
+- [Fast skill learning for variable compliance robotic assembly](https://arxiv.org/abs/1905.04427), Ren et al., arXiv, 2019
+- [Compliant Robotic Assembly based on Deep Reinforcement Learning](https://ieeexplore.ieee.org/abstract/document/9529475), Zhou et al., IEEE MLISE, 2021
+
+**Hierarchical and Structured Learning for Assembly**
+- [A Hierarchical Compliance-Based Contextual Policy Search for Robotic Manipulation Tasks With Multiple Objectives](https://ieeexplore.ieee.org/abstract/document/9841405), Hou et al., IEEE Transactions on Industrial Informatics, 2023
+- [Hierarchical Reinforcement Learning Integrating With Human Knowledge for Practical Robot Skill Learning in Complex Multi-Stage Manipulation](https://ieeexplore.ieee.org/abstract/document/10159571), Liu et al., IEEE Transactions on Automation Science and Engineering, 2024
+- [SHaRe-RL: Structured, Interactive Reinforcement Learning for Contact-Rich Industrial Assembly Tasks](https://arxiv.org/html/2509.13949v1), Stranghöner et al., arXiv, 2025
 </details>
 
 <details open>
