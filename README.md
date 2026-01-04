@@ -741,6 +741,13 @@ Learning-based methods here typically involve adaptive impedance control, learni
 
 <details open>
 <summary>Policy Spaces</summary>
+
+- [SafeVLA: Towards Safety Alignment of Vision-Language-Action Model via Constrained Learning](https://arxiv.org/abs/2503.03480), Zhang et al., arXiv preprint arXiv:2503.03480, 2025
+- [Handling long-term safety and uncertainty in safe reinforcement learning](https://arxiv.org/abs/2409.12045), G{\ et al., arXiv preprint arXiv:2409.12045, 2024
+- [Recovery rl: Safe reinforcement learning with learned recovery zones](https://ieeexplore.ieee.org/document/9392290), Thananjeyan et al., IEEE Robotics and Automation Letters, 2021
+- [Diffusion forcing: Next-token prediction meets full-sequence diffusion](https://proceedings.neurips.cc/paper_files/paper/2024/hash/2aee1c4159e48407d68fe16ae8e6e49e-Abstract-Conference.html), Chen et al., Advances in Neural Information Processing Systems, 2024
+- [A human-centered safe robot reinforcement learning framework with interactive behaviors](https://www.frontiersin.org/journals/neurorobotics/articles/10.3389/fnbot.2023.1280341), Gu et al., Frontiers in Neurorobotics, 2023
+- [State-wise safe reinforcement learning with pixel observations](https://proceedings.mlr.press/v242/zhan24a.html), Zhan et al., 6th Annual Learning for Dynamics \& Control Conference, 2024
 </details>
 
 ## Cite
