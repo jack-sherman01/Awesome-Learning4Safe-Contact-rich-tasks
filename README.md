@@ -571,10 +571,71 @@ Foundation Models & General Large Models (e.g., VLMs, VLAs) have shown great pot
 
 <details open>
 <summary>Low-Level Safety Implementations</summary>
+Low-level safety control focuses on ensuring safe interactions at the actuation and feedback level. This includes real-time enforcement of physical constraints such as force, torque, impedance, and stability, which are especially critical in contact-rich scenarios. 
+Learning-based methods here typically involve adaptive impedance control, learning CBFs, model-predictive safety filters, or robust policy adaptation techniques
+
+**Compliant control and impedance learning**
+- [Variable impedance skill learning for contact-rich manipulation](https://ieeexplore.ieee.org/abstract/document/9812508), Yang et al., IEEE Robotics and Automation Letters, 2022
+- [Learning impedance actions for safe reinforcement learning in contact-rich tasks](http://oru.diva-portal.org/smash/record.jsf?pid=diva2:1620121), Yang et al., NeurIPS 2021 Workshop on Deployable Decision Making in Embodied Systems, 2021
+- [Skill learning for robotic insertion based on one-shot demonstration and reinforcement learning](https://link.springer.com/article/10.1007/s11633-021-1290-3), Li & Xu, International Journal of Automation and Computing, 2021
+- [Safety compliant control for robotic manipulator with task and input constraints](https://ieeexplore.ieee.org/document/9785709), Murtaza et al., IEEE Robotics and Automation Letters, 2022
+- [CHEQ-ing the Box: Safe Variable Impedance Learning for Robotic Polishing](https://arxiv.org/abs/2501.07985), Cramer et al., arXiv, 2025
+- [Data-Efficient Reinforcement Learning for Variable Impedance Control](https://ieeexplore.ieee.org/document/10401924), Anand et al., IEEE Access, 2024
+- [Optimizing Non-diagonal Stiffness Matrix of Compliance Control for Robotic Assembly Using Deep Reinforcement Learning](https://iopscience.iop.org/article/10.1088/1742-6596/2402/1/012013), Liu et al., Journal of Physics: Conference Series, 2022
+- [A Passivity-Based Variable Impedance Controller for Incremental Learning of Periodic Interactive Tasks](https://ieeexplore.ieee.org/document/10711399), Dalle Vedove et al., IEEE CASE, 2024
+- [Passivity-Centric Safe Reinforcement Learning for Contact-Rich Robotic Tasks](https://arxiv.org/abs/2503.00287), Zhang et al., arXiv, 2025
+  
+**Safety filters and barriers**
+- [Stability-guaranteed reinforcement learning for contact-rich manipulation](https://ieeexplore.ieee.org/document/9309336), Khader et al., IEEE Robotics and Automation Letters, 2021
+- [Safety Gymnasium: A Unified Safe Reinforcement Learning Benchmark](https://proceedings.neurips.cc/paper_files/paper/2023/hash/8a2900ccf23e8fcde68f59a9f4c7afc7-Abstract-Datasets_and_Benchmarks.html), Ji et al., NeurIPS, 2023
+- [Control Barrier Function-Based Force Constrained Safety Compliance Control for Manipulator](https://ieeexplore.ieee.org/document/10275266), Liang et al., ICAC, 2023
+- [Safe data-driven model predictive control of systems with complex dynamics](https://ieeexplore.ieee.org/document/10113472), Mitsioni et al., IEEE Transactions on Robotics, 2023
+- [Dynamic model predictive shielding for provably safe reinforcement learning](https://arxiv.org/abs/2402.18722), Banerjee et al., NeurIPS, 2024
+- [Safe reinforcement learning using robust control barrier functions](https://ieeexplore.ieee.org/document/8793506), Cheng et al., IEEE/RSJ IROS, 2019
+- [High-Order Control Barrier Functions-Based Impedance Control of a Robotic Manipulator with Time-Varying Output Constraints](https://www.sciencedirect.com/science/article/abs/pii/S0019057822000726), Wang et al., ISA Transactions, 2022
+- [Safe Force/Position Tracking Control via Control Barrier Functions for Floating Base Mobile Manipulator Systems](https://ieeexplore.ieee.org/document/10591297), Sharifi & Heshmati-Alamdari, ECC, 2024
+- [Data-Driven Safety Filters: Hamilton–Jacobi Reachability, Control Barrier Functions, and Predictive Methods for Uncertain Systems](https://ieeexplore.ieee.org/document/10266799), Wabersich et al., IEEE Control Systems Magazine, 2023
+- [Guarding Force: Safety-Critical Compliant Control for Robot-Environment Interaction](https://ieeexplore.ieee.org/document/11266955), Wang et al., IEEE Robotics and Automation Letters, 2025
+- [Contact-Aware Safety in Soft Robots Using High-Order Control Barrier and Lyapunov Functions](https://arxiv.org/abs/2505.03841), Wong et al., arXiv, 2025
+- [Safe reinforcement learning with model uncertainty estimates](https://arxiv.org/abs/1810.08700), Lütjens et al., IEEE ICRA, 2019
+- [Safe Human–Robot Collaboration With Risk Tunable Control Barrier Functions](https://ieeexplore.ieee.org/document/11023035), Sharma et al., IEEE/ASME Transactions on Mechatronics, 2025
+- [Control barrier functions: Theory and applications](https://ieeexplore.ieee.org/abstract/document/8796030), Ames et al., ECC, 2019
+- [Safety through Permissibility: Shield Construction for Fast and Safe Reinforcement Learning](https://arxiv.org/abs/2405.19414), Politowicz et al., arXiv, 2024
+- [Better Safe Than Sorry: Enhancing Arbitration Graphs for Safe and Robust Autonomous Decision-Making](https://arxiv.org/abs/2411.10170), Spieker et al., arXiv, 2024
+- [Reachability-Based Trajectory Safeguard (RTS): A Safe and Fast Reinforcement Learning Safety Layer for Continuous Control](https://ieeexplore.ieee.org/document/9063989), Shao et al., IEEE Robotics and Automation Letters, 2021
+- [ABNet: Attention BarrierNet for Safe and Scalable Robot Learning](https://arxiv.org/abs/2406.13025), Xiao et al., arXiv, 2024
+- [DADEE: Well-calibrated Uncertainty Quantification in Neural Networks for Barriers-Based Robot Safety](https://arxiv.org/abs/2407.00616), Ataei & Dhiman, arXiv, 2024
+- [LTLDoG: Satisfying Temporally-Extended Symbolic Constraints](https://ieeexplore.ieee.org/document/10637680), Feng et al., IEEE RAL, 2024
+- [Safe Flow Matching: Robot Motion Planning with Control Barrier Functions](https://arxiv.org/abs/2504.08661), Dai et al., arXiv, 2025
+- [Disturbance Observer-based Control Barrier Functions with Residual Model Learning for Safe Reinforcement Learning](https://arxiv.org/abs/2410.06570), Kalaria et al., arXiv, 2024
+- [Flexible Active Safety Motion Control for Robotic Obstacle Avoidance: A CBF-Guided MPC Approach](https://ieeexplore.ieee.org/document/10854514), Liu et al., IEEE Robotics and Automation Letters, 2025
+- [Learning Piecewise Residuals of Control Barrier Functions for Safety of Switching Systems using Multi-Output Gaussian Processes](https://ieeexplore.ieee.org/document/10591208), Aali & Liu, ECC, 2024
+- [Safe CoR: A Dual-Expert Approach to Integrating Imitation Learning and Safe Reinforcement Learning Using Constraint Rewards](https://ieeexplore.ieee.org/document/10801577), Kwon et al., IEEE/RSJ IROS, 2024
+- [Safety-Critical Control with Uncertainty Quantification using Adaptive Conformal Prediction](https://ieeexplore.ieee.org/document/10644391), Zhou et al., ACC, 2024
+- [Auxiliary-Variable Adaptive Control Barrier Functions for Safety Critical Systems](https://ieeexplore.ieee.org/document/10383595), Liu et al., CDC, 2023
+- [Adaptive High-Order Control Barrier Function-Based Iterative LQR for Real Time Safety-Critical Motion Planning](https://ieeexplore.ieee.org/document/10522835), Kong et al., IEEE Robotics and Automation Letters, 2024
+- [Data-driven permissible safe control with barrier certificates](https://ieeexplore.ieee.org/document/10886850), Mazouz et al., CDC, 2024
+- [Implicit Safe Set Algorithm for Provably Safe Reinforcement Learning](https://arxiv.org/abs/2405.02754), Zhao et al., arXiv, 2024
+- [Hamilton-Jacobi reachability: A brief overview and recent advances](https://ieeexplore.ieee.org/document/8263977), Bansal et al., CDC, 2017
+- [Enhancing Safety in Model-Based Reinforcement Learning With High-Order Control Barrier Functions](https://onlinelibrary.wiley.com/doi/10.1002/rnc.7888), Zhang et al., International Journal of Robust and Nonlinear Control, 2025
+- [Robotic deployment on construction sites: considerations for safety and productivity impact](https://arxiv.org/abs/2404.13143), Braga et al., arXiv, 2024
+- [Safe and Optimal Variable Impedance Control via Certified Reinforcement Learning](https://arxiv.org/abs/2511.16330), Kumar & Prakash, arXiv, 2025
+- [Sauté RL: Almost Surely Safe Reinforcement Learning Using State Augmentation](https://proceedings.mlr.press/v162/sootla22a.html), Sootla et al., ICML, 2022
+- [WCSAC: Worst-Case Soft Actor Critic for Safety-Constrained Reinforcement Learning](https://ojs.aaai.org/index.php/AAAI/article/view/17272), Yang et al., AAAI, 2021
+- [Langevin Policy for Safe Reinforcement Learning](https://proceedings.mlr.press/v235/lei24a.html), Lei et al., ICML, 2024
+  
+**Robust and adaptive safety**
+- [A learning control strategy for robot-assisted bathing via impedance sliding mode technique with non-repetitive tasks](https://link.springer.com/article/10.1007/s12555-022-0436-6), Xu et al., International Journal of Control, Automation and Systems, 2024
+- [Safe model-based reinforcement learning with an uncertainty-aware reachability certificate](https://ieeexplore.ieee.org/document/10329343), Lin et al., IEEE Transactions on Automation Science and Engineering, 2024
+- [Forge: Force-guided exploration for robust contact-rich manipulation under uncertainty](https://arxiv.org/abs/2408.04587), Noseworthy et al., arXiv, 2024
+- [Controlling Contact-Rich Manipulation Under Partial Observability](https://roboticsproceedings.org/rss16/p023.pdf), Wirnshofer et al., Robotics: Science and Systems, 2020
+- [Robotic disassembly task training and skill transfer using reinforcement learning](https://ieeexplore.ieee.org/document/10038536), Qu et al., IEEE Transactions on Industrial Informatics, 2023
+- [Learning contact-rich assembly skills using residual admittance policy](https://ieeexplore.ieee.org/abstract/document/9636547), Spector et al., IEEE/RSJ IROS, 2021
 </details>
 
 <details open>
 <summary>End-to-End Safety Enhancement</summary>
+
 </details>
 
 <details open>
