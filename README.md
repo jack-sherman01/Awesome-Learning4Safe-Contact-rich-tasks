@@ -548,6 +548,25 @@ Foundation Models & General Large Models (e.g., VLMs, VLAs) have shown great pot
 
 <details open>
 <summary>High-Level Safety Constraints</summary>
+
+- [Hierarchical Reinforcement Learning Integrating With Human Knowledge for Practical Robot Skill Learning in Complex Multi-Stage Manipulation](https://ieeexplore.ieee.org/document/10184998), Liu et al., IEEE Transactions on Automation Science and Engineering, 2024
+- [A Task-Efficient Reinforcement Learning Task-Motion Planner for Safe Human-Robot Cooperation](https://arxiv.org/abs/2510.12477), Liu et al., arXiv, 2025
+- [Combining planning, reasoning and reinforcement learning to solve industrial robot tasks](https://arxiv.org/abs/2212.03570), Mayr et al., arXiv, 2022
+- [Bridging the gap between learning-to-plan, motion primitives and safe reinforcement learning](https://arxiv.org/abs/2408.14063), Kicki et al., arXiv, 2024
+- [Safe Reinforcement Learning with Probabilistic Guarantees](https://ieeexplore.ieee.org/abstract/document/10383601), Krasowski et al., CDC, 2023
+- [Multi-level Reasoning for Robotic Assembly: From Sequence Inference to Contact Selection](https://arxiv.org/abs/2312.10571), Zhu et al., IEEE ICRA, 2024
+- [Assemble them all: Physics-based planning for generalizable assembly by disassembly](https://dl.acm.org/doi/10.1145/3550454.3555525), Tian et al., ACM Transactions on Graphics, 2022
+- [Dynamic model predictive shielding for provably safe reinforcement learning](https://arxiv.org/abs/2405.13863), Banerjee et al., CDC, 2023
+- [Safety through Permissibility: Shield Construction for Fast and Safe Reinforcement Learning](https://arxiv.org/abs/2405.19414), Politowicz et al., arXiv, 2024
+- [Better Safe Than Sorry: Enhancing Arbitration Graphs for Safe and Robust Autonomous Decision-Making](https://arxiv.org/abs/2411.10170), Spieker et al., arXiv, 2024
+- [Don't Let Your Robot be Harmful: Responsible Robotic Manipulation via Safety-as-Policy](https://arxiv.org/abs/2411.18289), Ni et al., arXiv, 2024
+- [Toward Automated Programming for Robotic Assembly Using ChatGPT](https://arxiv.org/abs/2405.08216), Macaluso et al., IEEE ICRA, 2024
+- [Towards Safe Robot Foundation Models](https://arxiv.org/abs/2503.07404), Tölle et al., arXiv, 2025
+- [SafeAgentBench: A benchmark for safe task planning of embodied LLM agents](https://arxiv.org/abs/2412.13178), Yin et al., arXiv, 2024
+- [SafeVLA: Towards Safety Alignment of Vision-Language-Action Model via Constrained Learning](https://arxiv.org/abs/2503.03480), Zhang et al., arXiv, 2025
+- [Text2Interaction: Establishing Safe and Preferable Human-Robot Interaction](https://arxiv.org/abs/2408.06105), Thumm et al., CoRL, 2024
+- [CALAMARI: Contact-aware and language conditioned spatial action MApping for contact-RIch manipulation](https://proceedings.mlr.press/v229/wi23a.html), Wi et al., CoRL, 2023
+- [ImpedanceGPT: VLM-driven Impedance Control of Swarm of Mini-drones for Intelligent Navigation in Dynamic Environment](https://arxiv.org/abs/2503.02723), Batool et al., arXiv, 2025
 </details>
 
 <details open>
