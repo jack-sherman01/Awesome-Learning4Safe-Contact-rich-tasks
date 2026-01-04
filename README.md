@@ -655,6 +655,29 @@ Learning-based methods here typically involve adaptive impedance control, learni
 
 <details open>
 <summary>Hybrid Safety Approaches</summary>
+
+- [Impedance learning-based adaptive control for human–robot interaction](https://ieeexplore.ieee.org/document/9531394), Sharifi et al., IEEE Transactions on Control Systems Technology, 2022
+- [Learning impedance actions for safe reinforcement learning in contact-rich tasks](http://oru.diva-portal.org/smash/record.jsf?pid=diva2:1620121), Yang et al., NeurIPS 2021 Workshop on Deployable Decision Making in Embodied Systems, 2021
+- [Skill learning for robotic insertion based on one-shot demonstration and reinforcement learning](https://link.springer.com/article/10.1007/s11633-021-1290-3), Li & Xu, International Journal of Automation and Computing, 2021
+- [Stability-guaranteed reinforcement learning for contact-rich manipulation](https://ieeexplore.ieee.org/document/9309336), Khader et al., IEEE Robotics and Automation Letters, 2021
+- [Learning-based contact status recognition for peg-in-hole assembly](https://ieeexplore.ieee.org/document/9636147), Yan et al., IEEE/RSJ IROS, 2021
+- [Safe robot execution in model-based reinforcement learning](https://ieeexplore.ieee.org/document/7354232), Martínez et al., IEEE/RSJ IROS, 2015
+- [Safe-control-gym: A unified benchmark suite for safe learning-based control and reinforcement learning in robotics](https://ieeexplore.ieee.org/document/9812392), Yuan et al., IEEE Robotics and Automation Letters, 2022
+- [Passivity-Centric Safe Reinforcement Learning for Contact-Rich Robotic Tasks](https://arxiv.org/abs/2503.00287), Zhang et al., arXiv, 2025
+- [SRL-VIC: A Variable Stiffness-Based Safe Reinforcement Learning for Contact-Rich Robotic Tasks](https://ieeexplore.ieee.org/document/10530396), Zhang et al., IEEE Robotics and Automation Letters, 2024
+- [Safety compliant control for robotic manipulator with task and input constraints](https://ieeexplore.ieee.org/document/9785709), Murtaza et al., IEEE Robotics and Automation Letters, 2022
+- [Model-based reinforcement learning variable impedance control for human-robot collaboration](https://link.springer.com/article/10.1007/s10846-020-01183-3), Roveda et al., Journal of Intelligent & Robotic Systems, 2020
+- [Safety Gymnasium: A Unified Safe Reinforcement Learning Benchmark](https://proceedings.neurips.cc/paper_files/paper/2023/hash/8a2900ccf23e8fcde68f59a9f4c7afc7-Abstract-Datasets_and_Benchmarks.html), Ji et al., NeurIPS, 2023
+- [Neural dynamic policies for end-to-end sensorimotor learning](https://proceedings.neurips.cc/paper/2020/hash/354ac345fd8c6d7ef634d9a8e3d47b83-Abstract.html), Bahl et al., NeurIPS, 2020
+- [Diffusion-Based Impedance Learning for Contact-Rich Manipulation Tasks](https://arxiv.org/abs/2509.19696), Geiger et al., arXiv, 2025
+- [TacDiffusion: Force-Domain Diffusion Policy for Precise Tactile Manipulation](https://ieeexplore.ieee.org/document/11127334), Wu et al., IEEE ICRA, 2025
+- [Learning Diffusion Policies from Demonstrations For Compliant Contact-rich Manipulation](https://arxiv.org/abs/2410.19235), Aburub et al., arXiv, 2024
+- [Residual Feedback Learning for Contact-Rich Manipulation Tasks with Uncertainty](https://ieeexplore.ieee.org/document/9636176), Ranjbar et al., IEEE/RSJ IROS, 2021
+- [SafeVLA: Towards Safety Alignment of Vision-Language-Action Model via Constrained Learning](https://arxiv.org/abs/2503.03480), Zhang et al., arXiv, 2025
+- [Towards Safe Robot Foundation Models](https://arxiv.org/abs/2503.07404), Tölle et al., arXiv, 2025
+- [Towards physical plausibility in robot policy learning via energy-bound inference](https://ieeexplore.ieee.org/document/10705419), Shi et al., IEEE/RSJ IROS, 2024
+- [OmniVIC: A Self-Improving Variable Impedance Controller with Vision-Language In-Context Learning for Safe Robotic Manipulation](https://arxiv.org/abs/2510.17150), Zhang et al., arXiv, 2025
+- [ImpedanceGPT: VLM-driven Impedance Control of Swarm of Mini-drones for Intelligent Navigation in Dynamic Environment](https://arxiv.org/abs/2503.02723), Batool et al., arXiv, 2025
 </details>
 
 ### Safety Enforcement Spaces
