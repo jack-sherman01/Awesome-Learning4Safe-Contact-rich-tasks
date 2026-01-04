@@ -534,7 +534,14 @@ Foundation Models & General Large Models (e.g., VLMs, VLAs) have shown great pot
 </details>
 
 <details open>
-<summary>improved Evaluation</summary>
+<summary>Improved Evaluation</summary>
+
+- [A learning control strategy for robot-assisted bathing via impedance sliding mode technique with non-repetitive tasks](https://link.springer.com/article/10.1007/s12555-022-0436-6), Xu et al., International Journal of Control, Automation and Systems, 2024
+- [Forge: Force-guided exploration for robust contact-rich manipulation under uncertainty](https://arxiv.org/abs/2408.04587), Noseworthy et al., arXiv, 2024
+- [Knowledge-guided robot learning on compliance control for robotic assembly task with predictive model](https://www.sciencedirect.com/science/article/abs/pii/S0957417423015397), Liu et al., Expert Systems with Applications, 2023
+- [Controlling Contact-Rich Manipulation Under Partial Observability](https://roboticsproceedings.org/rss16/p023.pdf), Wirnshofer et al., Robotics: Science and Systems, 2020
+- [Robotic disassembly task training and skill transfer using reinforcement learning](https://ieeexplore.ieee.org/document/10038536), Qu et al., IEEE Transactions on Industrial Informatics, 2023
+- [Learning contact-rich assembly skills using residual admittance policy](https://ieeexplore.ieee.org/abstract/document/9636547), Spector et al., IEEE/RSJ IROS, 2021
 </details>
 
 ### Safety Abstraction Level
