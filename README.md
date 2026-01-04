@@ -732,6 +732,11 @@ Learning-based methods here typically involve adaptive impedance control, learni
 
 <details open>
 <summary>Dual-Space Safety Enforcement </summary>
+
+- [A contact-safe reinforcement learning framework for contact-rich robot manipulation](https://ieeexplore.ieee.org/document/9981185), Zhu et al., 2022 IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS), 2022
+- [Adaptive neural network force tracking control of flexible joint robot with an uncertain environment](https://ieeexplore.ieee.org/document/10173753), Yu et al., IEEE Transactions on Industrial Electronics, 2023
+- [End-to-end reinforcement learning for torque based variable height hopping](https://ieeexplore.ieee.org/document/10342187), Soni et al., 2023 IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS), 2023
+- [Model-based actor-critic learning of robotic impedance control in complex interactive environment](https://ieeexplore.ieee.org/document/9652099), Zhao et al., IEEE Transactions on Industrial Electronics, 2021
 </details>
 
 <details open>
