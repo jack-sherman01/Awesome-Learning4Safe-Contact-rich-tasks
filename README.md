@@ -719,6 +719,15 @@ Learning-based methods here typically involve adaptive impedance control, learni
 
 <details open>
 <summary>Joint Space </summary>
+
+- [Variable Impedance Control Combining Reinforcement Learning and Gaussian Process Regression](https://ieeexplore.ieee.org/document/10769856), De Risi et al., 2024 IEEE-RAS 23rd International Conference on Humanoid Robots (Humanoids), 2024
+- [Composite learning variable impedance robot control with stability and passivity guarantees](https://ieeexplore.ieee.org/document/10295573), Pan et al., IEEE Robotics and Automation Letters, 2023
+- [Guarding Force: Safety-Critical Compliant Control for Robot-Environment Interaction](https://ieeexplore.ieee.org/document/11266955), Wang et al., arXiv preprint arXiv:2405.04859, 2024
+- [Data-Driven Control of Hydraulic Manipulators by Reinforcement Learning](http://dx.doi.org/10.1109/tmech.2023.3336070), Yao et al., IEEE/ASME Transactions on Mechatronics, 2024
+- [Controlling Contact-Rich Manipulation Under Partial Observability.](https://roboticsproceedings.org/rss16/p023.html), Wirnshofer et al., Robotics: Science and Systems, 2020
+- [Learning Variable Impedance Control for Contact Sensitive Tasks](http://dx.doi.org/10.1109/lra.2020.3011379), Bogdanovic et al., IEEE Robotics and Automation Letters, 2020
+- [Motion planner augmented reinforcement learning for robot manipulation in obstructed environments](https://proceedings.mlr.press/v155/yamada21a.html), Yamada et al., Conference on Robot Learning, 2021
+- [Learning variable impedance control for robotic massage with deep reinforcement learning: A novel learning framework](https://ieeexplore.ieee.org/document/10385222), Li et al., IEEE Systems, Man, and Cybernetics Magazine, 2024
 </details>
 
 <details open>
