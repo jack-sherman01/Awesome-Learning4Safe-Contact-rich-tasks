@@ -506,7 +506,6 @@ Foundation Models & General Large Models (e.g., VLMs, VLAs) have shown great pot
 <details open>
 <summary>Safety, Efficiency and Task Objectives </summary>
 
-
 - [State-wise safe reinforcement learning with pixel observations](https://proceedings.mlr.press/v242/zhan24a.html), Zhan et al., L4DC, 2024
 - [Safe data-driven model predictive control of systems with complex dynamics](https://ieeexplore.ieee.org/document/10113472), Mitsioni et al., IEEE Transactions on Robotics, 2023
 - [Deep reinforcement learning-based variable impedance control for grinding workpieces with complex geometry](https://www.emerald.com/insight/content/doi/10.1108/RIA-09-2024-0207/full/html), Li et al., Robotic Intelligence and Automation, 2025
@@ -524,6 +523,14 @@ Foundation Models & General Large Models (e.g., VLMs, VLAs) have shown great pot
 
 <details open>
 <summary>Trade-off Between Objectives</summary>
+
+- [Recovery rl: Safe reinforcement learning with learned recovery zones](https://ieeexplore.ieee.org/document/9392290), Thananjeyan et al., IEEE Robotics and Automation Letters, 2021
+- [SRL-VIC: A Variable Stiffness-Based Safe Reinforcement Learning for Contact-Rich Robotic Tasks](https://ieeexplore.ieee.org/document/10517611), Zhang et al., IEEE Robotics and Automation Letters, 2024
+- [Learning Diffusion Policies from Demonstrations For Compliant Contact-rich Manipulation](https://arxiv.org/abs/2410.19235), Aburub et al., arXiv, 2024
+- [Learning robotic manipulation skills using an adaptive force-impedance action space](https://arxiv.org/abs/2110.09904), Ulmer et al., arXiv, 2021
+- [Motion planner augmented reinforcement learning for robot manipulation in obstructed environments](https://arxiv.org/abs/2010.11940), Yamada et al., CoRL, 2020
+- [Safe reinforcement learning with model uncertainty estimates](https://arxiv.org/abs/1810.08700), Lütjens et al., ICRA, 2019
+
 </details>
 
 <details open>
