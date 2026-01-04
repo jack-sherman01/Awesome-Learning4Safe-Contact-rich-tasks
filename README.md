@@ -507,6 +507,19 @@ Foundation Models & General Large Models (e.g., VLMs, VLAs) have shown great pot
 <summary>Safety, Efficiency and Task Objectives </summary>
 
 
+- [State-wise safe reinforcement learning with pixel observations](https://proceedings.mlr.press/v242/zhan24a.html), Zhan et al., L4DC, 2024
+- [Safe data-driven model predictive control of systems with complex dynamics](https://ieeexplore.ieee.org/document/10113472), Mitsioni et al., IEEE Transactions on Robotics, 2023
+- [Deep reinforcement learning-based variable impedance control for grinding workpieces with complex geometry](https://www.emerald.com/insight/content/doi/10.1108/RIA-09-2024-0207/full/html), Li et al., Robotic Intelligence and Automation, 2025
+- [Research on Robot Massage Force Control Based on Residual Reinforcement Learning](https://ieeexplore.ieee.org/document/10374025), Xiao et al., IEEE Access, 2023
+- [A learning control strategy for robot-assisted bathing via impedance sliding mode technique with non-repetitive tasks](https://link.springer.com/article/10.1007/s12555-022-0436-6), Xu et al., International Journal of Control, Automation and Systems, 2024
+- [The path towards contact-based physical human–robot interaction](https://www.sciencedirect.com/science/article/pii/S0921889024002136), Farajtabar et al., Robotics and Autonomous Systems, 2024
+- [Force-constrained visual policy: Safe robot-assisted dressing via multi-modal sensing](https://ieeexplore.ieee.org/abstract/document/10465608), Sun et al., IEEE Robotics and Automation Letters, 2024
+- [CHEQ-ing the Box: Safe Variable Impedance Learning for Robotic Polishing](https://arxiv.org/abs/2501.07985), Cramer et al., arXiv, 2025
+- [Learning Diffusion Policies from Demonstrations For Compliant Contact-rich Manipulation](https://arxiv.org/abs/2410.19235), Aburub et al., arXiv, 2024
+- [Learning robotic manipulation skills using an adaptive force-impedance action space](https://arxiv.org/abs/2110.09904), Ulmer et al., arXiv, 2021
+- [Motion planner augmented reinforcement learning for robot manipulation in obstructed environments](https://proceedings.mlr.press/v164/yamada22a.html), Yamada et al., Conference on Robot Learning, 2022
+
+
 </details>
 
 <details open>
