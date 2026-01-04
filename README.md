@@ -636,6 +636,21 @@ Learning-based methods here typically involve adaptive impedance control, learni
 <details open>
 <summary>End-to-End Safety Enhancement</summary>
 
+- [End-to-end safe reinforcement learning through barrier functions for safety-critical continuous control tasks](https://ojs.aaai.org/index.php/AAAI/article/view/4213), Cheng et al., AAAI, 2019
+- [Motion planner augmented reinforcement learning for robot manipulation in obstructed environments](https://proceedings.mlr.press/v164/yamada22a.html), Yamada et al., CoRL, 2021
+- [Torque-based deep reinforcement learning for task-and-robot agnostic learning on bipedal robots using sim-to-real transfer](https://ieeexplore.ieee.org/document/10214627), Kaspar et al., IEEE ICRA, 2023
+- [Neuropolicy: Learning control with foundation models](), Luo et al., arXiv, 2024
+- [Towards Safe Robot Foundation Models](https://arxiv.org/abs/2503.07404), Tölle et al., arXiv, 2025
+- [SafeVLA: Towards Safety Alignment of Vision-Language-Action Model via Constrained Learning](https://arxiv.org/abs/2503.03480), Zhang et al., arXiv, 2025
+- [Towards physical plausibility in robot policy learning via energy-bound inference](https://ieeexplore.ieee.org/document/10705419), Shi et al., IEEE/RSJ IROS, 2024
+- [Don't Let Your Robot be Harmful: Responsible Robotic Manipulation via Safety-as-Policy](https://arxiv.org/abs/2411.18289), Ni et al., arXiv, 2024
+- [Text2Interaction: Establishing Safe and Preferable Human-Robot Interaction](https://arxiv.org/abs/2408.06105), Thumm et al., CoRL, 2024
+- [Zero-shot policy adaptation for robot manipulation with prompt tuning](), Fang et al., IEEE ICRA, 2024
+- [ImpedanceGPT: VLM-driven Impedance Control of Swarm of Mini-drones for Intelligent Navigation in Dynamic Environment](https://arxiv.org/abs/2503.02723), Batool et al., arXiv, 2025
+- [SafeAgentBench: A benchmark for safe task planning of embodied LLM agents](https://arxiv.org/abs/2412.13178), Yin et al., arXiv, 2024
+- [CALAMARI: Contact-aware and language conditioned spatial action MApping for contact-RIch manipulation](https://proceedings.mlr.press/v229/wi23a.html), Wi et al., CoRL, 2023
+- [Toward Automated Programming for Robotic Assembly Using ChatGPT](https://arxiv.org/abs/2405.08216), Macaluso et al., IEEE ICRA, 2024
+- [LTLDoG: Satisfying Temporally-Extended Symbolic Constraints](https://ieeexplore.ieee.org/document/10637680), Feng et al., IEEE RAL, 2024
 </details>
 
 <details open>
