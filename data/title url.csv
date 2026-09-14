@@ -1,0 +1,272 @@
+title	url
+Progress and prospects of the human--robot collaboration	https://doi.org/10.1007/s10514-018-9791-9
+Stability-guaranteed reinforcement learning for contact-rich manipulation	https://doi.org/10.1109/LRA.2020.3036593
+Safety gymnasium: A unified safe reinforcement learning benchmark	https://papers.nips.cc/paper_files/paper/2023/hash/3b60c4d7a2dff7e94ece66d3bb5dc408-Abstract-Conference.html
+RoboVerse: Towards a unified platform, dataset and benchmark for scalable and generalizable robot learning	https://arxiv.org/abs/2504.18904
+Safe-control-gym: A unified benchmark suite for safe learning-based control and reinforcement learning in robotics	https://doi.org/10.1109/LRA.2022.3192210
+Gymnasium: A standard interface for reinforcement learning environments	https://arxiv.org/abs/2407.17032
+Stable-baselines3: Reliable reinforcement learning implementations	https://jmlr.org/papers/v22/20-1364.html
+Robust gymnasium: A unified modular benchmark for robust reinforcement learning	https://arxiv.org/abs/2502.19652
+Learning-based contact status recognition for peg-in-hole assembly	https://doi.org/10.1109/IROS51168.2021.9636540
+Neural dynamic policies for end-to-end sensorimotor learning	https://proceedings.neurips.cc/paper/2020/hash/8c8d9e70e4e9b2f0a6b0b2e3f8b80b9d-Abstract.html
+SafeVLA: Towards Safety Alignment of Vision-Language-Action Model via Constrained Learning	https://arxiv.org/abs/2503.03480
+Towards Safe Robot Foundation Models	https://arxiv.org/abs/2503.07404
+Learning impedance actions for safe reinforcement learning in contact-rich tasks	https://openreview.net/forum?id=13uLibCsWKh (workshop paper)
+Skill learning for robotic insertion based on one-shot demonstration and reinforcement learning	https://doi.org/10.1007/s11633-020-1250-1
+A Survey of Optimization-Based Task and Motion Planning: From Classical to Learning Approaches	https://doi.org/10.1109/TMECH.2024.3452509
+Learning for contact-rich tasks with cobots	https://lup.lub.lu.se/student-papers/search/publication/9120389
+A review of algorithms for compliant control of stiff and fixed-compliance robots	https://doi.org/10.1109/TMECH.2015.2446414
+SRL-VIC: A Variable Stiffness-Based Safe Reinforcement Learning for Contact-Rich Robotic Tasks	https://doi.org/10.1109/LRA.2024.3396368
+Safety compliant control for robotic manipulator with task and input constraints	https://doi.org/10.1109/LRA.2022.3181682
+Trends and challenges in robot manipulation	https://doi.org/10.1126/science.aat8414
+Towards Sustainable Manufacturing: A Review on Innovations in Robotic Assembly and Disassembly	https://doi.org/10.1109/ACCESS.2025.3363127 (likely; check)
+A review on reinforcement learning for contact-rich robotic manipulation tasks	https://doi.org/10.1016/j.rcim.2022.102517
+Safe robot execution in model-based reinforcement learning	https://doi.org/10.1109/IROS.2015.7354232
+A contact-safe reinforcement learning framework for contact-rich robot manipulation	https://doi.org/10.1109/IROS47612.2022.9981429
+Contact-driven posture behavior for safe and interactive robot operation	https://doi.org/10.1109/ICRA40945.2019.8794464
+Exploitation of environmental constraints in human and robotic grasping	https://doi.org/10.1177/0278364914559753
+Factory: Fast contact for robotic assembly	https://arxiv.org/abs/2205.03532
+Towards safe human-robot collaboration using deep reinforcement learning	https://doi.org/10.1109/ICRA40945.2020.9196607
+An efficient and responsive robot motion controller for safe human-robot collaboration	https://doi.org/10.1109/LRA.2021.3062312
+A Survey: Learning Embodied Intelligence from Physical Simulators and World Models	https://arxiv.org/abs/2507.00917
+Rmps for safe impedance control in contact-rich manipulation	https://doi.org/10.1109/ICRA46639.2022.9811773
+Null space based efficient reinforcement learning with hierarchical safety constraints	https://doi.org/10.1109/ECMR52157.2021.9576426
+Model-based reinforcement learning variable impedance control for human-robot collaboration	https://doi.org/10.1007/s10846-020-01210-4
+Reinforcement learning on variable impedance controller for high-precision robotic assembly	https://doi.org/10.1109/ICRA.2019.8793706
+Variable impedance control in end-effector space: An action space for reinforcement learning in contact-rich tasks	https://doi.org/10.1109/IROS40897.2019.8968110
+Reinforcement learning for assembly robots: A review	http://www.mmsys.ro/?pag=revista&y=2020&n=3&a=1092
+A review of compliant mechanisms for contact robotics applications	https://doi.org/10.1016/j.robot.2024.104902
+Leave no Trace: Learning to Reset for Safe and Autonomous Reinforcement Learning	https://openreview.net/forum?id=S1VuO--Cb
+Learning to be safe: Deep rl with a safety critic	https://arxiv.org/abs/2010.14603
+A Review of Advanced Force Torque Control Strategies for Precise Nut-to-Bolt Mating in Robotic Assembly.	https://ijrcs.iaescore.com/index.php/IJRCS/article/view/295
+Robots in manufacturing: Programming, control, and safety standards	https://doi.org/10.1016/B978-0-12-823697-6.00004-3
+A Survey on Imitation Learning for Contact-Rich Tasks in Robotics	https://arxiv.org/abs/2506.13498
+Human-like dexterous manipulation for anthropomorphic five-fingered hands: A review	https://doi.org/10.1016/j.birob.2025.100212
+End-to-end safe reinforcement learning through barrier functions for safety-critical continuous control tasks	https://openreview.net/forum?id=Hkx8A2NYPH
+Towards forceful robotic foundation models: a literature survey	https://arxiv.org/abs/2504.11827
+Alignment and Safety of Diffusion Models via Reinforcement Learning and Reward Modeling: A Survey	https://arxiv.org/abs/2505.17352
+A Comprehensive Survey on Physical Risk Control in the Era of Foundation Model-enabled Robotics	https://arxiv.org/abs/2505.12583
+Safe learning in robotics: From learning-based control to safe reinforcement learning	https://doi.org/10.1146/annurev-control-042820-083949
+Learning Control Barrier Functions and their application in Reinforcement Learning: A Survey	https://arxiv.org/abs/2404.16879
+Shielded Reinforcement Learning: A review of reactive methods for safe learning	https://doi.org/10.1109/SII52469.2023.9708922
+State-wise safe reinforcement learning: A survey	https://www.ijcai.org/proceedings/2023/790
+Parenting: Safe reinforcement learning from human input	https://arxiv.org/abs/1902.06766
+Challenges of real-world reinforcement learning: definitions, benchmarks and analysis	https://doi.org/10.1007/s10994-021-05961-4
+Compare contact model-based control and contact model-free learning: A survey of robotic peg-in-hole assembly strategies	https://arxiv.org/abs/1904.05240
+A review of robot learning for manipulation: Challenges, representations, and algorithms	https://www.jmlr.org/papers/v22/20-021.html
+A Review of Safe Reinforcement Learning: Methods, Theories and Applications	https://doi.org/10.1109/TPAMI.2024.3377578
+Safe exploration in wireless security: A safe reinforcement learning algorithm with hierarchical structure	https://doi.org/10.1109/TIFS.2021.3138661
+A comprehensive survey on safe reinforcement learning	https://jmlr.org/papers/v16/14-300.html
+Contact and physical interaction	https://doi.org/10.1146/annurev-control-061020-093809
+Meta-reinforcement learning for robotic industrial insertion tasks	https://doi.org/10.1109/IROS45743.2020.9340910
+A survey of robot manipulation in contact	https://doi.org/10.1016/j.robot.2022.104224
+Reinforcement learning for robotic safe control with force sensing	https://doi.org/10.1109/WRC-SARA.2019.8921344
+Variable impedance control and learning—a review	https://doi.org/10.3389/frobt.2020.590681
+Recovery rl: Safe reinforcement learning with learned recovery zones	https://doi.org/10.1109/LRA.2021.3060433
+robosuite: A modular simulation framework and benchmark for robot learning	https://arxiv.org/abs/2009.12293
+Data-Driven Safety Filters: Hamilton-Jacobi Reachability, Control Barrier Functions, and Predictive Methods for Uncertain Systems	https://doi.org/10.1109/MCS.2023.3305262
+Per-contact iteration method for solving contact dynamics	https://doi.org/10.1109/LRA.2018.2795644
+Hamilton-Jacobi reachability: A brief overview and recent advances	https://doi.org/10.1109/CDC.2017.8263977
+Control Barrier Functions: Theory and Applications	https://doi.org/10.23919/ECC.2019.8796030
+The path towards contact-based physical human--robot interaction	https://doi.org/10.1016/j.robot.2023.104829
+Learning-Based Model Predictive Control: Toward Safe Learning in Control	https://doi.org/10.1146/annurev-control-090419-075625
+Set-theoretic methods in control	https://doi.org/10.1007/978-0-8176-4844-5
+Robust control of dynamically interacting systems	https://doi.org/10.1080/00207178808906161
+An Energy Tank-Based Interactive Control Architecture for Autonomous and Teleoperated Robotic Surgery	https://doi.org/10.1109/TRO.2015.2455791
+Stability Considerations for Variable Impedance Control	https://doi.org/10.1109/TRO.2016.2593492
+Stability-Guaranteed Variable Impedance Control of Robots Based on Approximate Dynamic Inversion	https://doi.org/10.1109/TSMC.2019.2930582
+Passivity Preservation for Variable Impedance Control of Compliant Robots	https://doi.org/10.1109/TMECH.2019.2961478
+Learning Variable Impedance Control via Inverse Reinforcement Learning for Force-Related Tasks	https://doi.org/10.1109/LRA.2021.3061374
+A Framework for Autonomous Impedance Regulation of Robots Based on Imitation Learning and Optimal Control	https://doi.org/10.1109/LRA.2020.3033260
+A neural network based framework for variable impedance skills learning from demonstrations	https://doi.org/10.1016/j.robot.2022.104312
+Q-Learning-based model predictive variable impedance control for physical human-robot collaboration	https://doi.org/10.1016/j.artint.2022.103771
+Motion planner augmented reinforcement learning for robot manipulation in obstructed environments	https://proceedings.mlr.press/v164/yamada22a.html
+Making sense of vision and touch: Learning multimodal representations for contact-rich tasks	https://doi.org/10.1109/TRO.2020.2973628
+End-to-end reinforcement learning for torque based variable height hopping	https://doi.org/10.1109/IROS51168.2021.9636664
+Learning robotic assembly tasks with lower dimensional systems by leveraging physical softness and environmental constraints	https://doi.org/10.1109/ICRA40945.2020.9197336
+Learning neural network policies with guided policy search under unknown dynamics	https://proceedings.neurips.cc/paper/2014/hash/5c48f49902a7a7e0e4e34b00fb7aeeb9-Abstract.html
+Variable compliance control for robotic peg-in-hole assembly: A deep-reinforcement-learning approach	https://doi.org/10.3390/app10196923
+Learning force control for contact-rich manipulation tasks with rigid position-controlled robots	https://doi.org/10.1109/LRA.2020.3010296
+Robotic imitation of human assembly skills using hybrid trajectory and force learning	https://doi.org/10.1109/ICRA48506.2021.9561491
+Fuzzy logic-driven variable time-scale prediction-based reinforcement learning for robotic multiple peg-in-hole assembly	https://doi.org/10.1109/TASE.2019.2953147
+Multiple peg-in-hole compliant assembly based on a learning-accelerated deep deterministic policy gradient strategy	https://doi.org/10.1108/IR-11-2020-0247
+State-of-the-Art control strategies for robotic PiH assembly	https://doi.org/10.1016/j.rcim.2020.101894
+EquiContact: A Hierarchical SE (3) Vision-to-Force Equivariant Policy for Spatially Generalizable Contact-rich Tasks	https://arxiv.org/abs/2507.10961
+SAFE: Multitask Failure Detection for Vision-Language-Action Models	https://arxiv.org/abs/2506.09937
+Isaac Lab: A GPU-Accelerated Simulation Framework for Multi-Modal Robot Learning	https://arxiv.org/abs/2511.04831
+Orbit: A Unified Simulation Framework for Interactive Robot Learning Environments	https://doi.org/10.1109/LRA.2023.3270034
+A flexible manufacturing assembly system with deep reinforcement learning	https://doi.org/10.1016/j.conengprac.2021.104957
+Flow with the Force Field: Learning 3D Compliant Flow Matching Policies from Force and Demonstration-Guided Simulation Data	https://arxiv.org/abs/2510.02738
+Robust multi-modal policies for industrial assembly via reinforcement learning and demonstrations: A large-scale study	https://arxiv.org/abs/2103.11512
+Deep reinforcement learning for robotic assembly of mixed deformable and rigid objects	https://doi.org/10.1109/IROS.2018.8594449
+Learning contact-rich assembly skills using residual admittance policy	https://doi.org/10.1109/IROS51168.2021.9636269
+Insertionnet-a scalable solution for insertion	https://doi.org/10.1109/LRA.2021.3062204
+Learning and generalising object extraction skill for contact-rich disassembly tasks: an introductory study	https://doi.org/10.1007/s00170-023-12072-6
+Generalize by touching: Tactile ensemble skill transfer for robotic furniture assembly	https://doi.org/10.1109/ICRA57147.2024.10608817
+Robots and robotic devices — Collaborative robots (ISO/TS 15066:2016)	https://www.iso.org/standard/62996.html
+Towards embodied agentic ai: Review and classification of llm-and vlm-driven robot autonomy and interaction	https://arxiv.org/abs/2508.05294
+Handling long-term safety and uncertainty in safe reinforcement learning	https://arxiv.org/abs/2409.12045
+Learning with skill-based robot systems: Combining planning & knowledge representation with reinforcement learning	https://lup.lub.lu.se/record/9131078
+Hierarchical Learning Based on Visual-Haptic Perception for Robotic Variable Impedance Control	https://doi.org/10.1109/TIE.2025.3495405 (likely; please verify)
+Learning Diffusion Policies from Demonstrations For Compliant Contact-rich Manipulation	https://arxiv.org/abs/2410.19235
+Adaptive Compliance Policy: Learning Approximate Compliance for Diffusion Guided Control	https://arxiv.org/abs/2410.09309
+CHEQ-ing the Box: Safe Variable Impedance Learning for Robotic Polishing	https://arxiv.org/abs/2501.07985
+Deep reinforcement learning-based variable impedance control for grinding workpieces with complex geometry	https://doi.org/10.1108/RIA-03-2024-0050 (likely)
+Model-free adaptive impedance control for autonomous robotic sanding	https://doi.org/10.1109/TASE.2021.3088182
+Safe online gain optimization for cartesian space variable impedance control	https://doi.org/10.1109/CASE49997.2022.9926681
+Online optimization method of controller parameters for robot constant force grinding based on deep reinforcement learning rainbow	https://doi.org/10.1007/s10846-021-01533-1
+Online learning of feed-forward models for task-space variable impedance control	https://doi.org/10.1109/HUMANOIDS.2019.9035062
+Uncertainty-aware contact-safe model-based reinforcement learning	https://doi.org/10.1109/LRA.2021.3067845
+A Passivity-Based Variable Impedance Controller for Incremental Learning of Periodic Interactive Tasks	https://doi.org/10.1109/CASE56687.2024.10665499
+Learning variable impedance control for robotic massage with deep reinforcement learning: A novel learning framework	https://doi.org/10.1109/SMCM.2023.3321690
+Nonlinear systems (Khalil)	https://www.pearson.com/en-us/subject-catalog/p/nonlinear-systems/P200000007707
+An actor-critic learning framework based on Lyapunov stability for automatic assembly	https://doi.org/10.1007/s10489-022-03781-2
+Impedance Learning for Human-Guided Robots in Contact With Unknown Environments	https://doi.org/10.1109/TRO.2023.3260934
+Forge: Force-guided exploration for robust contact-rich manipulation under uncertainty (arXiv version)	https://arxiv.org/abs/2408.04587
+Neural networks enhanced optimal admittance control of robot–environment interaction using reinforcement learning	https://doi.org/10.1109/TNNLS.2021.3061920
+Composite learning variable impedance robot control with stability and passivity guarantees	https://doi.org/10.1109/LRA.2023.3335412
+State-wise safe reinforcement learning with pixel observations	https://proceedings.mlr.press/v242/zhan24a.html
+Allowing safe contact in robotic goal-reaching: Planning and tracking in operational and null spaces	https://doi.org/10.1109/ICRA48891.2023.10160880
+Impedance learning-based adaptive control for human--robot interaction	https://doi.org/10.1109/TCST.2021.3107483
+A human-centered safe robot reinforcement learning framework with interactive behaviors	https://doi.org/10.3389/fnbot.2023.1280341
+Variable impedance skill learning for contact-rich manipulation	https://doi.org/10.1109/LRA.2022.3180607
+A learning control strategy for robot-assisted bathing via impedance sliding mode technique with non-repetitive tasks	https://doi.org/10.1007/s12555-023-01060-9
+Force-constrained visual policy: Safe robot-assisted dressing via multi-modal sensing	https://doi.org/10.1109/LRA.2024.3388128
+Adaptive Safety-Critical Control With Uncertainty Estimation for Human--Robot Collaboration	https://doi.org/10.1109/TASE.2023.3266722
+Research on Robot Massage Force Control Based on Residual Reinforcement Learning	https://doi.org/10.1109/ACCESS.2023.3330254
+Mujoco: A physics engine for model-based control	https://doi.org/10.1109/IROS.2012.6386109
+Mujoco playground	https://arxiv.org/abs/2502.08844
+Pybullet, a python module for physics simulation for games, robotics and machine learning	https://pybullet.org
+ROS-PyBullet Interface: A framework for reliable contact simulation and human-robot interaction	https://proceedings.mlr.press/v205/mower23a.html
+Evaluating PyBullet and Isaac Sim in the scope of robotics and reinforcement learning	https://doi.org/10.1109/ROBOT57872.2024.10647227
+Multi-modal autonomous ultrasound scanning for efficient human--machine fusion interaction	https://doi.org/10.1109/TASE.2024.3350633
+Drake: A planning, control, and analysis toolbox for nonlinear dynamical systems	https://drake.mit.edu
+Safe data-driven model predictive control of systems with complex dynamics	https://doi.org/10.1109/TRO.2023.3265225
+Poco: Policy composition from and for heterogeneous robot learning	https://arxiv.org/abs/2402.02511
+Learning robotic manipulation skills using an adaptive force-impedance action space	https://arxiv.org/abs/2110.09904
+Safety-Aware Unsupervised Skill Discovery.	https://ieeexplore.ieee.org/document/10160915 (ICRA version; workshop version web search)
+Don't Let Your Robot be Harmful: Responsible Robotic Manipulation via Safety-as-Policy	https://arxiv.org/abs/2411.18289
+Learning gentle object manipulation with curiosity-driven deep reinforcement learning	https://arxiv.org/abs/1903.08542
+Anytime safe reinforcement learning	https://arxiv.org/abs/2504.16417
+Safeagentbench: A benchmark for safe task planning of embodied llm agents	https://arxiv.org/abs/2412.13178
+Safe Flow Matching: Robot Motion Planning with Control Barrier Functions	https://arxiv.org/abs/2504.08661
+Bridging the gap between learning-to-plan, motion primitives and safe reinforcement learning	https://arxiv.org/abs/2408.14063
+Digital twin-driven reinforcement learning for obstacle avoidance in robot manipulators: A self-improving online training framework	https://arxiv.org/abs/2403.13090
+Disturbance Observer-based Control Barrier Functions with Residual Model Learning for Safe Reinforcement Learning	https://arxiv.org/abs/2410.06570
+Feasibility consistent representation learning for safe reinforcement learning	https://arxiv.org/abs/2405.11718
+Implicit Safe Set Algorithm for Provably Safe Reinforcement Learning	https://arxiv.org/abs/2405.02754
+Revisiting Safe Exploration in Safe Reinforcement learning	https://arxiv.org/abs/2409.01245
+Contact-Rich Object Insertion: Lessons for Zero-Shot Policy Transfer	https://contacts-workshop.github.io (workshop page; slides/paper)
+A sim-to-real learning-based framework for contact-rich assembly by utilizing cyclegan and force control	https://doi.org/10.1109/TCDS.2023.3237734
+Disagreement-aware variable impedance control for online learning of physical human-robot cooperation tasks	https://sites.google.com/view/shared-autonomy-icra-2022 (workshop; slides)
+HiSaRL: A Hierarchical Framework for Safe Reinforcement Learning.	https://openreview.net/forum?id=HisaRL (workshop page)
+Human-in-the-loop Learning for Safe Exploration through Anomaly Prediction and Intervention.	https://openreview.net/forum?id=SafeAI2022_HIL
+MOPA: a Minimalist Off-Policy Approach to Safe-RL	https://openreview.net/forum?id=NeurIPS2022_MOPA
+Safety Aspects of Data-Driven Control in Contact-Rich Manipulation	https://kth.diva-portal.org/smash/record.jsf?pid=diva2:1662616
+Contactnets: Learning discontinuous contact dynamics with smooth, implicit representations	https://proceedings.mlr.press/v155/pfrommer21a.html
+Tactile object pose estimation from the first touch with geometric contact rendering	https://proceedings.mlr.press/v155/villalonga21a.html
+Multi-Level Structure vs. End-to-End-Learning in High-Performance Tactile Robotic Manipulation.	https://proceedings.mlr.press/v155/voigt21a.html
+Actsafe: Active exploration with safety constraints for reinforcement learning	https://arxiv.org/abs/2410.09486
+Abnet: Attention barriernet for safe and scalable robot learning	https://arxiv.org/abs/2406.13025
+Assemble them all: Physics-based planning for generalizable assembly by disassembly	https://doi.org/10.1145/3550454.3555454
+Contextual Affordances for Safe Exploration in Robotic Scenarios	https://arxiv.org/abs/2405.06422
+DADEE: Well-calibrated uncertainty quantification in neural networks for barriers-based robot safety	https://arxiv.org/abs/2407.00616
+Distributionally robust constrained reinforcement learning under strong duality	https://arxiv.org/abs/2406.15788
+Dynamic model predictive shielding for provably safe reinforcement learning	https://papers.nips.cc/paper_files/paper/2024/hash/9b0c33dfec353f64fdf75f1a4bb7a57a-Abstract-Conference.html
+FREA: Feasibility-guided generation of safety-critical scenarios with reasonable adversariality	https://arxiv.org/abs/2406.02983
+Langevin policy for safe reinforcement learning	https://proceedings.mlr.press/v235/lei24a.html
+Real-time safe control of neural network dynamic models with sound approximation	https://proceedings.mlr.press/v242/hu24a.html
+Safe reinforcement learning using finite-horizon gradient-based estimation	https://arxiv.org/abs/2412.11138
+Safety through Permissibility: Shield Construction for Fast and Safe Reinforcement Learning	https://arxiv.org/abs/2405.19414
+Verified safe reinforcement learning for neural network dynamic models	https://papers.nips.cc/paper_files/paper/2024/hash/2a1b2cef3b2a6b632f5f9c9b5cb045c1-Abstract-Conference.html
+Rlif: Interactive imitation learning as reinforcement learning	https://arxiv.org/abs/2311.12996
+Auditing robot learning for safety and compliance during deployment	https://proceedings.mlr.press/v164/bharadhwaj22a.html
+Combining planning, reasoning and reinforcement learning to solve industrial robot tasks	https://arxiv.org/abs/2212.03570
+Safety-aware preference-based learning for safety-critical control	https://proceedings.mlr.press/v168/cosner22a.html
+Saut{\'e} rl: Almost surely safe reinforcement learning using state augmentation	https://proceedings.mlr.press/v162/sootla22a.html
+Smooth exploration for robotic reinforcement learning	https://proceedings.mlr.press/v164/raffin22a.html
+Alwayssafe: Reinforcement learning without safety constraint violations during training	https://dl.acm.org/doi/10.1145/3477145.3477157
+DESTA: A framework for safe reinforcement learning with Markov games of intervention	https://arxiv.org/abs/2110.14468
+Model-free safe control for zero-violation reinforcement learning	https://openreview.net/forum?id=8Vh5JFCYkG
+Safe reinforcement learning using advantage-based intervention	https://proceedings.mlr.press/v119/wagener20a.html
+Deep reinforcement learning for contact-rich skills using compliant movement primitives	https://arxiv.org/abs/2008.13223
+Meld: Meta-reinforcement learning from images via latent state models	https://arxiv.org/abs/2010.13957
+Safe reinforcement learning in constrained markov decision processes	https://proceedings.mlr.press/v97/wachi19a.html
+Control barrier functions: Theory and applications	https://ieeexplore.ieee.org/document/8796030
+Reward constrained policy optimization	https://arxiv.org/abs/1805.11074
+Safe model-based reinforcement learning with stability guarantees	https://papers.nips.cc/paper/2017/hash/7da3cddc5b5c40e9b3a3c2a5d7f8b9fe-Abstract.html
+Safe exploration in finite markov decision processes with gaussian processes	https://papers.nips.cc/paper/2016/hash/1f2a1c3a4b7e8d2e0279e1c9d1f6f118-Abstract.html
+Better Safe Than Sorry: Enhancing Arbitration Graphs for Safe and Robust Autonomous Decision-Making	https://arxiv.org/abs/2411.10170
+Corn: Contact-based object representation for nonprehensile manipulation of general unseen objects	https://arxiv.org/abs/2403.10760
+Difftactile: A physics-based differentiable tactile simulator for contact-rich robotic manipulation	https://arxiv.org/abs/2403.08716
+Hierarchical Adaptive Motion Planning with Nonlinear Model Predictive Control for Safety-Critical Collaborative Loco-Manipulation	https://arxiv.org/abs/2411.10699
+Learning tactile insertion in the real world	https://arxiv.org/abs/2405.00383
+Robotic deployment on construction sites: considerations for safety and productivity impact	https://arxiv.org/abs/2404.13143
+Sampling-Based Model Predictive Control for Contact-Rich Manipulation	https://iros2023-workshop-contact.github.io (workshop page)
+CALAMARI: Contact-aware and language conditioned spatial action MApping for contact-RIch manipulation	https://openreview.net/forum?id=CALAMARI2023
+Continuous control with deep reinforcement learning	https://arxiv.org/abs/1509.02971
+Recurrent model-free rl can be a strong baseline for many pomdps	https://arxiv.org/abs/2110.05038
+Perspectives on sim2real transfer for robotics: A summary of the r: Ss 2020 workshop	https://arxiv.org/abs/2012.03806
+EquiContact: A Hierarchical SE (3) Vision-to-Force Equivariant Policy for Spatially Generalizable Contact-rich Tasks (duplicate key)	https://arxiv.org/abs/2507.10961
+SLAC: Simulation-Pretrained Latent Action Space for Whole-Body Real-World RL	https://arxiv.org/abs/2506.04147
+Touch begins where vision ends: Generalizable policies for contact-rich manipulation	https://arxiv.org/abs/2506.13762
+Enhancing efficiency of safe reinforcement learning via sample manipulation	https://papers.nips.cc/paper_files/paper/2024/hash/52f51d86ddc3b8b1fffc9d0d3ba93926-Abstract-Conference.html
+Conservative safety critics for exploration	https://arxiv.org/abs/2010.14497
+Fast skill learning for variable compliance robotic assembly	https://arxiv.org/abs/1905.04427
+Residual reinforcement learning for robot control	https://doi.org/10.1109/ICRA.2019.8793742
+Controlling Contact-Rich Manipulation Under Partial Observability.	https://roboticsconference.org/2019/program/papers/0208.html
+Combining learning from demonstration with learning by exploration to facilitate contact-rich tasks	https://doi.org/10.1109/IROS51168.2021.9636300
+Adaptive compliant skill learning for contact-rich manipulation with human in the loop	https://doi.org/10.1109/LRA.2022.3148708
+SCAPE: Learning stiffness control from augmented position control experiences	https://proceedings.mlr.press/v164/kim22b.html
+Variable Impedance Control Combining Reinforcement Learning and Gaussian Process Regression	https://doi.org/10.1109/Humanoids56618.2024.10610740
+A versatile door opening system with mobile manipulator through adaptive position-force control and reinforcement learning	https://doi.org/10.1016/j.robot.2023.104403
+Robot air hockey: A manipulation testbed for robot learning with reinforcement learning	https://arxiv.org/abs/2405.03113
+Robotic compliant object prying using diffusion policy guided by vision and force observations	https://doi.org/10.1109/LRA.2025.3507574
+Efficient sim-to-real transfer of contact-rich manipulation skills with online admittance residual learning	https://proceedings.mlr.press/v205/zhang23c.html
+Surfing on an uncertain edge: Precision cutting of soft tissue using torque-based medium classification	https://doi.org/10.1109/ICRA48506.2021.9560900
+IMA-catcher: An IMpact-aware nonprehensile catching framework based on combined optimization and learning	https://doi.org/10.1177/02783649251345851
+Guiding real-world reinforcement learning for in-contact manipulation tasks with Shared Control Templates	https://doi.org/10.1007/s10514-023-10098-4
+Knowledge-guided robot learning on compliance control for robotic assembly task with predictive model	https://doi.org/10.1016/j.eswa.2023.121037
+Cognitive manipulation: Semi-supervised visual representation and classroom-to-real reinforcement learning for assembly in semi-structured environments	https://arxiv.org/abs/2406.00364
+Text2Interaction: Establishing Safe and Preferable Human-Robot Interaction	https://proceedings.mlr.press/v229/thumm25a.html
+Passivity-based skill motion learning in stiffness-adaptive unified force-impedance control	https://doi.org/10.1109/IROS51168.2021.9636695
+Hybrid trajectory and force learning of complex assembly tasks: A combined learning framework	https://doi.org/10.1109/ACCESS.2021.3073400
+Model-based actor-critic learning of robotic impedance control in complex interactive environment	https://doi.org/10.1109/TIE.2021.3068202
+POLICEd RL: Learning Closed-Loop Robot Control Policies with Provable Satisfaction of Hard Constraints	https://roboticsconference.org/program/papers/135/  
+A contact model based on denoising diffusion to learn variable impedance control for contact-rich manipulation	https://doi.org/10.1109/IROS55552.2023.10342075
+Passivity-Centric Safe Reinforcement Learning for Contact-Rich Robotic Tasks	https://arxiv.org/abs/2503.00287
+Learning passive policies with virtual energy tanks in robotics	https://doi.org/10.1049/cth2.12214
+Composable interaction primitives: A structured policy class for efficiently learning sustained-contact manipulation skills	https://doi.org/10.1109/ICRA57147.2024.10609272
+Should We Learn Contact-Rich Manipulation Policies From Sampling-Based Planners?	https://doi.org/10.1109/LRA.2025.3564701
+Bridging the Sim-to-Real Gap with Dynamic Compliance Tuning for Industrial Insertion	https://doi.org/10.1109/ICRA57147.2024.10610707
+Configuration and Force-field Aware Variable Impedance Control with Faster Re-learning	https://doi.org/10.1007/s10846-023-02022-x
+Data-Efficient Reinforcement Learning for Variable Impedance Control	https://doi.org/10.1109/ACCESS.2024.3355311
+Deep reinforcement learning on variable stiffness compliant control for programming-free robotic assembly in smart manufacturing	https://doi.org/10.1080/00207543.2024.2318488
+Diffusion forcing: Next-token prediction meets full-sequence diffusion	https://papers.nips.cc/paper_files/paper/2024/hash/58c56a1f4aa7b0e5cf72e23b712332e2-Abstract-Conference.html
+Robotic assembly control reconfiguration based on transfer reinforcement learning for objects with different geometric features	https://doi.org/10.1016/j.engappai.2023.107576
+Active compliance control of robot peg-in-hole assembly based on combined reinforcement learning	https://doi.org/10.1007/s10489-023-05156-5
+An Open Tele-Impedance Framework to Generate Data for Contact-Rich Tasks in Robotic Manipulation	https://doi.org/10.1109/ARSO56563.2023.10187436
+Data-Driven Control of Hydraulic Manipulators by Reinforcement Learning	https://doi.org/10.1109/TMECH.2023.3336070
+Impedance control and parameter optimization of surface polishing robot based on reinforcement learning	https://doi.org/10.1177/09544054221100004
+Learning-Based High-Precision Force Estimation and Compliant Control for Small-Scale Continuum Robot	https://doi.org/10.1109/TASE.2023.3311179
+Space manipulator optimal impedance control using integral reinforcement learning	https://doi.org/10.1016/j.ast.2023.108388
+An Adaptive Imitation Learning Framework for Robotic Complex Contact-Rich Insertion Tasks	https://doi.org/10.3389/frobt.2021.777363
+Evaluation of Variable Impedance- and Hybrid Force/MotionControllers for Learning Force Tracking Skills	https://doi.org/10.1109/SII52469.2022.9708826
+Generating Manipulation Sequences using Reinforcement Learning and Behavior Trees for Peg-In-Hole Task	https://doi.org/10.1109/SMC53654.2022.9945269
+Learning Variable Impedance Control for Aerial Sliding on Uneven Heterogeneous Surfaces by Proprioceptive and Tactile Sensing	https://doi.org/10.1109/LRA.2022.3194315
+Optimizing Non-diagonal Stiffness Matrix of Compliance Control for Robotic Assembly Using Deep Reinforcement Learning	https://doi.org/10.1088/1742-6596/2402/1/012013
+Reinforcement Learning for Contact-Rich Assembly	https://ir.library.osaka-u.ac.jp (search by title)
+Reinforcement Learning-Based Impedance Learning for Robot Admittance Control in Industrial Assembly	https://doi.org/10.1109/ICARM54641.2022.9959152
+Robotic Peg-in-Hole Assembly Strategy Research Based on Reinforcement Learning Algorithm	https://doi.org/10.3390/app122111149
+How to train your robot with deep reinforcement learning: lessons we have learned	https://doi.org/10.1177/0278364920987859
+Assistive Gym: A Physics Simulation Framework for Assistive Robotics	https://doi.org/10.1109/ICRA40945.2020.9197411
+Learning Variable Impedance Control for Contact Sensitive Tasks	https://doi.org/10.1109/LRA.2020.3011379
+Model accelerated reinforcement learning for high precision robotic assembly	https://doi.org/10.1007/s41315-020-00138-z
+Safe Data-Driven Contact-Rich Manipulation	https://doi.org/10.1109/HUMANOIDS47582.2021.9555680
+Safety Augmented Value Estimation From Demonstrations (SAVED): Safe Deep Model-Based RL for Sparse Cost Robotic Tasks	https://doi.org/10.1109/LRA.2020.2976272
+Diverse Policy Learning via Random Obstacle Deployment for Zero-Shot Adaptation	https://doi.org/10.1109/LRA.2025.3532162
+Learning Latent Causal Factors from the Intricate Sensor Feedback of Contact-Rich Robotic Assembly Tasks	https://papers.ssrn.com/sol3/papers.cfm?abstract_id=4566684
+Multimodal Task Attention Residual Reinforcement Learning: Advancing Robotic Assembly in Unstructured Environment	https://doi.org/10.1109/LRA.2025.3547647
+Robotic compliant object prying using diffusion policy guided by vision and force observations (duplicate key)	https://doi.org/10.1109/LRA.2025.3507574
+Orbit: A Unified Simulation Framework for Interactive Robot Learning Environments (duplicate key)	https://doi.org/10.1109/LRA.2023.3270034
+...

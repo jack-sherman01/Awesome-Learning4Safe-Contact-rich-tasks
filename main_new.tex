@@ -1,0 +1,1175 @@
+% sage_latex_guidelines.tex V1.20, 14 January 2017
+\UseRawInputEncoding
+\documentclass[Afour,sageh,times]{template/sagej}
+\usepackage{moreverb,url}
+
+ % Our packages
+\usepackage{textgreek}
+% for tables
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{lipsum}
+\usepackage{array}
+
+\usepackage{graphicx} % Required for inserting images
+\usepackage{amsmath} % assumes amsmath package installed
+\usepackage{amssymb}  % assumes amsmath package installed
+\usepackage{graphicx}
+\usepackage{pifont} % for \cmark and \xmark
+\newcommand{\cmark}{\ding{51}}  % 
+\newcommand{\xmark}{\ding{55}}  % 
+\usepackage{subcaption}
+\usepackage{float}
+% \usepackage{floatrow}
+\usepackage{amsmath}
+\usepackage[inline]{enumitem}
+
+\usepackage{tikz}
+\usetikzlibrary{shapes.misc, positioning, arrows.meta, calc, fit, shadows}
+
+% text color
+\usepackage{pifont}
+\usepackage[x11names]{xcolor}
+\usepackage{soul} % for strike through
+%\usepackage{hyperref} 
+
+%plotting
+\usepackage{tikz}
+\usetikzlibrary{shadows, shapes.geometric, arrows.meta, positioning}
+
+\tikzstyle{block} = [
+    rectangle, 
+    draw=black, 
+    rounded corners, 
+    fill=#1!30, 
+    drop shadow={shadow xshift=1pt, shadow yshift=-1pt, opacity=0.3},
+    text centered, 
+    minimum height=3em, 
+    minimum width=9em,
+    font=\sffamily\footnotesize
+]
+\tikzstyle{line} = [draw, -{Latex[length=3mm, width=2mm]}, thick]
+
+\usepackage[colorlinks,
+linkcolor=blue,
+ anchorcolor=blue,
+ citecolor=blue]{hyperref}
+ \usepackage{overpic}
+ \usepackage[font=small,labelfont=bf]{caption}
+
+\newcommand{\remember}[1]{{\color{gray} #1}}
+\newcommand{\suggest}[1]{{\color{olive} (#1)}}
+\newcommand{\highlight}[1]{{\color{violet} #1}}
+\newcommand{\reviewer}[1]{{\color{teal} (#1)}}
+
+
+\newcommand\BibTeX{{\rmfamily B\kern-.05em \textsc{i\kern-.025em b}\kern-.08em
+T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+
+\def\volumeyear{2025}
+\setcounter{secnumdepth}{3} % IJRR
+\begin{document}
+
+% \runninghead{author names}
+
+\title{Safe Learning for Contact-Rich Robot Tasks: A Survey from Classical Learning-Based Methods to Safe Foundation Models}
+
+\author{Heng Zhang\affilnum{1,2,3}, Rui Dai\affilnum{4}, Gokhan, Solak\affilnum{1} Pokuang Zhou\affilnum{3}, Yu She\affilnum{3,5,6} and Arash Ajoudani\affilnum{1}}
+
+\affiliation{\affilnum{1}Human-Robot Interfaces and Interaction Lab, Istituto Italiano di Tecnologia, Genova, Italy.\\
+\affilnum{2}Ph.D. program of national interest in Robotics and Intelligent Machines (DRIM) and Universit `a di Genova, Genoa, Italy. \\
+\affilnum{3} Edwardson School of Industrial Engineering, Purdue University, West Lafayette, IN, USA.\\
+\affilnum{4}HHCM Lab, Istituto Italiano di Tecnologia, Genova, Italy.\\
+\affilnum{5} School of Mechanical Engineering, Purdue University, West Lafayette, IN, USA.\\
+\affilnum{6} Elmore Family School of Electrical and Computer Engineering, Purdue University, West Lafayette, IN, USA.\\
+}
+
+\corrauth{Heng Zhang, Human-Robot Interfaces and Interaction Lab, Istituto Italiano di Tecnologia, Genoa, Italy.}
+
+\email{heng.zhang@iit.it}
+
+\begin{abstract}
+Contact-rich tasks pose significant challenges for robotic systems due to inherent uncertainty, complex dynamics, and the high risk of damage during interaction. Recent advances in learning-based control have shown great potential in enabling robots to acquire and generalize complex manipulation skills in such environments, but ensuring safety, both during exploration and execution, remains a critical bottleneck for reliable real-world deployment. This survey provides a comprehensive overview of safe learning-based methods for robot contact-rich tasks.
+We categorize existing approaches into two main domains: safe exploration, which focuses on minimizing the risk of unsafe actions during the learning phase, and safe execution, which ensures policy robustness and constraint satisfaction during deployment and interaction. We review key techniques, including constrained reinforcement learning, risk-sensitive optimization, uncertainty-aware modeling, control barrier functions, and model predictive safety shields, and highlight how these methods incorporate prior knowledge, task structure, and online adaptation to balance safety and efficiency.
+A particular emphasis of this survey is on how these safe learning principles extend to and interact with emerging robotic foundation models, especially vision-language models (VLMs) and vision-language-action models (VLAs), which unify perception, language, and control for contact-rich manipulation. We discuss both the new safety opportunities enabled by VLM/VLA-based methods, such as language-level specification of constraints and multimodal grounding of safety signals, and the amplified risks and evaluation challenges they introduce. Finally, we outline current limitations and promising future directions toward deploying reliable, safety-aligned, and foundation-model-enabled robots in complex contact-rich environments.
+% More details and materials are available at our \href{ https://github.com/jack-sherman01/Awesome-Learning4Safe-Contact-rich-tasks}{Project GitHub Repository}.
+\end{abstract}
+
+\keywords{contact-rich tasks, safe learning, robot manipulation, physical interaction}
+
+\maketitle
+\begin{quote}
+    \textit{``Contact is the heart of robotic manipulation. To understand manipulation, you must understand contact."}\\
+    \href{https://mtmason.com/the-heart-of-robotic-manipulation/}{The Heart of Robotic Manipulation}\\
+    \hfill \textbf{------ Matthew T. Mason}
+\end{quote}
+\section{Introduction} \label{sec:intro}
+% \suggest{Motivation}
+% \suggest{H: emphasize that safety in robotics, especially when 1. the method is learning-based, like how to deal with OOD problem. 2. for physical interaction contact-rich tasks}
+Robots are increasingly expected to operate in unstructured and dynamic environments, where interaction with the physical world is inevitable~\citep{billard2019trends,ajoudani2018progress}. Among such interactions, contact-rich tasks such as assembly, insertion, cutting, or tool use are particularly challenging due to their complex, discontinuous dynamics and the need for precise force and motion control. Traditional model-based control methods often struggle in these scenarios due to inaccurate or hard-to-obtain models, while learning-based methods promise flexibility and adaptability by leveraging data-driven representations~\citep{elguea2023review}.
+
+However, applying learning-based methods to contact-rich tasks raises critical safety concerns. Exploration during training may lead to unsafe actions that damage the robot, the environment, or nearby humans. Similarly, the execution of learned policies in deployment must guarantee constraint satisfaction and robustness, especially under distributional shifts. Therefore, safety must be addressed both during exploration and during execution to ensure the reliable operation of autonomous systems in the real world.
+
+This survey focuses on safe learning-based approaches that address the dual challenges of safe exploration and safe execution in robot contact-rich tasks. We categorize and analyze a wide range of methods, including constrained and risk-aware reinforcement learning, uncertainty-aware control, model-based safety filters, and hybrid approaches that combine learning with formal guarantees. These methods aim to strike a balance between learning efficiency, task performance, and safety assurance.
+
+We begin by outlining the unique challenges posed by contact-rich tasks and the requirements for safety in this context. We then present a taxonomy of existing methods based on the learning paradigm and safety mechanism employed. Finally, we identify open problems and future research directions, including benchmark design, generalization, and integration of safety across system levels.
+
+This survey aims to provide a structured overview of the current landscape, foster a deeper understanding of safe learning in contact-rich robotics, and inspire new research toward safe and capable autonomous systems. In particular, it emphasizes the emerging role of vision-language models (VLMs) and vision-language-action models (VLAs) as robotic foundation models that unify perception, language, and control for contact-rich tasks. By framing safety challenges and design principles in the context of these models, the survey seeks to guide the development of VLM/VLA-based systems that are not only powerful and general but also verifiably safe in real-world deployment.
+
+% \suggest{related survey and their limitations}
+A number of recent surveys have explored topics at the intersection of safety, learning, and contact-rich robotic manipulation. However, none comprehensively address the unique challenges and opportunities posed by safe learning in contact-rich tasks. Our survey aims to bridge this gap by providing a focused, methodical overview of the state-of-the-art, specifically within this critical niche.
+
+Several surveys have investigated safe learning and reinforcement learning (RL) more generally. Works such as~\citep{brunke2022safe,zhao2023state,gu2024review} provide comprehensive overviews of safety mechanisms in learning-based control and safe RL, including constraints, shielding, and exploration strategies. More specialized perspectives are offered in surveys on state-wise safety~\citep{zhao2023state}, control barrier functions in RL~\citep{guerrier2024learning} and shielded RL~\citep{odriozola2023shielded}. While these surveys address safety in learning, they often neglect the complexities introduced by physical interaction and contact dynamics.
+
+From the perspective of robotic manipulation and contact, surveys such as~\citep{suomalainen2022survey,kroemer2021review} and ~\citep{xu2019compare} analyze manipulation strategies and control frameworks, including both model-based and model-free methods. Others review variable impedance control~\citep{abu2020variable} and compliant mechanisms~\citep{samadikhoshkho2024review}, which are crucial for adapting to contact uncertainties but do not directly integrate learning-based safety frameworks.
+
+The application of RL in robotic assembly has also been reviewed in recent literature~\citep{stan2020reinforcement,elguea2023review,das2025towards} with emphasis on task success and sample efficiency. However, these surveys primarily focus on task performance and learning architectures, offering limited discussion on safety guarantees during exploration or deployment. 
+% Some surveys focused on contact-rich tasks without safety highlight, such as ~\citep{Tsuji2025asu} only focus on imitation learning methods.
+A recent survey paper \citep{Tsuji2025asu} reviews the imitation learning methods for contact-rich robotic tasks. 
+Differently, we center our review specifically on online safe learning methods, without focusing on imitation learning.
+
+% \suggest{recent}
+More recent efforts begin to address physical risk and safety in the era of data-driven and foundation model-based robotics~\citep{kojima2025comprehensive,lamba2025alignment,xie2025towards,wabersich2023data},  highlighting the growing relevance of scalable safety mechanisms. However, they often center on high-level policy alignment or general-purpose systems, lacking specificity in contact-rich manipulation contexts.
+
+% \suggest{safety in VLA}
+This survey also concentrates on the key safety gaps and data requirements underlying robust VLA robotic generalists. Advanced agentic embodied AI sheds light on a generalist robotic system, while the safety issue remains due to a lack of physical interaction data.~\cite{salimpour2025towards}
+Safety for VLA robotic generalists lags because high-fidelity, failure and near‑miss contact data are scarce, and foundational semantic models still mis‑ground force, region, and tolerance constraints in physically complex interaction regimes \citep{cruz2024learning}.  
+Hybrid plan–parameterize–filter stacks that couple semantic/VLM layers with compliant action abstractions and certified online shields improve robustness under distribution shift but remain challenged by contact mode transitions and geometry/material variation \citep{33,330,10705419,das2025towards}.
+Advancing VLA safety thus hinges on curated multimodal contact corpora, standardized force/violation metrics, and tighter analytical–data-driven integration for adaptive constraint grounding and reactive invariance maintenance \citep{salimpour2025towards}.
+
+% \suggest{others related surveys} 
+Lastly, surveys on human-like manipulation~\citep{huang2025human} force/torque control~\citep{sy2025review},  and safety in robotic manufacturing~\citep{lakshminarayanan2024robots} provide valuable domain-specific insights but remain largely disconnected from the safe learning perspective, especially the standard of safety was discussed in~\citep{lakshminarayanan2024robots}.
+
+In contrast to the aforementioned surveys, our work uniquely focuses on the intersection of safe learning and contact-rich robotics, where safety must be ensured not only in policy learning but also in dynamic interaction with the environment. We systematically review methods that account for safety during physical contact, discuss open challenges in real-world applications, and outline promising directions for future research. We conducted a detailed analysis of the research intensity in this field over recent years, covering the period from 2018 to the present 2025. Figure~\ref{fig:trend} illustrates the trend of research interest in this area, along with the examples of robotic experiments associated with the keywords “safety,” “contact-rich robotics,” and “learning.”
+\begin{figure}
+    \centering
+    \includegraphics[width=1\linewidth]{figs/publication_chart.pdf}
+    \caption{Trend of research publications that include keywords related to both safety, contact-rich robotics and learning. Representative example works are shown: contact-rich tasks, safe control, and learning-based methods \cite{11023035,luu2025manifeel}.
+    }
+    \label{fig:trend} 
+\end{figure}
+
+% \suggest{Scope of ours}
+Therefore, it is necessary to provide a comprehensive survey of recent advancements in safe learning for robotic contact-rich tasks. 
+This survey focuses on learning-based approaches that directly integrate safety mechanisms into the learning process, such as safe reinforcement learning and model-based safety strategies. We deliberately exclude imitation learning methods, as their primary objective is to replicate demonstrated behaviors rather than actively managing safety during exploration or execution, an aspect critical in contact-rich environments where uncertainty and dynamic interaction play a significant role.
+
+\suggest{Contribution}
+In light of the aforementioned challenges and recent advancements, we systematically review the landscape of safe learning methods for robotic contact-rich tasks, which pose unique challenges due to the dynamic, force-intensive, and uncertain nature of physical interactions. Our contributions are threefold:
+\begin{enumerate}
+    \item \textbf{A Safety-Centric Taxonomy} We introduce a structured taxonomy that categorizes safe learning approaches based on key dimensions, including learning phase (exploration vs. execution), level of safety integration (planning, control, or end-to-end), and modalities used (force/torque, vision, etc.). This survey provides a comprehensive lens through which researchers can analyze existing methods and identify safety design trade-offs.
+    \item \textbf{Contextualization Within Contact-Rich Tasks} Beyond general safe learning, we focus on its application to contact-rich robotic tasks such as insertion, polishing, and assembly. We detail how safety constraints are embedded in these tasks, and map the methods used to specific operational challenges (e.g., compliance, contact-inavatiable tasks, collision avoidance, and force control).
+    \item \textbf{Identification of Gaps, Challenges, and Future Directions}. We synthesize open research questions and outline critical challenges such as sim-to-real transfer under safety constraints, the scarcity of standardized benchmarks, and the need for provably safe generalization. We also discuss underexplored directions, including hybrid control-learning frameworks and human-in-the-loop safety mechanisms. Most importantly, we highlight the challenges and future opportunities in integrating safe contact-rich learning with large robotic foundation models, particularly VLM and VLA.
+\end{enumerate}
+
+\suggest{Outline}
+The remainder of this survey is organized as follows. In Section~\ref{sec:background}, we provide background on contact-rich tasks and formalize safety definitions in this context. Section~\ref{sec:methods} categorizes existing safe learning methods from multiple perspectives, including learning paradigms and safety mechanisms. In Section~\ref{sec:challenges}, we discuss open challenges and limitations in current approaches. Finally, Section~\ref{sec:perspectives} outlines promising future research directions to advance safe learning in robotic contact-rich tasks. Especially, we highlight the challenges and perspectives in large robot foundation models, such as VLM/VLA.
+
+\section{Background and Definitions in Safe Robotic Interaction} \label{sec:background}
+
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=0.99\columnwidth]{figs/chatgpt-task-images2.png}
+    \caption{Illustrations of typical contact-rich tasks: Surface grinding, %~\citep{142}, 
+    peg-in-hole, %~\citep{79}, 
+    massaging, %~\citep{19} and 
+    % multi-finger object manipulation.
+    and non-prehensile object manipulation. %~\citep{kim_pre-_2023,lee_non-prehensile_2025}. 
+    % {\color{red}TODO need fixed the Citation error.}
+    The images are generated using ChatGPT~5.1.}
+    \label{fig:task-images}
+\end{figure}
+
+
+\subsection{\suggest{Gokhan}Robotic Contact-Rich Tasks}
+% \suggest{Define the term, include taxonomy of these tasks, e.g., insertion, force-controlled manipulation, assembly, etc.}
+% \suggest{here I give a short definition and postpone the detailed discussion to Sec.~\ref{sec:tasks-review}}
+
+The definition of contact-rich tasks varies in the literature, and it was also referred to by different terms such as physical interaction tasks~\citep{hogan2022contact}, or manipulation in contact~\citep{suomalainen2022survey}. 
+According to our definition, a task is contact-rich when its successful execution requires dynamic and sustained physical contact with the environment, where motion and force are tightly coupled through contact constraints
+% i.e., contact is unavoidable to complete a task successfully. 
+
+In this regard, for instance, obstacle avoidance is not a contact-rich task: even though contact can happen sometimes, the task can be accomplished without contact. 
+Simple pick-and-place tasks are not included even though they involve contacts with objects, because these contacts are fixed (i.e., not dynamic) after the grasp. 
+However, tool-use tasks where the grasped object interacts with the environment, or in-hand manipulation where the contacts between the object and the robot hand are not fixed, are considered contact-rich. 
+% We leave the grasping-based tasks (such as dexterous manipulation) out of our scope as these require highly specialized approaches that deserve their own surveys \citep{}.
+The definition also excludes the impact-based tasks such as throwing \citep{100}, hitting \citep{48} or catching \citep{tassi2025ima} an object, in which the contact is momentary or sparse (i.e., not extended). These tasks are contact-intensive, but not contact-rich.
+
+Some examples of typical contact-rich tasks are peg-in-hole insertion, surface grinding, massaging a human, multi-finger manipulation, vegetable cutting, and box pushing (Fig.~\ref{fig:task-images}). 
+We advance our discussion on the contact-rich tasks in Sec.~\ref{sec:tasks-review}, by grouping the tasks in the reviewed literature into four main categories, and presenting uncommon task variants that introduce novel challenges.
+
+% \suggest{task classification: - mobility (horizontal (polish) vs vertical (drill) to contact) - accuracy requirement \cite{suomalainen2022survey} - periodicity \cite{suomalainen2022survey} - reversibility of mistake (painting vs wiping) - coupled/unconnected }
+
+% \remember{"robot must either implicitly or explicitly control the contact force with the environment to complete the task"~\cite{suomalainen2022survey}; contact is either compulsory, or only used to decrease uncertainty.}
+
+% \remember{related terms: pHRI, impact-aware manip., manipulation with the environment, exploiting environment constraints}
+
+
+\subsection{\suggest{Heng}Definition of Safety in Contact-Rich Tasks}
+Safety in contact-rich manipulation spans multiple, complementary notions that arise from diverse objectives, stakeholders, and operational contexts~\cite{wabersich2023data}. Rather than a single definition, safety should be understood along several axes: physical interaction and energy exchange; stability and invariance; constraint satisfaction and reachability; risk- and data-driven guarantees; human-centered factors and standards~\cite{ISO15066}; and phase- and level-specific integration (exploration vs.\ execution; planning vs.\ control). We formalize these axes and situate them within contact-rich robotics with representative references.
+
+
+
+\subsubsection{Physical-Interaction Safety: Contact-force, Energy and Passivity}
+Contact force is a primary lens for safety in contact-rich manipulation. Excessive normal or tangential forces, whether as high transient impact at contact onset or as sustained forces/pressures during steady interaction, can damage workpieces and tooling, or injure humans in collaborative settings. A practical definition of safety, therefore, specifies force envelopes over time, including bounds on magnitude, rate of change, and impulse, together with region- or phase-specific limits (e.g., fragile surfaces, no-touch faces). Reviews on interaction/impedance control and force regulation formalize these aspects and their stability implications \citep{ajoudani2018progress,calanca2015review}.
+
+Achieving force-centric safety requires (i) reliable sensing/estimation of contact forces and states, (ii) controllers that prioritize force regulation under uncertainty, and (iii) runtime mechanisms that enforce hard limits. Force/torque sensing combined with observers and multimodal perception~\cite{huang_unified_2025} supports contact-state estimation (onset, sticking/slip) and force-grounded policy inputs; this enables early guard actions (e.g., approach deceleration, alignment) to reduce peaks and avoid lateral overload. Classical hybrid position–force control and impedance/admittance control provide physically interpretable means to track force references while maintaining compliant interaction; variable impedance schemes adapt stiffness/damping online to keep forces within bounds amid modeling error and task variation \citep{ajoudani2018progress,calanca2015review}. In learning-integrated systems, producing high-level references (pose/force/impedance gains) rather than direct torques helps preserve stability margins while meeting force objectives \citep{ajoudani2018progress,yuan2022safe}.
+
+Enforcement at execution time benefits from casting force bounds (and friction cones) as constraints. Model-based safety filters, such as MPC with hard/soft constraints or barrier-based action projection, can minimally modify a nominal (possibly learned) command to preserve admissible contact forces, especially near transitions (free-space to contact, contact to sliding). This projection viewpoint also supports chance/risk-aware limits to reduce rare but damaging force spikes \citep{yuan2022safe,29,152}. When specifications are given in natural language or task rules (e.g., “do not exceed 5 N on cable,” “avoid pressing the painted surface”), grounding them into formal force/region constraints and injecting them into the safety layer provides reliable guardrails during execution \citep{33,100}.
+
+Energy and passivity complement the force-first view by regulating how much energy the robot injects into the environment. Passivity indices and energy reservoirs (energy tanks) offer monitors and buffers that cap impact energy and prevent force runaway under delays, unmodeled compliance, or high-gain settings. In practice, combining passivity-aware impedance/admittance with explicit force envelopes yields robust behavior across approach, impact, and sustained-contact phases, and remains compatible with learning-based references and uncertainty-aware shields \citep{ajoudani2018progress,calanca2015review,yuan2022safe}.
+
+\subsubsection{Stability and Invariance: Lyapunov and CBF Views}
+A second axis treats safety as stability and set invariance. Lyapunov methods certify convergence or boundedness and can imply safety when safe sets are invariant sublevel sets of a Lyapunov function \citep{khalil2002nonlinear, kumar_safe_2025}. Control Barrier Functions (CBFs) enforce forward invariance of safety sets online, minimally modifying actions to prevent constraint violations; they have seen increasing use in contact-aware robotics and safe RL \citep{ames2019cbf,guerrier2024learning,213,235}. End-to-end safe RL can embed barrier-based constraints into training or runtime filtering \citep{287,129}. Here, safety means remaining inside certified invariant sets while preserving task feasibility.
+
+\subsubsection{Constraint Satisfaction and Reachability}
+Safety can be defined as the satisfaction of state, input, and contact constraints (e.g., joint/velocity/torque limits, friction cones, force envelopes). Safe MPC enforces constraints over a horizon with robust tubes or uncertainty sets \citep{hewing2020learning,21}. Hamilton–Jacobi reachability and safety filters compute (or approximate) safe sets and veto actions that would exit them \citep{bansal2017hamilton,wabersich2023data,271}. In the constraint-centric view, safety is the persistent satisfaction of physically meaningful bounds throughout approach, impact, sliding, and re-grasp phases.
+
+\subsubsection{Risk- and Data-Driven Safety}
+Data-driven definitions quantify safety via risk-sensitive objectives, recovery zones, or auxiliary critics that predict and penalize unsafe outcomes. Recovery RL separates exploration from recovery to reduce unsafe excursions \citep{91}; safety critics or pessimistic objectives downweight risky actions under uncertainty \citep{185,gu2024review,brunke2022safe}. Recent work provides theoretical formulations (e.g., safe value functions, shielding and generalization guarantees) to connect statistical learning with formal safety \citep{165,137}. In this axis, safety is a probabilistic guarantee or risk bound over contact outcomes under imperfect models and noisy sensing.
+
+\subsubsection{Human-Centered and Standard-Driven Safety}
+In human–robot collaboration and assistance, safety must address physical limits (contact pressure, speed-and-separation, ergonomics) and perceived safety (predictability, comfort, trust) \citep{ajoudani2018progress,52}. Standards such as ISO~10218 and ISO/TS~15066 codify limits and processes, shaping acceptable forces, speeds, and safety-rated monitoring \citep{280,lakshminarayanan2024robots}. Perception- and policy-level safeguards further bound human exposure to risk in collaborative and assistive tasks \citep{zhao2021efficientHRC,el2020towardsICRA,57,9}. Along this axis, safety extends beyond robot/object protection to human well-being and acceptability.
+
+\subsubsection{Semantic Safety with Vision–Language(–Action) Models}
+Semantic safety concerns aligning task intent, environment context, and contact constraints with what the robot actually executes, so that language-/vision-conditioned policies do not trigger unsafe contact behaviors. In contact-rich settings, this means grounding task semantics (objects, affordances, no-touch zones, insertion axes, force limits) and safety rules (limits, PPE, human proximity) into actionable constraints and monitors for execution \citep{yuan2022safe}.
+
+Modern VLM/VLA systems can (i) parse natural-language goals and safety rules, (ii) ground them in the sensed scene (objects, surfaces, grasp points) \citep{10705419,33,51}, and (iii) parameterize low-level compliant controllers or skill libraries with safety-aware references (pose/force/impedance) \citep{330,zhou_physvlm_2025,wei_audio-vla_2025} rather than direct torques. Typical architectures use a hierarchical split: a language–vision planner selects certified skills/options; mid-level skills expose safety-relevant parameters; low-level safety enforcers (impedance, CBF/MPC, rate limiters) guarantee contact stability and constraint satisfaction during execution \citep{wei_audio-vla_2025,cui_end--end_nodate,lu_vla-rl_2025,376}.
+% Frameworks and benchmarks (e.g., Gymnasium/Safety, stable toolchains) help quantify violation rates and generalization \citep{towers2024gymnasium,raffin2021stable}.
+
+
+
+% In contact, the robot and environment exchange energy; safe behavior often requires limiting net energy injection and bounding impact/steady-state forces. Passivity-based designs ensure that the closed-loop system does not generate energy that could destabilize contact, using constructs such as energy tanks and passivity indices to maintain safe interaction envelopes \citep{hogan2022contact,ferraguti2015energy,spyrakos2020passivity,kronander2016stability,sun2021stability}. Passivity-centric learning integrates these ideas into modern RL, targeting policies that remain energetically “well-behaved” during contact \citep{zhang2025passivity}. From this perspective, safety means bounded energy exchange and force regulation under uncertainties, enabling stable, compliant interaction \citep{ajoudani2018progress}.
+
+
+\subsection{\suggest{Heng}Problem Formulation and Learning Paradigm}
+\suggest{Briefly outline the learning setups: RL, IL, model-based, hybrid methods. This helps readers understand the context of the methods later.}
+\subsubsection{Problem Setting}
+Contact-rich manipulation arises across assembly, insertion, forceful surface interaction, and human–robot collaboration. We consider a general formulation that does not commit to a single mathematical model. Tasks are described by
+(i) a state representation $x_t$ that includes robot kinematics/dynamics, latent contact modes, and measured or estimated wrenches;
+(ii) a control signal $u_t$ that can be low-level torques/velocities or higher-level references such as force targets and impedance/admittance gains; and
+(iii) safety and feasibility specifications involving force/torque envelopes, friction and approach cones, motion limits, and human-centric constraints \citep{ajoudani2018progress,calanca2015review,yuan2022safe}.
+Depending on assumptions and requirements, the underlying decision model may be an unconstrained Markov decision process (MDP) or a partially observable Markov decision process (POMDP), a constrained variant (e.g.,  constrained Markov decision process (CMDP)), or a hybrid-systems/control-theoretic problem with explicit contact transitions. In all cases, safety is operationalized through limits on contact forces/pressures and motion, potentially augmented by risk- or semantics-derived rules \citep{yuan2022safe,33,100,330}.
+
+Observability and abstraction are key design choices. When direct force/torque sensing is available, controllers can track force references and tighten safety envelopes; otherwise, observers or learned estimators provide wrench/contact-state cues for policy inputs and online monitoring \citep{calanca2015review}. Action abstraction often improves safety and sim-to-real transfer: outputting pose/force targets or impedance parameters instead of raw torques yields compliant interaction and clearer hooks for runtime safety mechanisms \citep{calanca2015review,ajoudani2018progress,yuan2022safe}. Finally, semantics (VLM/VLA) supply high-level task structure and safety rules that must be grounded into formal constraints and checked during execution \citep{33,100,330,geng2025roboverse,gu2025robust}.
+
+\suggest{diagram to show the structure }\\
+\begin{figure}
+    \centering
+\includegraphics[width=1\linewidth]{figs/structure.pdf}
+    \caption{structure {\color{red}TODO need a stucture figure }}
+    \label{fig:structure}
+\end{figure}
+
+\subsubsection{Learning Paradigm}
+We summarize five main learning paradigms and how they interface with safety in contact-rich manipulation.
+
+\textbf{Reinforcement Learning}: RL learns policies for variable-impedance forceful skills and insertions, often using action spaces that output force targets or stiffness/damping to preserve compliant interaction. Safety is enhanced by conservative objectives, recovery strategies, and shielded execution (e.g., barrier/reachability/MPC layers) \citep{zhang2024srl,roveda2020model, stan2020reinforcement,zhang2025passivity,348, 320}
+
+\textbf{Imitation Learning}: Demonstrations initialize contact sequencing and force profiles (approach, touch, slide) and are commonly refined by RL or supervised updates; hybrid trajectory–force learning and one/few-shot strategies are prevalent in insertion and assembly settings. IL shares the same safety-friendly action abstractions and leverages compliant controllers during execution \citep{246,27,luu2025manifeel}
+% \textcolor{orange}{Pokuang comment: Our recent benchmark work, ManiFeel, applies IL to nine multimodal contact-rich tasks. You can quote it here if find it appropriate. \cite{luu2025manifeel} }
+
+\textbf{Learning for Model-based and control-theoretic methods}
+Impedance/admittance regulation, robust/adaptive force controllers, MPC with contact constraints, and barrier/reachability filters operationalize limits on contact force/torque, friction cones, and approach geometry. Learning augments these by identifying dynamics, adapting gains, or shaping feasible sets, yielding transparent enforcement at runtime \citep{242, 235,318,pang2023planning,242, xu_look_2021}
+
+\textbf{Foundation model-based methods}
+Foundation models for robotics leverage large-scale vision–language (and action) pretraining to parse open-ended goals, infer affordances, and impose safety-aware constraints before execution. In contact-rich settings, these methods are typically embedded in a plan–parameterize–enforce stack: (i) a VLM/VLA module interprets natural-language goals and scene context to propose task sketches and safety rules (e.g., force caps, no-touch regions, speed-and-separation); (ii) the semantic plan is compiled into formal constraints and parameterized skill references (pose/force/impedance) rather than raw torques to preserve compliant interaction; and (iii) low-level safety layers (e.g., MPC/CBF filters, rate limiters) execute with verifiable bounds on contact forces and approach geometry \citep{33,100,330}. Data and evaluation rely on open toolchains and safety-oriented benchmarks to quantify violation rates, refusal/recovery behavior, and generalization under distribution shift \citep{towers2024gymnasium,152,geng2025roboverse,gu2025robust}. Practically, safety guardrails for foundation-model pipelines include structured prompting and tool schemas, text-to-constraint grounding with pre-execution checks, conservative default limits (force/velocity caps), and “plan-then-filter” action projection through certified controllers; these mitigations address hallucination and mis-grounding that could otherwise lead to overloads at contact \citep{33,330,10705419}.
+
+
+\textbf{Hybrid integration (plan–learn–enforce)}
+Planning and skill graphs (potentially guided by VLM/VLA) provide structure; learned policies output pose/force/impedance parameters; safety layers project actions to satisfy certified constraints. Semantic modules further align high-level intent and safety rules with the certified execution stack \citep{geng2025roboverse,gu2025robust,330,10705419}. Evaluation commonly reports violations, near misses, and generalization using standardized suites and simulators \citep{towers2024gymnasium,raffin2021stable,152}.
+
+
+
+\section{Categorization of Methods from Different Perspectives} \label{sec:methods}
+This section organizes existing safe learning approaches for contact-rich robot tasks along several complementary dimensions to clarify their underlying assumptions and design trade-offs. By examining methods through perspectives such as task characteristics, sensing and policy modalities, data acquisition strategies, simulation environments and benchmarks, safety evaluation metrics, safety abstraction levels, and safety enforcement spaces, the survey highlights common patterns and gaps that are not apparent from any single taxonomy. This multi-view categorization also helps connect classical control-theoretic techniques with modern learning-based and foundation-model-based approaches, providing a unified lens for analyzing current methods and guiding future developments.
+\subsection{Safe Learning for Contact-Rich Tasks}
+\highlight{In this section, we focus on '\textbf{how}' to be safe, mainly including safe exploration and safe execution.}
+
+{\color{red} TODO change the order of subsection, and add the brief introduction to connect each subsection.}
+
+\subsubsection{\suggest{Pokuang} Safe Exploration (safe learning before contact)}
+\suggest{discuss all of the methods such as reachability, RBF, MPC, Safety-set, etc, learning for safe \textbf{control}.}
+
+This section introduces safe learning before executing the task, highlighting its importance in ensuring reliable and risk-free performance prior to real execution. 
+
+Safe HRC is a major application branch within the broader class of contact-rich tasks, and it has traditionally been approached through path planning algorithms such as rapidly-exploring random tree star (RRT$^*$)~\cite{chi2017risk} for dynamic human-robot systems, or artificial potential field (APF)~\cite{rodriguez2023advanced} and virtual fixtures~\cite{bowyer2013active} for real-time adjustment of the robot's trajectory. 
+However, these methods often yield slow trajectory computation and limited generalization, since they require task-specific tuning, assume simplified environments, and adapt poorly to dynamic or unstructured settings~\cite{bowyer2013active}.
+
+Recent approaches enforce safety constraints via control barrier functions (CBFs), where quadratic programs compute minimal trajectory deviations to maintain safety~\cite{hsu2023safety,ferraguti2020safety,dai2023safe}. Extensions to uncertain CBFs (U-CBFs) handle environmental uncertainty~\cite{das2024robust,li2023robust}, though worst-case assumptions often yield conservative designs. Stochastic frameworks using chance constraints offer less conservative alternatives~\cite{wang2024flow,du2011probabilistic}, but remain computationally intractable for most HRC applications due to non-convex feasible regions~\cite{ahmed2008solving}. Complementary work examines risk factors in HRC~\cite{berx2022identification,inam2018risk,liu2020dynamic,majumdar2020should}. While these approaches can better inform the tolerable risk-bound for different applications, a risk tunable CBF can solve the limitation~\cite{11023035}. 
+
+Ensuring system safety while maintaining performance requires sophisticated approaches that balance computational efficiency, safety guarantees, and adaptability. Below, we present four prominent categories of methods that address these challenges through different theoretical frameworks and computational strategies.
+
+% Reachability-based Trajectory Safeguard (RTS)~\cite{Shao2021RTS,Holmes-RSS-20,kousik2020bridging} is an offline-online safety layer that precomputes reachable sets for plan tracking and, at runtime, filters the reinforcement learning policy's continuous actions to the nearest safe plan without throttling learning speed. Compared to Model Predictive Control (MPC), CBF, and Safety-set methods, which provide strong online guarantees but require heavier per-step optimization, RTS offers computational efficiency through its offline precomputation strategy. Similarly, while Radial Basis Function (RBF) and Gaussian Process (GP)-based safe learning methods offer flexible uncertainty modeling, they often rely on probabilistic guarantees and incur expensive computational costs. this approach relies on a reasonably accurate system model and can be less adaptive when dynamics or obstacles change significantly during operation.
+
+Across these reachability-based methods, a common theme is to shift most of the computational burden into the offline construction of trajectory-parameterized reachable sets based on a reasonably accurate model. Reachability-based Trajectory Safeguard (RTS)~\cite{Shao2021RTS} is an offline--online safety layer for continuous-control RL that precomputes trajectory-parameterized forward reachable sets and, at runtime, projects the RL agent's chosen plan parameters to a nearest safe plan while preserving learning efficiency. A reachability-based manipulator planner ~\cite{Holmes-RSS-20} that builds joint-space, trajectory-parameterized reachable sets offline and then uses them to constrain receding-horizon optimization. ~\cite{kousik2020bridging} introduce a receding-horizon planner for mobile robots that performs offline reachability analysis over a continuum of trajectory parameters and then selects safe parameters online. Those approach rely on a reasonably accurate system model and can be less adaptive when dynamics or obstacles change significantly during operation.
+
+
+Model predictive shielding (MPS)~\cite{banerjee2024dynamic} provide a model-predictive shield around any RL policy: they forecast violations and replace unsafe actions with safe, goal-directed recoveries, enabling zero-violation training and deployment. CBF-Guided MPC~\cite{liu2025flexible} embeds barrier constraints in MPC and tunes them online for proactive, explainable hard-safety during tracking/avoidance at the cost of online optimization and careful model or CBF design.
+These MPC-based methods trade offline precomputation for online optimization to improve task progress with interpretable constraints. Planner-augmented approaches such as MoPA-RL \cite{99} can be viewed as a broader shield that uses classical motion planning (and reactive shaping) to intervene and generate collision-free long-horizon actions around a learned policy, improving exploration and execution safety without CBF-style hard guarantees.
+
+RTS-style reachability safeguards shift burden offline, enabling fast runtime projection with hard safety so long as the precomputed reachable sets remain valid; their main limitation is reduced adaptivity under model mismatch or rapidly changing contact dynamics. In contrast, MPS and CBF-guided MPC place more computation online: they can respond to changing constraints and goals within a receding horizon, but require repeated optimization and careful dynamics/constraint modeling, with feasibility and real-time performance becoming the bottleneck in high-dimensional HRC. Practically, reachability filters suit fixed platforms with stable dynamics and tight real-time budgets, whereas MPC/CBF variants suit environments where constraints and intent change quickly and online compute is available.
+
+Implicit Safe Set Algorithm~\cite{zhao2024implicit}.  A model-free safe control method that queries a black-box dynamics (e.g., digital twin) to synthesize a safety index (barrier certificate) and a corresponding safe control law, guaranteeing forward invariance and finite-time convergence. 
+Data-Driven Permissible Safe Control with Barrier Certificates~\cite{mazouz2024data} learns unknown stochastic dynamics via Gaussian Processes and constructs piecewise stochastic barrier functions to compute a maximal set of permissible strategies that satisfy a target probabilistic safety level; as data increases, the permissible set grows toward the known-model benchmark while maintaining safety. Together with safe exploration methods \cite{sootla2022saute,yang2021wcsac,lei2024langevin}, these approaches illustrate how pre-deployment safe learning can constrain exploration to certified-safe behaviors before execution.
+
+Advantage-Based Intervention~\cite{wagener2021safe} achieves safety by online interventions and surrogate MDP training (requires a safe backup policy/advantage estimates), whereas AlwaysSafe~\cite{simao2021alwayssafe} achieves safety by a model-based abstraction of safety dynamics (requires a correct abstraction); both enable safe data collection for learning.
+
+Reachability filters policy actions via offline reachable sets for real-time, hard-safety execution; MPC/CBF enforces safety online via predictive checks and constraints with interpretable but optimization-heavy control; safety-set constructs invariant or permissible safe regions model-free or GP-based for certified operation; and safe exploration guarantees no violations during learning via interventions or abstract safety models, trading flexibility and sample efficiency against model/backup policy assumptions.
+
+Here we group learning-based methods by what they learn and how they ensure safety. Lyapunov actor–critic~\cite{16} learns policy weights under an explicit Lyapunov constraint, and executes through an adaptive impedance layer for compliant, stability-guaranteed motion. Safety-Aware Unsupervised Skill Discovery~\cite{22} learns a skill policy and a safety-critic that estimates failure probability, yielding intrinsically safe skills for downstream tasks. Variable-Impedance Skill Learning~\cite{23} learns a latent skill prior/decoder, a latent policy, and impedance as part of the action, achieving safety via compliant interaction and bounded contact forces. Impedance-learning adaptive control for HRI~\cite{9531394} learns impedance gains, feedforward interaction force, dynamics parameters, and robust Sliding Mode Control (SMC) gain, with Lyapunov proofs of bounded tracking. Impedance iterative-learning SMC~\cite{5} updates impedance and SMC gains across trials, combining compliance and robustness guarantees for non-repetitive tasks. Model-accelerated maximum-entropy RL for high-precision assembly~\cite{98} learns a stochastic policy executed through an impedance controller and leverages a GP dynamics model for sample-efficient training, achieving practical safety via compliant interaction.
+
+ Learning-based approaches directly optimize policies, skills and impedance from data, offering greater adaptability to unmodeled dynamics and complex contact phenomena with less hand-crafted modeling, most advantageous when rich demonstrations or interactive rollouts are available and the task/environment is hard to model yet demands fast, compliant behavior under distribution shift.
+
+ 
+Since the literature lacks a unified benchmark that evaluates different safety paradigms on the same contact-rich task under matched conditions, the comparisons in this section are necessarily synthesis-based: we distill the reported assumptions, guarantees, and practical constraints from the above studies into a common set of criteria. To provide a unified lens for analyzing trade-offs across method families, we compare them using six recurring axes:
+(A1) guarantee strength/type (hard invariance/reachability vs.\ probabilistic vs.\ empirical),
+(A2) model reliance (known dynamics vs.\ approximate/black-box vs.\ data-driven),
+(A3) compute placement (offline precomputation vs.\ online optimization/filtering),
+(A4) conservatism and risk tuning (worst-case bounds vs.\ chance levels vs.\ tunable safety margins),
+(A5) scalability and real-time viability (state dimension, horizon length, contacts/multi-agent),
+and (A6) data/sample efficiency (how safety constraints affect exploration and learning speed).
+In figures~\ref{fig:6dim_hex_ratings}, we summarize these axes using hexagonal ratings for representative methods.
+
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=\linewidth]{figs/6dim1.pdf}\\
+    \includegraphics[width=\linewidth]{figs/6dim2.pdf}
+    \caption{
+    Hexagonal ratings across six comparison axes (higher values indicate stronger relative performance on a 1--5 scale).
+    (A1) Guarantee strength: 1 = empirical/heuristic only, 5 = hard safety (invariance/reachability-style).
+    (A2) Model independence: 1 = requires an accurate known model, 5 = model-free / black-box / learned abstraction.
+    (A3) Online efficiency: 1 = heavy online optimization, 5 = lightweight runtime (most computation offline).
+    (A4) Conservatism / tunability: 1 = highly conservative with few tuning knobs, 5 = explicitly risk-tunable and typically less conservative in practice.
+    (A5) Scalability / real-time viability: 1 = struggles in high-dimensional contact-rich or multi-agent settings, 5 = scales well and runs in real time.
+    (A6) Data efficiency (safe learning): 1 = data-hungry, 5 = requires little data to ensure safety or supports efficient safe data collection.
+    }
+
+
+    \label{fig:6dim_hex_ratings}
+\end{figure}
+
+Across the six axes (A1--A6), the literature reveals a recurring trade-off between guarantee strength and adaptability/compute. Classical planning and reactive shaping are intuitive but often provide weaker or indirect guarantees and require task-specific tuning, limiting scalability in dynamic HRC. CBF-style methods offer explicit, interpretable safety enforcement with strong guarantees when modeling assumptions hold, but can become conservative under uncertainty (e.g., worst-case U-CBFs) or computationally heavy when using less conservative probabilistic constraints. Learning-based compliant skills improve adaptability to complex contact phenomena and can achieve practical safety via compliance and stability arguments, but their effective safety depends on training coverage and may trade formal hardness for data requirements. Reachability-based safeguards deliver the strongest hard-safety behavior with predictable runtime by shifting computation offline, yet rely on accurate models and can be less adaptive under mismatch or rapidly changing environments. MPC/shielding approaches sit between these extremes, improving adaptivity through online prediction and constraint handling but incurring repeated optimization costs and feasibility concerns in high-dimensional contact-rich settings. Safe-set/certificate construction and intervention/abstraction-based safe exploration further enable pre-deployment or training-time safety, but their conservatism and scalability are governed by certificate fidelity, backup/abstraction correctness, and how often safety mechanisms override exploration.
+
+
+\subsubsection{\suggest{Heng}{Safe Execution (post contact stage).}}
+Safe execution is crucial in contact-rich robotic tasks, as robots must interact not only with complex and uncertain environments but often also in close proximity to humans~\citep{ajoudani2018progress}. During these interactions, any unsafe behavior can result in damage to the robot, the manipulated objects, or even pose risks to human safety. Ensuring safe execution means that the robot's actions consistently respect physical constraints~\cite{141}, avoid hazardous situations, and maintain robust performance despite uncertainties or disturbances. This is especially important in real-world deployments, where unpredictable events and unmodeled dynamics are common. Therefore, developing methods that guarantee safety during execution is essential for the reliable and trustworthy operation of robots in contact-rich scenarios.
+
+A widely adopted and effective approach to enhance safe execution in contact-rich robotic tasks is the use of compliant controllers~\cite{317,hogan1985impedance,24,23,samadikhoshkho_review_2025}. These controllers enable robots to interact safely with their environment and with humans by allowing controlled flexibility and adaptability in response to external forces. Among the most common compliant control strategies are impedance control and admittance control. Impedance control regulates the dynamic relationship between the robot's motion (position or velocity) and the forces it experiences, effectively making the robot behave like a virtual mass-spring-damper system~\cite{hogan1985impedance}. This allows the robot to absorb impacts and maintain stable contact with uncertain or moving surfaces. Admittance control, on the other hand, measures external forces and commands the robot to move accordingly, making it suitable for tasks where the environment imposes significant forces on the robot~\cite{232,205}. Both approaches are fundamental in ensuring that robots can safely and robustly perform manipulation tasks involving physical contact, reducing the risk of damage or injury during interaction.
+
+One key challenge in ensuring safe execution is properly tuning controller parameters (such as stiffness, damping, and inertia) to suit different task scenarios and contact conditions~\cite{calanca2015review}. Incorrect parameter settings can lead to unsafe behaviors, such as excessive contact forces, instability, or failure to accomplish the task. Traditionally, these parameters are manually tuned based on expert knowledge and trial and error, which is time-consuming and may not generalize well across diverse tasks or environments. Learning-based methods offer a promising solution by automatically adapting controller parameters through data-driven optimization, enabling robots to achieve both safety and high performance in varying and uncertain contact-rich scenarios~\cite{cruz2024learning,10705419}.
+
+A major research direction in safe execution for contact-rich tasks is the use of RL to automatically tune the parameters of compliant controllers~\cite{elguea2023review}, such as impedance or admittance control. In these approaches, RL algorithms are employed to learn optimal values for parameters such as stiffness~\cite{zhang2024srl}, damping, and inertia, enabling the robot to adapt its compliance to varying task requirements and contact conditions~\citep{martinez2015safe}. This data-driven adaptation helps maintain safety by minimizing excessive contact forces, preventing instability, and improving task performance.
+
+Recent research has demonstrated the effectiveness of RL-based parameter learning in a variety of contact-rich scenarios. For example, RL has been used to adjust impedance parameters online to ensure safe and robust assembly~\cite{stan2020reinforcement,192,49,174}, insertion~\cite{55,279,344}, and surface interaction tasks~\cite{61}. Some works incorporate safety constraints directly into the RL framework, such as limiting the maximum allowable force or ensuring stability margins during learning~\cite{287,66, zhang2024srl}. Others combine RL with model-based safety filters~\cite{tang2024learning} or control barrier functions~\cite{zhang_enhancing_nodate} to guarantee constraint satisfaction throughout the learning and execution process~\cite{zhang2024srl}.
+
+These methods offer several advantages: they reduce the need for manual parameter tuning, allow for adaptation to unmodeled dynamics or changes in the environment, and can explicitly balance safety and performance objectives. However, challenges remain in ensuring sample efficiency, generalization across tasks, and providing formal safety guarantees during both training and deployment. Ongoing research continues to address these issues by integrating uncertainty estimation, risk-sensitive objectives, and hybrid learning-control architectures.
+
+\suggest{list all of the methods such as hybrid VLM, VLA(e.g. safeVLA, TLA, etc), etc in terms of safe interaction.}
+Large vision–language(-action) “robot foundation” models enhance safe execution by converting unstructured scene and instruction inputs into structured, verifiable manipulation plans, then constraining low‑level interaction.
+
+% \textbf{Plan-parameterize-enforce (PPE).} 
+High-level language/vision modules parse tasks and safety rules (e.g., force caps, no-touch regions, human proximity) and compile them into machine-checkable constraints; mid-level policies parameterize compliant skills (pose/force/impedance) rather than direct torques; low-level safety filters (CBF/reachability/MPC shields) project commands online to maintain invariance and limits~\citep{330}.
+
+\textbf{ VLA with safe constraints and tactile modality (e.g., “safeVLA”, “TLA”-style).}
+Semantic policies are restricted via schema-conformant action spaces and pre-execution checks; code-as-policies and structured prompting inject explicit guardrails (caps, forbidden zones) before motion is issued \citep{33,330,10705419, zhang2025vtla, huang2025tactile, yang2025bitla, cheng2025omnivtla}.
+
+% \textbf{Safety wrappers around generative policies.} Diffusion or neural-dynamics controllers operate under runtime shields: barrier certificates, reachability vetoes, and safety-MPC perform minimal intervention to prevent force, velocity, and region violations in approach/impact/sustained-contact phases \citep{29,26,152}.
+\textbf{Semantic-to-physical constraint grounding.} VLMs/VLAs translate natural-language rules and scene understanding (affordances, fragile surfaces) into explicit force/region/speed constraints that downstream safety layers can enforce \citep{376}.
+
+% \suggest{integration of RL with IL}
+\subsubsection{\suggest{Rui}Provable Safety Methods}
+% \suggest{Lyapunov-based methods, Control Barrier Functions (CBFs), contraction metrics, etc.}
+
+Robotic safety has long been researched in classical control before learning-based methods became prevalent \citep{hogan1985impedance, khalil2002nonlinear, bansal2017hamilton, hogan2022contact}. Rigorous mathematical tools were developed to provide provable guarantees of stability and safety \citep{blanchini1999set, blanchini2008set, slotine1991applied, kumar_safe_2025}.  
+This section aims to systematically describe foundational methods for certifying safety, including lyapunov-based methods, control barrier functions (CBF), contraction metrics, reachability analysis and invariant sets.
+While originally developed for classical model-based control, many of these tools are increasingly integrated in modern learning-based frameworks \citep{wabersich2023data, 35, 75, 14, 57, 80}. This section aims to establish the control theoretical foundations for understanding and developing safe learning methods for contact-rich robotic tasks.
+
+\textbf{Lyapunov-based methods} build on the concept of a Lyapunov function, a scalar energy-like function $V(\boldsymbol{x})$ that decreases along trajectories of a dynamical system. Formally, consider a system $\dot{\boldsymbol{x}}={f}(\boldsymbol{x}, \boldsymbol{u})$ with state $\boldsymbol{x} \in \mathcal{X}$ and control input $\boldsymbol{u} \in \mathcal{U}$. A continuously differentiable function $V: \mathbb{R}^{n} \to \mathbb{R}_{\ge 0}$ is a Lyapunov function for a closed-loop system if it is positive definite ($V(\boldsymbol{0}) =0$, $V(\boldsymbol{x}) > 0$ for $\boldsymbol{x} \neq \boldsymbol{0}$) and its time derivative is negative semi-definite ($\dot{V}(\boldsymbol{x}) \le 0 \, \forall x$).  For safety, Lyapunov analysis is often used to certify invariant sets. If we can identify a set of safe states $\mathcal{S} (e.g. \, \mathcal{S} = \{\boldsymbol{x}\mid V(\boldsymbol{x}) \le c\})$ and a Lyapunov-like function $V(\boldsymbol{x})$ that decreases or stays constant on $\mathcal{S}$, then any trajectory starting in $\mathcal{S}$ will remain in $\mathcal{S}$ for all time, making $\mathcal{S}$ a forward-invariant safe set \citep{khalil2002nonlinear}.
+
+Lyapunov-based methods are well-suited to scenarios where the main objective is stability, for example, regulating contact force to a desired value. Nearly all classical robot controllers, e.g., PD controllers or compliance controllers, are derived with an implicit Lyapunov function to prove stability \citep{16, 2, 32}. Passivity-based control is another Lyapunov-related approach. By designing the closed-loop system to be passive, one can guarantee stable interactions, which means the robot can safely interact with the environment because it will not generate energy that could cause instability \citep{van2014port, forni2018differential, hill2022dissipativity, 35, 75}.
+
+Despite their broad use, a major challenge for Lyapunov methods is finding a suitable Lyapunov function for complex nonlinear systems \citep{khalil2002nonlinear}. For high-dimensional robots with complex contact dynamics, hand-designing a $V(\boldsymbol{x})$ that decreases in all conditions, especially across contact/non-contact modes, is difficult. In hybrid systems, standard Lyapunov theory does not directly apply and one may need multiple Lyapunov functions \citep{branicky2002multiple, giesl2015review, manchester2017control}. Another limitation is that classical Lyapunov methods are primarily designed to certify stability or asymptotic convergence of the closed-loop system. Unless the Lyapunov sublevel sets are explicitly constructed to be forward invariant and contained in a prescribed safe set, Lyapunov stability alone does not guarantee that state or input constraints are respected along the entire transient \citep{romdlony2016stabilization, li2023survey}. In particular, a Lyapunov-stable controller may drive a robot back to its desired equilibrium after a disturbance but still allow temporary violations of safe force or workspace limits \citep{manjunath2021safe, wu2015safety}. Therefore, Lyapunov-based designs are well-suited for ensuring long-term stability or boundedness, but typically need to be augmented with barrier-type conditions to enforce state constraints and safety \citep{ames2019cbf, blanchini1999set}.
+
+\textbf{Control barrier functions (CBFs)} provide a formal, Lyapunov-like tool specifically for enforcing safety constraints. While Lyapunov functions certify the stability of an equilibrium, barrier functions certify forward invariance of a safe set, which prove the system will never enter certain unsafe regions \citep{romdlony2016stabilization, ames2016control, ames2019cbf}. The typical setup is as follows: Define a continuously differentiable scalar boundary function $h(\boldsymbol{x})$ such that the safe set $\mathcal{C}$ is $\{\boldsymbol{x} \mid h(\boldsymbol{x}) \ge 0\}$ and the unsafe set is $\{\boldsymbol{x} \mid h(\boldsymbol{x}) < 0\}$. As an example, the boundary $h(\boldsymbol{x})=0$ can describe the contact force reaching a limit. A valid CBF satisfies a condition that ensures $h(\boldsymbol{x})$ cannot decrease into the negative unsafe region. One common form: There exists an extended class-$\mathcal{K}$ function $\alpha(\cdot)$ such that for all states on the boundary of $\mathcal{C}$, we can choose control inputs $\boldsymbol{u}$ to yield $\dot{h}(\boldsymbol{x}, \boldsymbol{u}) \ge -\alpha(h(\boldsymbol{x}))$. If this holds, then whenever $h(\boldsymbol{x})$ is zero or positive, its derivative cannot drive $h(\boldsymbol{x})$ across the zero boundary into the unsafe region. 
+Geometrically, $h(\boldsymbol{\boldsymbol{x}})$ can be seen as a "barrier" that goes to zero at the safety boundary and typically to negative values outside the safe set. 
+The CBF condition forces the controlled dynamics to hover at or increase $h(\boldsymbol{x})$ at the boundary, never allowing a drop below zero \citep{wu2015safety}.
+
+CBFs are especially powerful for real-time enforcement of safety constraints. Unlike open-loop potential field methods \citep{batinovic2022path, pan2021improved}, CBFs offer a guarantee of safety because the CBF condition is a hard constraint on the control input. 
+
+Despite their strengths, CBFs come with several challenges. First, they require a reasonably accurate model of the system and environment. Model uncertainty or external disturbances can break the guarantee. There is active research on robust CBFs and adaptive CBFs to account for uncertainty, but guaranteeing safety under uncertainty often leads to conservative controllers \citep{pati2023robust, buch2021robust, wang2025safe}. Second, there can be conflicts between multiple CBFs or between a CBF and control goals. It is possible that no single controller can simultaneously satisfy all constraints and achieve the desired motion. In such cases, typically one should relax constraints \citep{isaly2024feasibility, breeden2023compositions}. Third, the design of CBFs becomes significantly more involved for safety constraints with high relative degree, such as contact and force constraints that depend on higher-order derivatives of the state, which are ubiquitous in contact-rich robotic tasks \citep{breeden2021high, wang2022high, wong2025contact}.
+
+% \begin{figure*}[ht]
+%     \centering
+%     \includegraphics[width=0.88\linewidth]{figs/tasks_categories_draft.pdf}
+%     \caption{ \textcolor{orange}{Pokuang updated, not finish will update tomorrow change the color, text format and the shape} }
+%     \label{fig:task-categories1}
+% \end{figure*}
+
+
+\textbf{Contraction metrics} offer a fundamentally different viewpoint than the  Lyapunov-based and CBF methods that provide scalar certificates for stability or safety with respect to particular equilibria or safe sets. Rather than analyzing the behavior of trajectories relative to a fixed point or a boundary, contraction theory studies the evolution of the differential distance between arbitrary trajectories of a dynamical system. A system is said to be contracting if infinitesimal displacements between trajectories converge exponentially to zero under an appropriate Riemannian metric. When such a contraction metric exists, all trajectories within a contraction region converge exponentially toward one another, independent of their initial conditions. This yields a strong form of incremental stability: not only do trajectories converge to a specific equilibrium, but they converge toward a unique flow or invariant trajectory structure of the system. The contraction metric thus serves as the formal certificate ensuring this incremental convergence and generalizes classical Lyapunov analysis to trajectory-to-trajectory stability \citep{liu2025certified, lohmiller1998contraction, slotine2003modular, manchester2017control}.
+
+A metric is typically given by a positive definite matrix function $\boldsymbol{M}(\boldsymbol{x})$ defining a weighted norm $|\delta \boldsymbol{x}|_{\boldsymbol{M}}^2 = \delta \boldsymbol{x}^{\top} \boldsymbol{M}(\boldsymbol{x}) \delta \boldsymbol{x}$ for infinitesimal perturbations $\delta \boldsymbol{x}$. The system $\dot{\boldsymbol{x}} = f(\boldsymbol{x}, \boldsymbol{u})$ is contracting with rate $\lambda > 0$ if there exists a uniformly positive definite metric $\boldsymbol{M}(\boldsymbol{x})$ such that the Jacobian of the dynamics satisfies a matrix inequality:
+\begin{equation}
+    \frac{\partial f}{\partial \boldsymbol{x}} (\boldsymbol{x}, \boldsymbol{u})^{\top} \boldsymbol{M}(\boldsymbol{x}) + \boldsymbol{M}(\boldsymbol{x})\frac{\partial f}{\partial \boldsymbol{x}} (\boldsymbol{x}, \boldsymbol{u}) \preceq -2 \lambda \boldsymbol{M}(\boldsymbol{x}), \forall \boldsymbol{x}, \boldsymbol{u}.
+\end{equation}
+
+This condition means the distance between two nearby solutions measured by $\boldsymbol{M}$ decays at least at rate $\lambda$. One can interpret it as a generalized Lyapunov condition applied to the difference dynamics. If we consider the error $|\tilde{\boldsymbol{x}}|= \boldsymbol{x}_1 - \boldsymbol{x}_2$ between two trajectories $\boldsymbol{x}_1$ and $\boldsymbol{x}_2$, contraction theory guarantees $|\tilde{\boldsymbol{x}}| \le k e^{-\lambda t} |\tilde{\boldsymbol{x}}(\boldsymbol{0})|$ for some $k>0$. A remarkable property is that if a system is contracting, it has a unique equilibrium or invariant trajectory that is globally exponentially stable \citep{lohmiller1998contraction}. In control contexts, we often speak of control contraction metrics (CCMs). A CCM extends the problem to controlled systems. It provides a condition under which a feedback controller can be designed so that the closed-loop system is contracting. If a CCM exists, one can synthesize a controller that achieves exponential tracking of any feasible reference trajectory \citep{manchester2017control}.
+
+\begin{figure*}[ht]
+    \centering
+    \includegraphics[width=0.9\linewidth]{figs/tasks_categories_block.pdf}
+    \caption{We review the contact-rich tasks under four main categories indicated with separate colors. Each category is further divided into sub-categories. The categories are not mutually exclusive. Examples of some downstream tasks that belong to multiple categories are shown as rectangular nodes.  }
+    \label{fig:task-categories}
+\end{figure*}
+
+Contraction metrics are particularly useful in scenarios requiring robust trajectory tracking and disturbance rejection. A major challenge of this approach is finding a contraction metric for a given system, which can be challenging as finding a Lyapunov function. For complicated robots, $\boldsymbol{M}(\boldsymbol{x})$ might need to be very complex or even non-existent in closed form \citep{giesl2021computing, giesl2022review}. Another challenge is that contraction typically addresses stability properties but not explicit state constraints \citep{singh2017robust}.
+
+\textbf{Reachability analysis and invariant sets} approaches compute the set of states from which the system can remain safe indefinitely or the set of states that could lead to an unsafe condition. Techniques like Hamilton-Jacobi (HJ) reachability solve a PDE to find the backward reachable set of an unsafe target \citep{mitchell2005time, bansal2017hamilton}. Consider a system whose dynamics are described by an ordinary differential equation
+    $ \dot{\boldsymbol{x}} = \boldsymbol{f}(\boldsymbol{x}(t), \boldsymbol{u}(t)) $
+where $\boldsymbol{x}$ is the system's states, $\boldsymbol{u}(t)$ is the control input.
+To compute the reachable set, a value function $V(\boldsymbol{x}, t)$ is typically defined, representing whether the system can reach the target set from state $\boldsymbol{x}$ at time $t$. This value function satisfies the HJ equation:
+\begin{equation}
+    \frac{\partial V}{\partial t} + H(\boldsymbol{x}, \nabla{V}) = 0
+\end{equation}
+where $H$ is the Hamiltonian defined as
+\begin{equation}
+    H(\boldsymbol{x}, \nabla{V}) = \max_{u \in \mathcal{U}}\{-\boldsymbol{f(x, u)} \cdot \nabla{V}\}
+\end{equation}
+By solving this equation, the boundary of the reachable set can be obtained, allowing for the analysis of the system's behavior under various control strategies \citep{mballo2025hamilton, choi2023forward, liu2024hamilton}.
+
+The limitation is the curse of dimensionality. Solving HJ PDEs or exhaustive reachability is only feasible for simplified systems \citep{darbon2016algorithms, bansal2021deepreach, ganai2023iterative}. In safe learning contexts, reachability is often used as a runtime safety filter \citep{liu2025reachable, Shao2021RTS, selim2022safe, kochdumper2023provably, suh2025dexterous}. 
+
+
+\subsection{\suggest{Gokhan} Contact-rich tasks}\label{sec:tasks-review}
+
+In this section, we review the safety-concerned online learning methods from the task perspective. 
+In accordance with our scope, we compile and discuss the contact-rich robotics tasks that are tackled with these methods in the literature. 
+For this purpose, we identified the tasks in each of the papers we scanned for this survey. 
+Our analysis shows that the \textit{insertion} or \textit{assembly} tasks are the most common type of physical interaction tasks. These are followed by the \textit{surface interaction} tasks such as polishing and grinding. 
+We also identify the task types of \textit{object manipulation} and \textit{physical human-robot interaction (pHRI)}. 
+% Please note that the dexterous hand manipulation and HRI keywords were not included in our paper scan, as these are broad topics in themselves, requiring specific surveying efforts such as \cite{huang2025human} and \cite{52}. 
+We reviewed the tasks in the recent works under these four categories as shown in Fig.~\ref{fig:task-categories}. Details and downstream examples of these categories are given in the following sections. Please see Fig.~\ref{fig:task-images} for example task illustrations.
+
+Our categorization is application-independent, however, it is possible to categorize the tasks also w.r.t. the application areas such as industry, household and healthcare \citep{Tsuji2025asu}.
+Many contact-rich tasks are demonstrated for household applications that cannot be automated, as opposed to industry. These include general household tasks such as wiping a table or a vase \citep{151,6}, inserting a plug \citep{112,146}, and opening a door \citep{36,149}; and kitchen tasks such as cutting vegetables \citep{21, 157}, stirring or scooping food \citep{92,191}, and rolling pizza \citep{156}.
+Industry applications usually focus on flexible manufacturing tasks such as inserting a gear \citep{177,192}, nut threading \citep{10}, building furniture \citep{43}, and disassembly \citep{20,62}. 
+Healthcare applications mostly include the surgery operations \citep{339,188} and physically assisting humans (Sec.~\ref{sec:task-hri}). 
+
+Please note that there may be overlaps and similarities between the four categories as shown in Fig.~\ref{fig:task-categories}. 
+For example, many peg insertion tasks could also be seen as object manipulation, or specific tool use tasks may aim for surface interaction. 
+Depending on the problem formulation some downstream tasks may bring the challenges of multiple categories, which are detailed below.
+
+
+\subsubsection{Assembly and Insertion}\label{sec:task-assembly}
+%Assembly and insertion 
+tasks have been studied in the control literature for a long time both for their importance in industry and the challenges they offer \citep{jiang2020state}. 
+Robotic solutions to this problem can enable flexible assembly applications \citep{67}, and human-like activities such as inserting a key or a plug \citep{179, 85}.
+
+% \suggest{Challenges}
+The challenges include the precision requirement to achieve the tight fit, safety requirements to avoid damaging the equipment or getting stuck, and sensing difficulties as vision modality is less informative due to occlusions and the force-based nature of the task. 
+Assembly problems may involve multi-step insertion actions to achieve a more complex plan \citep{43, 10}. 
+The classical peg-in-hole task focuses on a single insertion of a securely grasped peg into a single upright hole \citep{levine2014learning}. 
+The problem is gradually made more challenging through limited or noisy sensor data, leading to uncertainties over the peg and hole poses \citep{104}, varying peg shapes and sizes \citep{87}, or limited control options, such as rigid position-control \citep{96}.
+
+Other varieties were introduced for covering different application cases: 
+% Practically, these tasks include assembling items such as furtnitures, \suggest{examples}
+% \suggest{Varieties} 
+Inserting multiple pegs (e.g., plugs) simultaneously \citep{30, 72}, 
+assembly in obstructed environments that also require path planning \citep{99}, 
+bimanually manipulating the hole and peg in the same time \citep{12, 31}, 
+multi-stage insertion of vertically complex pegs (e.g., L-shape) \citep{27}, 
+inserting into a deformable hole \citep{193}, 
+reverse insertion (ring-on-pole) \citep{192}, 
+and bolt threading \citep{10}.
+% \suggest{variety challenges} 
+The task varieties add new challenges such as synchronization between manipulators, added degrees of freedom, added constraints such as obstacles, multi-stage task solving and more complex dynamics.
+
+Additionally, the \textit{disassembly} tasks should be mentioned here.
+They invert the assembly task goal: There is already an inserted piece that has to be removed such as extracting a tightly fit part \citep{62}, sliding a bolt along a groove \citep{20}, or removing batteries \citep{113}.
+The challenges of the disassembly tasks are similar to constrained object manipulation tasks such as opening a door or a drawer (Sec.~\ref{sec:task-object}). However, disassembly presents tighter constraints that may easily lead to jamming.
+
+% Assembly/Insertion 
+% \begin{itemize}
+%     \item single peg
+%     \item multi-peg
+%     \item key-lock (shaped peg)
+%     \item ring-on-peg
+%     \item screwing
+%     \item disassembly
+% \end{itemize}
+
+% \suggest{\cite{elguea2023review}}
+
+\subsubsection{Surface Interaction} \label{sec:task-surface} tasks require a continuous purposeful interaction with a physical surface.
+% \suggest{importance} 
+This problem is important to achieve both autonomous manipulation tasks that are hazardous for humans such as sanding \citep{89}, and daily living activities in human spaces such as cleaning a table \citep{35} or stirring a porridge \citep{191}. 
+% \suggest{requirements}
+These tasks usually require keeping a stable contact with the surface and applying consistent force while also following a desired trajectory. Maintaining a precise force and velocity profile enables the consistent quality of results. The problem is made more challenging by varying the surface curvature \citep{2, 142} or tracking complex motion trajectories \citep{107}. The robot may be equipped with a power tool such as a polisher that causes significant vibrations \citep{425online}.
+
+% \suggest{categorization}
+The goal of the surface interaction tasks is to achieve a change on the surface. We observe these tasks under 3 categories: \begin{enumerate*}
+    \item \textit{Surface altering} tasks that change the surface geometry by removing material, such as grinding and sanding \citep{89, 142};
+    \item \textit{surface non-altering} tasks that do not cause a physical change in the surface, such as wiping and polishing \citep{66, 56};
+    \item \textit{particle interaction} tasks that go beyond the surface and move particles, such as scooping a soft tissue \citep{188} or stirring a granular medium  \citep{92, 191}. 
+\end{enumerate*}
+These tasks may require intricate 6-dof maneuvers and high force to move through or process the particles \citep{12}.
+In case of deformable objects \citep{zhu2022challenges}, \textit{surface altering} is easily achieved and revertible; in case of elastic objects such as a sponge \citep{44}, shape deformation is temporal and naturally reversed. Massaging is a special surface interaction task that is challenging due to involving a human, thus the safety concerns are more critical \citep{46}.
+Interaction with deformable surfaces is an under-explored area, attracting more contributions.
+
+We also identify the \textit{surface exploration} tasks as a type of surface non-altering tasks that are less explored in the literature.
+In these works, the touch is fundamental to facilitate navigation and direct the agent towards the goal, such as in blind maze exploration \citep{zhang2024srl,375}.
+These tasks are similar to other surface interaction tasks as the interaction is usually non-prehensile and continuous, however, the goal of these tasks is not manipulating the surface, but navigating or following a trajectory \citep{90}. 
+
+Surface interaction tasks are different than the object manipulation tasks as the target object is not expected to move.
+On the contrary, it is desired to keep the object stable while achieving the surface interaction. 
+The object of these tasks are usually physically constrained, however, wiping the surface of an unconstrained object, such as a vase, requires bimanual coordination to keep it stable during interaction \citep{6}.
+
+\subsubsection{Object Manipulation} \label{sec:task-object} tasks involve long-term and dynamic contacts with an object. Usually, the object constitutes the target of the task, i.e., it is manipulated. However, it is also possible that the object is grasped by the robot and used as a tool in a physical interaction task \citep{196}. The tool can be used to indirectly achieve a surface interaction, insertion or other contact-rich tasks.
+
+The object manipulation tasks are commonly categorized as prehensile and non-prehensile. The former requires grasping an object, while the latter interacts with the object without holding it, such as pushing \citep{94, 99}, sliding \citep{81} and pivoting \citep{145}. 
+Non-prehensile tasks can be done with a simpler manipulator that maintains a single contact with the object, however, they also have a limited control over the object motion. Consequently, the safety of these tasks depend on the motion of the object in challenging environmental conditions: \cite{99} evaluate their method in cluttered environments where collisions are frequent and the object should be moved through narrow paths; the experiments of \cite{94} involve pushing the object through a narrow gap where the object orientation becomes important, or through a bridge with the risk of the object falling. 
+% \suggest{their difference}
+On the other hand, prehensile tasks require at least two contacts with the object to maintain a grasp. 
+Simple grippers can tightly grasp an object, however they do not allow complex object manipulations, thus they are limited to pick-and-place or tool-use tasks.
+In contrast, bimanual manipulation is done through two high-DoF manipulators, and it can achieve complex interactions with the object such as lifting, pushing, flipping and rotating \citep{22, 53}.
+Safe bimanual manipulation requires maintaining safe levels of contact forces without dropping the object, in addition to the workspace and motion limits \citep{22}.
+Multi-fingered hands allow high manipulability of the object with increased control complexity. For a detailed review on dexterous hand manipulation we direct the reader to another survey \citep{huang2025human}.
+
+The object manipulation tasks can be further categorized w.r.t. the nature of the object, such as constrained, articulated, and deformable.
+Constrained object manipulation tasks, such as opening a door or a drawer, impose strict kinematic constraints on the object motion \citep{86}. These constraints may lead to high levels of force, if not handled with compliant and adaptive behavior \citep{36}. Objects like a door, drawer or lever are also termed articulated objects \citep{7}. % also the perception becomes important for generalization
+\textit{Disassembly} tasks (Sec.~\ref{sec:task-assembly}) are challenging examples of constrained object manipulation. 
+Deformable object manipulation is an under-explored research problem that is challenging due to the sensing and modeling complexities \citep{zhu2022challenges}.
+
+\subsubsection{Physical HRI}\label{sec:task-hri} tasks involve physical contact with humans \citep{52}, unlike the human-robot coexistence tasks, where avoiding the human is the main goal of the safety method \citep{57}. 
+pHRI tasks are challenging because of the increased criticality of human safety and the added uncertainty due to the human actor. 
+Thus, the methods should estimate the human behavior and accommodate the uncertainty \citep{ajoudani2018progress}. 
+In traditional pHRI, the robot assumes the passive role, and follows the human intention through compliance control. 
+A special case of this is a robot interacting with both the human and the environment, as in \cite{17}, where the human guides the robot while it interacts with a surface.
+In \cite{59}, the robot can switch between human-guided and autonomous in-contact manipulation modes to adapt its impedance characteristics.
+
+The safety-critical contact-rich interactions between an active robot and human fit better to our scope. 
+In prominent scenarios, the robot touches the human while the human takes a passive role, such as dressing \citep{9} and bathing assistance \citep{5}, ultrasound scanning \citep{14}, and massaging \citep{19, 46}.
+When the robot is physically coupled with the human, such as the rehabilitation robotics, the controller should estimate the human impedance parameters to ensure stability \citep{24}.
+
+Crucially, the notion of safety expands with the inclusion of a human. For example, \cite{5} limit the vision system to a LIDAR during bathing assistance for ethical considerations. Human \textit{perceived safety} also becomes important for the trustworthy and socially acceptable interactions \citep{bartneck2009measurement}. 
+
+\subsection{\suggest{Rui}Sensing And Policy Modalities}
+
+% \suggest{give the details of the policy input that helps enhance safety }
+% In contact-rich manipulation tasks, accurate knowledge of the interaction wrench, i.e., the six-dimensional vector of forces and torques at the robot–object interface, is indispensable. These measurements allow a torque-controlled robot to respect safety constraints, such as friction cones, joint limits, and allowable contact pressures, while still exploiting compliant behaviors that improve robustness to model error and unstructured environments. Consequently, most state-of-the-art control policies treat force/torque information as their primary feedback signal, regulating it in real time to prevent excessive impacts, detect slip, and enable delicate operations such as insertion, threading, or polishing.
+
+% At the same time, recent advances in computer vision have unlocked high-bandwidth, rich semantic perception that complements tactile sensing. Vision provides global, non-contact cues about object geometry, pose, and the surrounding scene, enabling the policy to anticipate upcoming contact events, localize task-relevant features, and adapt its control objectives accordingly. When fused with force/torque feedback—either through classical observers or learned multimodal networks, visual information significantly expands the range of feasible manipulation skills, from dynamic peg-in-hole assembly to human-aware collaborative tasks.
+
+% In this section we review how these two sensing modalities are leveraged in modern control pipelines.
+
+% The dominant input modalities are organized in Tab.~\ref{tab:input}
+
+In contact-rich manipulation, the choice of policy input has a direct impact on safety. The controller must detect the onset and evolution of contact, respect safety constraints such as joint/torque limits, admissible contact forces and friction cones, and remain robust to modelling errors and partial observability. 
+To this end, modern safe learning pipelines leverage a spectrum of sensing modalities, ranging from purely proprioceptive state, through force/torque and high-bandwidth vision, to rich multimodal and language-conditioned inputs. 
+Table~\ref{tab:inputs} summarizes the dominant input types and how they are typically exploited for safety.
+
+\begin{table*}[h]
+    \centering
+    \caption{Sensing and policy modalities}
+    \begin{tabular}{>{\raggedright\arraybackslash}p{3cm}|>{\raggedright\arraybackslash}p{4cm}|>{\raggedright\arraybackslash}p{8cm}}
+    \hline
+      \textbf{Dominant modality} & \textbf{Typical safety leverage} & \textbf{References}\\
+      \hline
+         Proprioceptive and kinematic state only & Contact reasoning from joint configurations and end effector pose; conservative motion generation  & \citet{21, 27, 34, 42, 45, 81, 90, 96, 99, 101, 103} \\
+         \hline
+         Force/torque & Real-time enforcement of force and impedance limits, slip detection, compliant correction of model error & \citet{1, 2, 3, 4, 6, 7, 9, 10, 11, 12, 14, 15, 16, 17, 18, 19, 20, 23, 25, 26, 29, 30, 32, 35, 36, 37, 39, 40, 41, 44, 46, 49, 55, 56, 58, 59, 60, 61, 63, 64, 66, 67, 68, 69, 70, 72, 73, 74, 75, 76, 77, 78, 79, 80, 88, 92, 94, 95, 97, 98, 100, 104}\\
+         \hline
+         Vision & Contact evaluation, localizing task features, and supplying global context that force sensors cannot provide & \citet{1, 2, 3, 5, 6, 9, 12, 13, 15, 18, 20, 22, 28, 33, 36, 47, 48, 57, 61, 65, 67, 68, 85, 87, 89, 91, 94, 95, 98, 100, 107} \\
+         \hline
+         Natural-language instruction& Large multimodal models interpret a human's insturction and then check internal low-level safety & \citet{8, 15, 33, 51} \\
+         \hline
+         Tactile & High-resolution contact localization, pressure distribution monitoring, and incipient slip detection & \citet{43, 71, 86, 106} \\
+         \hline
+         Multimodal fusion & Enables high precision under occlusion & \citet{1, 2, 3, 6, 9, 12, 15, 18, 20, 33, 36, 61, 67, 68, 71, 94, 95, 98, 100, 106}\\
+    \hline
+    \end{tabular}
+    \label{tab:inputs}
+\end{table*}
+
+% \subsubsection{pose}
+% Some works directly use the pose of the robots as the inputs. \cite{27} uses the pose as the input of the skill policy to generate a new sub-goal every certain time step. The Motion-Planner-Augmented Reinforcement Learning framework in \cite{99} processes two complementary classes of inputs: one is the policy-level observation $s_t$. At every control cycle the stochastic policy receives the full robot-environment state vector $s_t$. This vector concatenates proprioceptive signals—sine- and cosine-encoded joint angles together with their angular velocities—with task-specific exteroceptive quantities such as the Cartesian pose of the end-effector, the pose of manipulated objects, and the goal pose within the workspace. The other inputs are considered in the motion-planning query $(q_t, g_t)$. The policy outputs a joint-space displacement.  Whenever its infinity-norm exceeds the direct-execution limit, the system forwards a start–goal pair to an external motion planner. The planner returns a collision-free path that realises this displacement and is subsequently executed. This two-tier input design allows the agent to alternate smoothly between fine, single-step control and long-horizon, obstacle-avoiding motion planning while retaining a unified joint-space action representation.
+
+% The framework in \cite{96} is referenced to the desired end-effector pose that the user supplies as the primary input. At each control step it augments this reference with real-time feedback—the pose error, the end-effector linear / angular velocity, and the external wrench, to form the observation vector consumed jointly by the reinforcement-learning policy and the force-control loop.
+
+% In \cite{91} the contact-rich object extraction environments feed the policy a purely kinematic, non-visual state: a high-dimensional vector that concatenates the manipulator’s joint configuration (positions and velocities) with the Cartesian poses of all tabletop blocks and the end-effector. Because no wrench, force/torque, or tactile channels are provided, contact reasoning is learned solely from this geometric state rather than from explicit force measurements.
+
+% The scheme in \cite{99} consumes a rich state observation that includes the robot’s instantaneous joint positions, joint velocities and other task-relevant scene features such as the Cartesian poses of objects and goal locations.
+
+\subsubsection{Pose and Proprioceptive State}
+
+Several works rely predominantly on proprioceptive and kinematic state, i.e., joint configurations, end-effector poses and their derivatives, sometimes augmented with a few task-level geometric variables, while omitting explicit force/torque (F/T) signals from the policy input. In these settings, safety emerges from conservative motion generation, collision-aware planning and geometric reasoning about contact, often supported by explicit constraints, recovery sets or safety-oriented value functions \citep{21,22,27,34,42,45,48,91,96,99,103}.
+
+A first group of approaches couples a compact state representation (pose and velocity) with an explicit description of goals and safety constraints, and then uses model-predictive or safe-RL updates to keep trajectories inside a certified safe set. The policy or controller observes the current system state together with reference poses and bounds on states and inputs, sometimes augmented with uncertainty estimates, safety penalties or human-provided safety signals \citep{21,22,42,45,54,57,103}. Because distances to constraint boundaries are part of the observation, the algorithm can reason explicitly about safety margins without having to infer risk from raw contact forces, e.g. tightening constraints near obstacles, slowing down near joint limits, or triggering backup controllers when the state approaches a learned unsafe region.
+
+A second family of methods organises behaviour around pose-based skills or motion primitives. Here, the observation typically consists of robot joint or end-effector states together with task-relevant geometric features, such as relative part poses or planner-generated waypoints, while the policy outputs bounded pose increments or selects from a library of safe trajectories \citep{27,34,96,99}. Motion-planner-augmented RL and planner or demonstration-driven frameworks exemplify this pattern. The learned policy reasons over kinematic state and high-level task features, whereas collision-free paths and smooth accelerations are enforced by a downstream planner or stabilising controller. Safety is thus embedded in the way pose sub-goals are parameterised and filtered, ensuring that abrupt or large displacements are routed through a geometry-aware planning layer.
+
+Pose-dominant observations are also used when exteroceptive information is represented directly in configuration space rather than as raw pixels. Benchmark interaction tasks encode the positions of pucks, tools or human partners as Cartesian poses, combined with the robot’s own pose and velocity, so that learning algorithms can enforce distance-based constraints, safety fields around humans, or recovery zones in a low-dimensional geometric space \citep{91,48,zhang2025bresa}. Even in visuomotor settings where images are available, the safety shaping is often defined over the proprioceptive and pose coordinates through joint limits, collision distances or certified invariant sets, while the visual input mainly serves to infer these geometric quantities or to disambiguate task context \citep{13,47,95,99,107}. Compared with force-centric designs, such pose-based formulations trade direct measurement of contact forces for simpler, more structured safety reasoning in configuration space, and are particularly attractive when high-quality kinematic models and planners are available.
+
+\subsubsection{Force and Torque sensing}
+
+For many contact-rich tasks, especially those involving insertion, surface following, or physical human–robot interaction, F/T measurements at the wrist or fingers act as the primary safety interface. Policies typically observe these signals together with joint and end-effector state and use them to cap contact loads, detect slip or jamming, and adapt impedance so that tracking performance is achieved without violating force or pressure limits \citep{1,2,4,23}. In contrast to purely kinematic designs, such formulations expose safety-relevant quantities directly in the observation, which allows controllers to react immediately to unsafe contact events in assembly, surface interaction, and terrain-contact scenarios \citep{19,32,39,61}.
+
+A large family of methods couples F/T sensing with variable impedance or admittance control. The policy input in these works typically concatenates joint or end-effector pose and velocity with measured interaction forces/torques, and sometimes task descriptors such as surface or tissue properties, environment stiffness, or task phase \citep{2,19,32,46}. The action space is parameterized in terms of stiffness, damping, or target forces, and safety is enforced by bounding these impedance parameters, shaping them over time, or embedding stability and performance objectives into the learning problem \citep{23,25,41,78}. This pattern appears across industrial assembly and sanding, massage and rehabilitation, and sliding or surface following tasks, where the policy learns to reshape compliance in response to the measured wrench so that interaction forces remain within prescribed envelopes \citep{39,61,69,71}. Some approaches further introduce latent policy classes or structured action spaces over impedance parameters, which makes it easier to impose smoothness and magnitude limits on the learned stiffness and damping profiles \citep{1,40,59,74}.
+
+F/T signals are also combined with explicit safety margins, constraints or stability certificates derived from control theory. In this line of work, the observation space does not stop at raw wrench measurements and state. Controllers additionally receive features derived from Lyapunov functions, control barrier functions, passivity errors or other safety indicators that are computed using the measured forces and state trajectories \citep{14,16,29,59}. Learning algorithms then operate directly on these structured safety variables, for example by penalizing trajectories that approach constraint boundaries, adjusting admittance or impedance gains when passivity residuals grow, or biasing exploration away from regions with high estimated risk \citep{39,44,57,80}. This idea extends naturally to uncertainty-aware formulations, where system state, force/torque and uncertainty estimates are combined, and the policy is trained to remain robustly within contact-safe sets despite modelling errors and partial observability \citep{60,92}.
+
+In physical human–robot interaction and teleoperation, F/T channels additionally encode human intent and comfort. Many frameworks treat human-applied forces at the end-effector, interaction torques, or teleoperated wrenches as part of the policy input together with robot joint or end-effector state and task phase \citep{11,17,24,58}. These signals are interpreted either as demonstrations of desired compliant behaviour or as instantaneous preferences over interaction forces, and are used to adapt impedance online, to learn tele-impedance mappings, or to construct task-oriented safety fields around the human partner \citep{15,52,69,76}. Safety here is twofold: the robot must both respect human-specified force envelopes and ensure that the resulting closed-loop behaviour remains stable under changing human dynamics.
+
+Another recurrent pattern is to use F/T sensing for contact-state estimation, search, and long-horizon assembly. In such settings, policies augment pose and geometry with force histories, contact-state labels, or belief maps over likely contact locations \citep{3,7,26,55}. Contact cues extracted from wrench measurements, such as contact onset, sticking versus sliding, or successful insertion, are then used to gate skills, switch admittance gains, or trigger recovery behaviours when jamming or misalignment is detected \citep{29,32,37,72}. Active-search methods in particular combine end-effector pose and force/torque with Bayesian belief updates and safety features, enabling the robot to probe cautiously, back off when measured forces exceed certified bounds, and refine subsequent search motions while remaining within safe contact regions \citep{14,56,60,77}. Compared with vision-only pipelines, these force-centric designs provide a direct window into the quality of contact, enabling safer behaviour under occlusion, poor lighting, or inaccurate geometric models.
+
+Even when richer sensory modalities such as vision or tactile arrays are available, force/torque remains a core channel through which safety is enforced. Multimodal policies often use vision primarily to infer geometry and high-level task context, while relying on force/torque and proprioception to regulate local interaction \citep{9,12,31,94}. End-to-end sensorimotor models that consume images, joint state and force/torque typically define safety shaping, through penalties, auxiliary critics or recovery policies, over wrench and configuration features rather than pixels, underscoring that F/T sensing is the main substrate on which safe contact behaviour is learned and executed \citep{37,95,100}.
+
+\subsubsection{Vision Sensing}
+
+Vision is widely used to provide non-contact, global information about objects, surfaces and humans that is difficult or impossible to infer from proprioception and force alone. Depending on the camera placement, visual inputs range from bird’s-eye or third-person views that cover the entire workspace, through fixed eye-to-hand cameras that monitor a local cell, to wrist- or eye-in-hand cameras that track the interaction region from the robot’s point of view \citep{3,5,13,15,20,36,57,65}. Across these configurations, safety is enhanced in two complementary ways: by anticipating future contact and potential collisions based on scene geometry, and by monitoring the evolution of interaction in the immediate vicinity of the end-effector.
+
+Global and external viewpoints are typically used to capture task geometry, object and fastener poses, and human motion. Assembly and disassembly systems exploit RGB or RGB-D images, often converted into scene graphs or object pose estimates, alongside joint and end-effector state to ensure that motion plans respect part tolerances and obstacle constraints before contact is made \citep{20,36,67,95,98}. Surface-interaction and bathing applications reconstruct patient or workpiece shape from point clouds or depth maps and use this geometry, together with robot pose, to generate reference paths that avoid sharp curvature and maintain safe approach angles during contact \citep{1,2,5,61}. In human–robot collaboration, visual tracking of human pose or trajectories is fused with robot state and sometimes interaction forces to construct task-oriented safety fields around the person. These fields enter the policy input as spatial risk maps that reshape robot motion to avoid unsafe proximity or contact \citep{15,57}. Pixel-based safe RL and visuomotor world models further push this idea by using raw images as the primary observation, with safety-aware critics or constraint penalties guiding behaviour toward image regions that correspond to safe configurations \citep{13,22,65,91}.
+
+Local eye-in-hand or wrist-mounted cameras provide a complementary, close-range view that is particularly valuable in contact-rich tasks where the relative pose between tool and environment must be controlled with high precision. Insertion and fastening pipelines use visual estimates of peg–hole or object–fixture pose from such cameras as part of the policy input, so that approach and alignment motions are corrected before large contact forces occur \citep{3,28,85,87}. Diffusion-based compliance policies and force-constrained dressing controllers condition on sequences of RGB or RGB-D images from wrist or nearby cameras, together with end-effector poses, to predict how candidate motions will influence contact geometry and thereby avoid unsafe configurations \citep{6,9,12}. In variable-impedance manipulation with image-conditioned action spaces, multiple RGB views of the workspace are combined with end-effector pose and velocity, so that the controller can adapt stiffness and damping not only to measured forces but also to visually perceived contact conditions, occlusions and environmental changes \citep{89,100,107}.
+
+A prominent trend is to fuse visual information with haptic and proprioceptive sensing in a joint representation that directly feeds safety-aware policies. Visual–haptic variable impedance controllers combine latent visual features extracted from RGB images with force/torque or tactile readings and robot state, enabling the policy to reason simultaneously about global geometry and local contact quality when selecting compliant actions \citep{31,86}. Dressing and bathing systems integrate segmented point clouds or image-based features with end-effector force histories and candidate motions, using learned dynamics or prediction models to filter out actions whose predicted contact forces exceed task-dependent thresholds \citep{5,9,12}. In furniture assembly and other complex contact-rich tasks, multimodal context sequences concatenate proprioceptive vectors, RGB observations and high-resolution tactile readings, allowing residual policies or skill-transfer mechanisms to refine motion precisely at the moment of contact while keeping interaction forces within safe ranges \citep{38,43,82}. Recurrent or belief-state architectures extend this idea by maintaining a latent estimate of the scene and contact state under partial observability, with both vision and force/torque streams contributing to belief updates and safety-aware action selection \citep{94,100}.
+
+Finally, several frameworks place visual perception within larger safety-aware learning stacks that combine high-level reasoning with low-level control. Safety-aware unsupervised skill discovery and recovery-based RL methods treat vision as part of the state used to infer which regions of the environment are safe to explore, and to learn recovery zones or backup skills that can be invoked when the system approaches unsafe visual configurations \citep{22,91,94}. Vision–language–action models extend this further by taking images alongside natural-language instructions and past interaction histories, and by incorporating safety feedback into the training objective so that the resulting policies can interpret human intent while avoiding visually grounded unsafe behaviours \citep{33}. Overall, these works highlight that visual inputs, whether global or hand-centric and whether raw pixels or structured geometry, play a central role in making safety-relevant aspects of the environment explicit to the policy, so that contact-rich behaviour can be regulated proactively rather than reactively.
+
+\subsubsection{Language Instructions}
+
+Natural language is increasingly used as a high-level input channel through which humans specify tasks, constraints and preferences, while lower-level controllers remain responsible for enforcing physical safety during execution. Instead of hard-coding task objectives in cost functions or reward weights, these approaches let users describe what the robot should do, and often how cautiously it should behave, in free-form ~\citep{kyaw_text_2025}, which is then grounded into symbolic plans, motion goals or policy parameters \citep{8,33,51}. From the perspective of safety inputs, language thus complements geometric and haptic signals by exposing human intent and safety requirements explicitly at the policy interface.
+
+One line of work couples language with visual and proprioceptive observations in large vision–language–action architectures. In such systems, camera images and robot state are processed jointly with a natural-language instruction to produce either low-level actions or intermediate code that can be executed by downstream controllers \citep{8,33}. Safety is then imposed at two levels: the model is aligned to avoid generating obviously harmful plans, and the generated code or action sequences are checked against constraint sets or safety filters before deployment \citep{8,33}. Compared to purely numeric task encodings, this design allows the same sensorimotor stack to be reused across tasks, while safety-relevant differences are captured in the language input rather than in separate controllers.
+
+Another set of approaches emphasizes preference-driven interaction. Here, users do not only issue initial instructions, but also provide follow-up signals indicating whether a behaviour is safe, comfortable, or acceptable, and these signals are incorporated into the learning objective or alignment procedure \citep{33,54}. Text-conditioned models, for instance, may take as input a description of the desired interaction style together with histories of states, actions and safety feedback, and are trained to predict actions that satisfy both task and safety preferences \citep{33,51}. Human-centered safe RL frameworks complement this by treating human feedback as an additional observation channel that shapes the policy toward behaviours that humans deem safe, even when those behaviours are not easily captured by simple numerical constraints \citep{54}.
+
+Across these works, language does not replace low-level safety mechanisms such as force limits, control barrier functions or conservative exploration. Rather, it provides a flexible interface for specifying and updating what safe means in a given context. High-level instructions determine which regions of the state and action spaces are desirable or forbidden, while the underlying visuomotor and force-aware controllers ensure that, once a plan is chosen, contact forces, distances and stability constraints remain within acceptable bounds \citep{8,33,51,54}. As language models and alignment techniques improve, this combination of linguistic intent with structured safety inputs offers a promising route to robots that can be both responsive to human guidance and reliably safe in contact-rich environments.
+
+\subsubsection{Tactile Sensing}
+% (\suggest{Heng's comment: Pokuang, could you check and add more ? Pokuang comment: sure})\\
+There exist many types of tactile sensors. In robot learning, the most widely used are vision-based tactile sensors such as the GelSight family \citep{yuan2017gelsight,wang2021gelsight}, as well as low-cost, easily arrayable tactile sensor designs such as flexible tactile sensor array \citep{huang20243d}. There has also been progress in vision-based tactile sensors with task-adaptive geometries, such as  hemispherical and finger-shaped designs \citep{11024242, sun2022soft, 9811966}. High-resolution vision-based tactile sensing provides high-resolution, local information about contact that complements global vision and low-dimensional F/T measurements. Rather than only measuring a single wrench at the wrist, tactile skins and fingertip arrays reveal pressure distributions, shear and incipient slip at the exact points of interaction, making it possible to detect unsafe contact patterns, such as concentrated loads on corners or sliding on fragile surfaces, before they escalate into damage or failure \citep{31,43,71}. For safe learning, these rich contact cues are typically fed directly into the policy alongside proprioceptive state, so that both exploration and execution can be guided away from behaviours that produce sharp spikes or unstable contact transitions \citep{71,106}.
+
+One group of methods uses tactile arrays as the main channel for encoding task success and safe contact configurations. In furniture assembly, for example, tactile ensembles distributed across fingers or grippers are used to characterise how surfaces, edges and fasteners behaviors during successful insertions or alignments. Policies are then trained to reproduce these tactile signatures while avoiding contact patterns associated with jamming or over-tightening \cite{43}. Gentle manipulation frameworks similarly treat touch as the primary feedback for regulating interaction intensity. Policies observe proprioception and tactile events, and are rewarded for acquiring task-relevant information while keeping per-taxel pressures and impact magnitudes low, which naturally steers exploration toward soft, sliding contacts rather than hard impacts \cite{106}. In both cases, safety is not an external constraint but an emergent property of how tactile patterns are encoded in the observation and reward.
+
+Tactile sensing also plays a key role in variable-impedance control for contact-rich motion along surfaces. In aerial or lightweight manipulators that slide along uneven terrain or structural elements, the policy often receives only proprioceptive state and tactile readings, without full F/T information at the base \cite{71}. The tactile stream indicates whether contact is lost, sticking, or concentrated on an unsafe subset of the surface, while the proprioceptive state captures global motion. Variable-impedance updates are then conditioned on these signals, increasing stiffness to maintain stable contact when support is good, and softening or backing off when tactile cues reveal high local pressure or impending slip \cite{71}. This coupling allows robots with limited payload and sensing to exploit contact safely, even when the exact environment model is unknown.
+
+A further set of approaches embeds tactile input within multimodal visual–haptic–proprioceptive representations. Hierarchical variable-impedance controllers, for instance, build high-level policies on visual features that capture object pose and scene layout, while lower-level modules refine actions using haptic channels that may include both force/torque and tactile measurements \cite{31}. In such designs, vision plans where and when contact should occur, while tactile feedback confirms whether contact is distributed and stable in the way the planner expects. More recent multimodal RL systems explicitly combine visual observations, tactile signals and joint state into a shared latent space, and train adaptive policies that allocate different roles to each modality. Vision is used to anticipate geometric constraints, tactile cues to detect unsafe local pressure or slip, and proprioception to enforce kinodynamic limits \cite{86}. By tying safety-related decisions to tactile cues rather than to coarse force thresholds alone, these methods achieve more nuanced and robust protection for delicate objects, complex assemblies and human collaborators.
+
+% \subsubsection{audio modality}
+% \suggest{Heng's comment: Rui, I just add this subsubsection, could you finalize it as a small part?}
+% ~\cite{wei_audio-vla_2025}
+% \cite{215}
+% \cite{}
+
+% \subsubsection{multisensing}
+% \cite{krohn_self-supervised_2025}
+
+\subsection{\suggest{Heng}Data Acquisition}
+\label{sec:data_acquisition}
+%bg
+Data acquisition plays a foundational role in safe learning for contact-rich manipulation. The quality, diversity, and safety-relevance of the data directly influence the performance and generalizability of learned policies, especially in scenarios involving unpredictable contacts or constrained physical interaction. In this section, we discuss three key paradigms in data acquisition: (i) simulation-based data generation, (ii) real-world data collection, and (iii) hybrid and self-supervised data acquisition.
+
+Data matters for policy learning, especially for a safe policy where negative samples play a significant role in training the agent to be aware of what unsafe scenarios are. However, acquiring such data is time-consuming and labor-intensive. Crucially, unlike the vast text and image corpora scraped from the Internet to train LLMs and VLAs, physical interaction data, specifically high-fidelity contact forces, torques, and safety-critical failure modes, cannot be obtained from the web. This scarcity of contact data in foundation models creates a significant gap in their ability to reason about physical dynamics and safety. Consequently, physical data collection remains inevitable and irreplaceable for contact-rich tasks, despite efforts to leverage simulation and internet-scale proxies. As shown in the data pyramid in Fig.~\ref{fig:data_pyramid}, real-world contact data sits at the apex and is both scarce and essential.
+ And in Fig.\ref{fig:data_pyramid} we retain only the most representative concepts in each layer to highlight the progression rather than exhaustively listing all sources. Within each layer, the listed keywords are ordered by increasing contact fidelity and safety relevance: for real-world data, from generic task execution logs to explicit safety and failure cases; for simulation, from generic randomized environments to simulation elements that most directly support sim-to-real transfer; and for internet and shared datasets, from general web-scale corpora to task-specific real-robot benchmarks.
+
+% \begin{figure}[tb]
+%     \centering
+%     \includegraphics[width=0.8\linewidth]{figs/data_pyramid.pdf}
+%     \caption{Data pyramid for safe policy learning in robotics}
+%     \label{fig:data_pyramid}
+% \end{figure}
+\begin{figure*}[t]
+    \centering
+    \includegraphics[width=\textwidth]{figs/data_pyramid_pie.pdf}
+    \caption{Data pyramid for safe policy learning in contact-rich manipulation. 
+    The pyramid is organized into three layers according to physical fidelity and safety relevance. 
+    (1) Real-world data: includes task execution logs, high-frequency proprioception (joint states, velocities, tactile and force--torque sensing ), contact-rich interaction episodes, and safe and unsafe or failure cases, which provide the most direct evidence about real physical contacts and safety-critical events. 
+    (2) Simulation: includes domain randomization (dynamics, appearance, noise), ground-truth physical quantities (forces, poses, contacts), physics engines (MuJoCo, PyBullet, Isaac Lab), procedural scene and task generation, and residual or learned dynamics models with sim-to-real adaptation, enabling large-scale exploration of contact scenarios under controllable yet imperfect dynamics. 
+    (3) Internet and shared datasets: includes web-scale language corpora (LLM data), generic vision datasets (web images and videos), large-scale robot logs with weak contact labels, manipulation datasets with limited contact or safety labels, and task-specific real-robot benchmarks with small scale, which are abundant but only indirectly capture contact-rich and safety-critical phenomena.}
+    \label{fig:data_pyramid}
+\end{figure*}
+
+
+\subsubsection{Simulation-Based Data Generation}
+Simulated environments provide a safe, scalable, and cost-effective way to generate large volumes of data for contact-rich tasks without risking damage to hardware or fixtures. Physics engines such as MuJoCo~\cite{todorov2012mujoco}, MuJoCo Playground~\cite{zakka2025mujoco}, PyBullet~\cite{coumans2016pybullet}, Isaac Gym~\cite{makoviychuk2021isaac} and Isaac Lab~\cite{mittal2025isaaclab} enable learning-based agents to interact with objects under diverse contact conditions, often with ground-truth access to forces, velocities, object poses, and other latent quantities that are difficult or expensive to measure on real systems. These simulators support large-scale parallel rollout, accelerating the training of data-hungry methods such as deep RL and imitation learning for contact-rich manipulation.
+
+To improve generalization and robustness, domain randomization and procedural scene generation are widely used to expose policies to variations in geometry, mass, friction, sensor noise, and task parameters, which is crucial for sim-to-real transfer in assembly, insertion, and other tight-tolerance tasks~\cite{37,139,145}. Recent work further combines high-fidelity rendering and physics to generate multimodal datasets (vision, force/torque, tactile) that can be used to train VLM/VLA-style models and other foundation models for contact-rich robotics.
+
+However, simulations still suffer from a pronounced reality gap, particularly for phenomena such as material deformation, frictional sticking and sliding, small-clearance contacts, and compliant or flexible components, which can lead to significant discrepancies in policy behavior when transferred to real hardware. To mitigate this, recent approaches incorporate learned residual models, online adaptation, or human-in-the-loop corrections on top of simulation-trained policies, for example by learning residual compliance parameters or gated residual policies that refine the base controller in the real world~\cite{111,176}. Together, these trends point toward hybrid pipelines in which accurate simulation, structured domain randomization, and residual or adaptive components jointly address the sim-to-real challenges of safe contact-rich manipulation.
+\subsubsection{Real-World Data Collection}
+Real-world data collection remains a cornerstone of safe learning, as it captures the complexities and uncertainties of physical interactions that simulations may not fully replicate. This involves deploying robots in controlled environments or real-world settings to gather data on contact forces, object dynamics, and task performance under various conditions.
+However, collecting high-quality data in the real world is often time-consuming, expensive, and potentially unsafe, especially in contact-rich tasks where excessive forces or unexpected contacts can damage hardware or pose safety risks to humans. To address these challenges, researchers often employ techniques such as teleoperation, where human operators guide the robot through tasks while collecting data on safe and unsafe interactions~\cite{mower2023ros, 354}. 
+Additionally, safety constraints can be integrated into the data collection process, ensuring that the robot operates within predefined limits to avoid damaging itself or its environment~\cite{5, 18}.
+Furthermore, real-world data can be augmented with simulation data through techniques like domain adaptation or transfer learning, allowing policies trained in simulation to be fine-tuned on real-world data~\cite{zhang2024srl, berrocal2024evaluating}.
+%table
+\begin{table*}[h]
+    \centering
+    \caption{Simulators used in contact-rich tasks for learning-based methods}
+    \begin{tabular}{l|c|c|c|r}
+    \hline
+    \hline
+      Simulators & Deformable & GPU & Tasks & References\\
+      \hline
+         MuJoCo & \checkmark & \xmark & Manipulation, Locomotion & \cite{zhang2024srl}\\ 
+         MuJoCo XLA/MJX & \checkmark & \checkmark & Manipulation, Locomotion & \cite{zhang2024srl}\\ 
+         Genesis & \checkmark & \checkmark & Soft-body, Articulated & \cite{Genesis}\\
+         PyBullet & \checkmark & \xmark & Manipulation, Grasping & \cite{mower2023ros, 354}\\
+         Isaac Gym & \checkmark & \checkmark & RL Training, Manipulation & \cite{makoviychuk2021isaac}\\
+         Isaac Sim & \checkmark & \checkmark & Photorealistic, Digital Twin & \cite{noauthor_isaac_nodate,berrocal2024evaluating}\\
+         Isaac Lab & \checkmark & \checkmark & Robot learning & \cite{372}\\
+         Orbit     &\checkmark & \checkmark & Interactive  Robot Learning &\cite{mittal2023orbit}\\
+         % RoboCasa & \checkmark & \checkmark & Household Tasks, Manipulation & \cite{nasiriany2024robocasa}\\
+         % RoboSuite & \checkmark & \checkmark & Manipulation, RL Benchmarks & \cite{zhu2020robosuite}\\
+         % ManiSkill & \checkmark & \checkmark & Manipulation, RL Benchmarks & \cite{mu2maniskill,gumaniskill2}\\
+          
+         Factory  &  \xmark & \checkmark & RL, Assembly & \cite{narang2022factory}\\
+         RoboAssembly & \xmark&\xmark ？&furniture assembly & \cite{yu2021roboassembly}\\
+         Drake & \xmark & \xmark & Model-based Control & \cite{tedrake2014drake}\\
+    \hline
+    \end{tabular}
+    \label{tab:simulators}
+\end{table*}
+
+\begin{table*}[h]
+    \centering
+    \caption{Benchmarks used in contact-rich tasks}
+    \begin{tabular}{l|c|c|c|c|r}
+    \hline
+    \hline
+      Benchmarks & Scalable& Deformable & GPU & Tasks & References\\
+      \hline 
+         RoboVerse & \checkmark& \checkmark & \checkmark & Manipulation, RL Benchmarks & \cite{geng2025roboverse}\\
+         RoboCasa & \checkmark& \checkmark & \checkmark & Household Tasks, Manipulation & \cite{nasiriany2024robocasa}\\
+         RoboSuite & \checkmark& \checkmark & \checkmark & Manipulation, RL Benchmarks & \cite{zhu2020robosuite}\\
+         ManiSkill & \checkmark& \checkmark & \checkmark & Manipulation, RL Benchmarks & \cite{mu2maniskill,gumaniskill2}\\
+         Meta-World & \checkmark& \xmark & \checkmark & Manipulation, RL Benchmarks & \cite{yu2020meta}\\
+         % Safety gym & \checkmark& \xmark & \checkmark & Safety in RL, Manipulation & \cite{ray2019benchmarking}\\
+         OpenAI Gym & \checkmark& \xmark & \checkmark & RL Benchmarks, Manipulation & \cite{brockman2016openai}\\ % this is not a simulator, but a benchmark
+         % RoboBench & \checkmark& \xmark & \checkmark & Manipulation, RL Benchmarks & \cite{robobench}\\
+         % D4RL & \checkmark& \xmark & \checkmark & RL Benchmarks, Manipulation & \cite{d4rl}\\
+         RLBench & \checkmark& \xmark & \checkmark & Manipulation, RL Benchmarks & \cite{james2020rlbench}\\
+         % OpenRAVE & \checkmark& \xmark & \xmark & Manipulation, Robotics & \cite{openrave}\\
+         %OpenAI Spinning Up & \checkmark& \xmark & \checkmark & RL Benchmarks, Manipulation & \cite{openai_spinning_up}\\
+         Stable Baselines & \checkmark& \xmark & \checkmark & RL Benchmarks, Manipulation & \cite{raffin2021stable}\\
+         Gymnasium & \checkmark& \xmark & \checkmark & RL Benchmarks, Manipulation & \cite{towers2024gymnasium}\\
+         Safety Gymnasium & \checkmark& \xmark & \checkmark & Safety in RL, Manipulation & \cite{152}\\
+         Robust gymnasium & \checkmark& \xmark & \checkmark & Safety in RL, Robotics & \cite{gu2025robust}\\
+        Safe-Control-Gym & \checkmark& \xmark & \checkmark & Safety in RL, Control & \cite{yuan2022safe}\\
+        % RoboScience & \checkmark& \xmark & \checkmark & xx & \cite{}\\
+            \hline
+    \end{tabular}
+    \label{tab:benchmarks}
+\end{table*}
+
+\subsubsection{Hybrid and Self-Supervised Data Acquisition}
+%bg
+Hybrid approaches combine simulation and real-world data to leverage the strengths of both modalities. 
+By pre-training policies in simulation and then fine-tuning them on real-world data, researchers can achieve better generalization and robustness in contact-rich tasks. This approach allows for the efficient exploration of a wide range of scenarios in simulation while still adapting to the nuances of real-world interactions~\cite{berrocal2024evaluating}.
+Self-supervised learning techniques can also be employed to generate additional training signals from the robot's own interactions, allowing it to learn from its experiences without requiring extensive labeled data~\cite{zhang2024srl}. 
+For example, robots can learn to predict future states or contact forces based on their own sensory inputs, creating a form of intrinsic motivation that drives exploration and learning in contact-rich environments~\cite{zhang2024srl}.
+These hybrid and self-supervised approaches can help bridge the reality gap and improve the robustness of learned policies in contact-rich tasks, enabling them to generalize better to real-world scenarios. 
+By combining simulated and real-world data, researchers can create more comprehensive training datasets that capture a wider range of contact scenarios, leading to safer and more effective policies for robotic manipulation.
+For instance, researchers may pre-train policies in simulation and then fine-tune them on real-world data, or use simulated data to augment limited real-world datasets~\cite{berrocal2024evaluating}. Self-supervised learning techniques can also be employed to generate additional training signals from the robot's own interactions, allowing it to learn from its experiences without requiring extensive labeled data~\cite{zhang2024srl}.
+These approaches can help bridge the reality gap and improve the robustness of learned policies in contact-rich tasks, enabling them to generalize better to real-world scenarios.  
+%bg
+
+\subsection{\suggest{Heng}Simulation Environment and Benchmarks}
+%bg{why sim}
+Simulation plays a critical role in the development and evaluation of safe learning algorithms for contact-rich robotic tasks.
+These tasks often involve complex dynamics, high-dimensional state spaces, and the potential for hardware damage, making direct deployment on real robots risky and costly during early stages of learning. 
+Simulated environments provide a safe, controllable, and repeatable platform to test algorithms, enabling rapid iteration and the generation of large-scale data without physical wear~\cite{long2025survey}.
+
+%benchmark:
+Moreover, standardized benchmarks enable consistent comparison across different approaches, thereby fostering reproducibility and progress in the field. By utilizing well-defined simulation platforms and task suites, researchers can more effectively assess safety, generalization, and performance under varied conditions before transitioning to real-world applications.
+
+\subsubsection{Simulation Environment}
+We group commonly used tools into a richer taxonomy reflecting the physics core, parallelism, sensing realism, and intended evaluation protocols. We highlight the perspective of contact-rich tasks in this survey, readers can find more comparative details in~\cite{berrocal2024evaluating}.
+
+\noindent\textbf{General robotics simulators (ROS-ready).}
+Gazebo \cite{38,70,71,84,96,175}, Webots \cite{95}, CoppeliaSim \cite{169}, and Drake \cite{196} emphasize sensor realism (RGB-D/LiDAR), ROS control, and plugins for actuation/perception. They suit closed-loop, system-level validation, including safety monitors.
+
+
+\noindent\textbf{Rigid-body dynamics engines.}
+\emph{\textbf{CPU engines}} such as DART (via robot\_dart) \cite{251} emphasize accurate contact, joint limits, and articulated constraints. PyBullet \cite{93,139,154,254,263,302,185} remains a widely used open-source engine with strong community support.
+MuJoCo, which is one of the most popular simulators for contact-rich tasks for its inherent contact modeling and fast simulation speed.
+It powers standard benchmarks such as RoboSuite \cite{201} and Safety Gym \cite{262}, and is extensively used in contact-rich manipulation tasks including insertion \cite{85,104,279}, assembly \cite{99,174}, and surface interaction \cite{66,151}. 
+Furthermore, it supports research in safe exploration and control \cite{29,65,91,129}, as well as data collection and skill learning \cite{18,37,74,77,178}. 
+It is also widely adopted in non-prehensile and articulated object manipulation \cite{7,81,94,145}, dynamic and locomotion tasks \cite{100,101}, and complex media interaction \cite{92,106}. 
+Additional applications span diverse contact-rich scenarios \cite{108,109,119,120,125,126,128,133,135,150,159,170,173,190,197,289}.
+
+\emph{\textbf{GPU engines}} leverage massive parallelism to accelerate data collection for RL. 
+The \textbf{Isaac ecosystem} is widely adopted, including Isaac Gym and Isaac Sim, along with their modular frameworks like Factory \cite{narang2022factory}, Orbit \cite{mittal2023orbit}, Isaac Lab \cite{372}, and RoboVerse \cite{geng2025roboverse}. 
+These platforms support large-scale training for contact-rich tasks \cite{10,22,207,240,252,298}.
+Recently, \textbf{MuJoCo MJX} \cite{zakka2025mujoco} has also introduced GPU-accelerated physics to the MuJoCo ecosystem.
+
+% \noindent\textbf{Soft-body, tactile, and differentiable simulation.}
+% SoftGym on NVIDIA FleX \cite{9} targets deformables (cloth, fluids). DIFFTACTILE \cite{299} and Taxim \cite{301,302} enable tactile signals and differentiable pipelines crucial for delicate or compliant manipulation.
+
+% \noindent\textbf{Photorealistic and digital twins.}
+% Isaac Sim (Omniverse) \cite{62} and Digital Twin setups \cite{123} provide photorealistic rendering, USD-based asset pipelines, RTX sensors, and large-scale domain randomization to close perception gaps.
+
+\noindent\textbf{Domain-specific environments.}
+% CARLA \cite{214} and VISTA \cite{206} 
+support safety-critical perception/planning; Assistive Gym \cite{93} focuses on assistive scenarios. Box2D \cite{184} remains useful for 2D contact/control prototyping.
+
+\noindent\textbf{Interfaces and experiment factories.}
+OpenAI Gym-style wrappers \cite{263,267} standardize observation/action APIs across engines and tasks; SAI~2.0 \cite{186,288} and related stacks provide perception-control scaffolding for contact-rich tasks.
+
+
+\subsubsection{Benchmarks}
+Standardized benchmarks are essential for quantifying progress in safety, generalization, and contact robustness. We categorize them into general manipulation suites, contact-intensive benchmarks, and safety-specific environments.
+
+\noindent\textbf{General manipulation suites.}
+\textbf{RoboSuite} \cite{201} standardizes robot models and canonical tasks (insertion, door opening), serving as a primary testbed for modular design. 
+\textbf{Meta-World} \cite{yu2020meta} and \textbf{RLBench} \cite{james2020rlbench} offer multi-task breadth, though often with simplified contact physics.
+Recently, \textbf{RoboVerse} \cite{geng2025roboverse} and \textbf{RoboCasa} \cite{nasiriany2024robocasa} have scaled these to large-scale, scene-level manipulation tasks using foundation models.
+
+\noindent\textbf{Contact-intensive and generalizable benchmarks.}
+To address the reality gap in contact physics, \textbf{ManiSkill} \cite{mu2maniskill} and \textbf{ManiSkill2} \cite{gumaniskill2} feature diverse articulated objects and high-fidelity physics for learning generalizable policies.
+\textbf{Factory} \cite{narang2022factory} provides physically accurate assembly tasks (nut-bolt threading) specifically designed for testing contact-rich policies in Isaac Gym.
+
+\noindent\textbf{Safety-oriented benchmarks.}
+\textbf{Safety Gym} and its successor \textbf{Safety Gymnasium} \cite{262,152} are the de facto standards for safe RL, defining constrained navigation and manipulation tasks with hazard maps and cost signals.
+Beyond penalty-based safety, \textbf{Safe-Control-Gym} \cite{yuan2022safe} integrates control-theoretic constraints (symbolic priors, partial observability) for evaluating certified safety methods.
+\textbf{Robust Gymnasium} \cite{gu2025robust} specifically targets safety under distributional shifts and adversarial disturbances, critical for robust sim-to-real transfer.
+
+
+\begin{figure*}[t]
+    \centering
+    \includegraphics[width=0.85\linewidth]{figs/metrics-figure.pdf}
+    \caption{The metrics in the contact-rich safe learning literature can be categorized according to their objectives: Safety, task and efficiency. There are trade-offs between these objectives. 
+    The researchers aim to develop safe systems with a good trade-off for task success and efficiency.
+    Some metrics, such as force, velocity and energy serve to measure multiple objectives.}
+    \label{fig:metrics}
+\end{figure*}
+\subsection{\suggest{Gokhan} Safety Evaluation Metrics}
+
+% \suggest{shall I split it into subsections? do you have suggestions?}
+
+Safe learning works differ from traditional learning works in their primary goals. Traditionally, the learned models are evaluated for their predictive performance or their task completion success. 
+Some works also focus on the efficiency of the learning system and generalization to novel situations. 
+Although the safe learning works are still concerned with these metrics, they add new ones related to safety, such as a statistic of constraint violations or a cost value. 
+In the case of contact-rich problems, the safety metrics are usually related to the contact forces.
+
+In the following, we present and categorize the evaluation metrics used by the relevant works scanned in our survey. 
+We present the prominent metrics as categorized according to their goals in Fig.~\ref{fig:metrics}. 
+The identified metrics aim to measure the safety, task (success) and efficiency objectives. 
+
+\subsubsection{Safety, Efficiency and Task Objectives}
+
+Safety is usually assessed through the violation of predefined constraints \citep{13, 11} or the value of a cost function \citep{65}. 
+In physical interaction tasks, it is often quantified through physical metrics such as force, acceleration and velocity \citep{36, 44}.
+Control stability and human safety are important subcategories of the safety objective.
+Stability can be measured by the convergence rate \citep{21, 2} or the energy flow of the system \citep{zanella2024learning,zhang2025passivity,375}. 
+The human safety includes primarily the \textit{physical safety} of the human in direct contact tasks like massaging or bathing assistance \citep{19, 5}, however, \textit{perceived safety} concepts such as trust, predictability and comfort gain importance for the acceptance of robots in social spaces \citep{52}. 
+A relevant work \citep{9} evaluates the perceived safety through 7-point Likert survey in their dressing assistance experiments.
+
+The safety objective is the main topic of this survey, however, it cannot be considered in isolation from the other criteria. 
+The task objective is quantified by the frequency of achieving a success \citep{94} or the value of a task cost function (i.e., reward) \citep{95}. In some works, the quality of a solution is assessed by the progress of task completion (\cite{9}: dressing rate, \cite{21}: vegetable slicing progress), size of the explored space \citep{1}, amount of produced output (\cite{12}: ground fine powder), or the tracking accuracy \citep{5}. \cite{20} defines an instability index to quantify the episode reward deviation between runs. 
+The efficiency objective is assessed by the energy consumption \citep{86}, and time requirements of the data collection (e.g., teaching) \citep{82}, learning a model \citep{99}, task execution \citep{95, 3}, or computation of an action or a plan \citep{94, 15}. 
+Since robot hardware is costly, reducing real-world trials by learning in simulation is preferable \citep{4}.
+
+\subsubsection{Trade-off Between Objectives}
+
+The three objectives (Fig.~\ref{fig:metrics}) may conflict in many instances, thus the designers often analyze the trade-off between these. 
+The trade-off can be measured by a combined metric, such as the ratio of the safe and successful experiments to constraint violating ones \citep{91, zhang2024srl}.
+% \remember{, or the ratio of the successful or violating runs to the total number of runs \citep{}}. 
+A safety-efficiency reward function was proposed by \cite{28} to achieve a good trade-off. 
+On the other hand, 
+\cite{11} and \cite{13} compare the numbers of successful and violating runs side-by-side instead of directly calculating a ratio between them. 
+
+Machine learning metrics such as prediction accuracy has been used to measure task objectives, however, it is also relevant in works that use learned models for safety-related predictions \citep{21, 4}.
+Just as the learning curves provide insights on the success and efficiency trade-off, some works present the learning curves of success, violation and their ratio to portray the trade-off between the three objectives during training \citep{91, zhang2024srl}.
+
+% \suggest{training, test, deployment}
+
+Although shifting the focus to safety can decrease the task performance or learning efficiency, these objectives can be aligned in the case of physically interpretable metrics such as force and motion tracking errors, and energy consumption.
+Physically meaningful results such as the force-velocity behavior can provide intuition towards the safety of the system \citep{1, 56}. 
+Tracking the target force without large deviations in the Lyapunov-based boundaries directly translates to both the control stability and task achievement quality \citep{2}. 
+% \suggest{ Force metrics (max, average, tracking)}
+On the other hand, learning energy-based stability from data directly translates to energy efficiency in deployment \citep{zhang2025passivity}.
+
+\subsubsection{Improved Evaluation}
+The safety aspect of a learning system can be further evaluated through added noise and disturbance. 
+% Testing under added challenges:
+\cite{5} evaluates the convergence of their trajectory tracking controller under external disturbance.
+The noise can be injected in observation-space \citep{10,18,94} or action-space \citep{20}. 
+These tests help assessing the limitations and sensing requirements of the systems.
+\cite{87} evaluate their system under uniformly sampled simulation parameters, in addition to localization uncertainties. This allows demonstrating the robustness and generalization capacity of the method.
+
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=0.99\columnwidth]{figs/analysis-levels.pdf}
+    \caption{Three levels of result analyses: Global (high-level), variational (mid-level), and exemplar (low-level).}
+    \label{fig:analysis-levels}
+    \vspace{-0.3cm}
+\end{figure}
+
+% \suggest{high/low-level metrics: trajectory-level (tracking errors: force/pos/stiffness), trial-level (nr of success/violation, progress, time)} 
+Most of the metrics can be presented at different levels of detail. 
+In Fig.~\ref{fig:analysis-levels},
+we define 3 levels of analyses to establish a common understanding and encourage more insightful results: \begin{enumerate*}
+    \item \textit{global} (high-level) analyses present aggregated summary statistics such as the maximum force, total number of violations, or mean ($\pm$ variance) tracking error over many episodes. 
+    \item \textit{variational} (mid-level) analyses show the trends of metrics among many episodes or seeds, such as a learning curve, a histogram of execution times% \citep{zhang2025passivity}
+    , or a scatter plot of success ratio versus force violation% \citep{9}
+    .
+    \item \textit{exemplar} (low-level) analyses present descriptive case studies, often real-time measurements from a single episode, such as motion trajectories, force measurements, or even multi-media material.
+\end{enumerate*}
+Going downwards, the amount of detail and depth of analysis increase; going upwards, the results get more general and memorable. % (or conclusive)
+\textit{Variational} comparisons allow a more in-depth analysis of the system behavior from temporal, spatial or multi-variate perspective. 
+%It allows the reader to understand the temporal behaviour of the system, similar to learning curves.
+\textit{Exemplar} results can give valuable insights on why and how the method works, or when it fails, without deriving general conclusions. 
+We recommend providing analyses at all levels for a more comprehensive communication of the results. 
+
+\subsection{\suggest{Heng}Safety Abstraction Level}
+In contact-rich robotic tasks, safety can be embedded at various abstraction levels in the system hierarchy, ranging from high-level task planning to low-level control, and even spanning across end-to-end learning architectures. Each level presents different trade-offs between interpretability, reactivity, and generalizability. This section categorizes learning-based safety approaches by the level of abstraction at which they operate and discusses their respective advantages, challenges, and applications.
+\subsubsection{High-Level Planning}
+At the high level, safety is typically encoded through symbolic reasoning, task graphs, or decision-making policies that govern long-horizon behavior. 
+Learning-based approaches at this level often involve hierarchical reinforcement learning (HRL) \cite{239, 365}, safe policy search with task constraints \cite{251, 47}, or logic-based planning augmented by learned models \cite{118, 311}.
+In contact-rich settings, these methods aim to avoid unsafe task sequences or infeasible contact configurations by reasoning over constraints such as force thresholds, joint limits, or task success probabilities \cite{204, 208}.
+
+For example, shielded planning mechanisms and arbitration graphs can learn to prune unsafe high-level actions using safety classifiers or predictive models \cite{212, 227, 292}. 
+While such methods provide good interpretability and modularity, they depend heavily on accurate abstractions and may suffer from limited reactivity to unforeseen contact dynamics during execution.
+Temporal logic specifications have also been integrated into diffusion-based planning to satisfy temporally-extended symbolic constraints \cite{218}.
+
+Recently, the emergence of LLMs and VLMs has enabled advanced high-level planning capabilities for robotic systems, including in contact-rich tasks. 
+These models can interpret complex task instructions, reason about safety constraints from natural language or visual cues, and generate high-level action sequences or code that proactively avoid unsafe situations \cite{8, 307, 330, 115}. 
+For example, VLM-enhanced planners can leverage multimodal perception to identify hazardous regions or delicate objects in the environment, integrating this information into symbolic task planning or policy generation \cite{33, 51, 309, 360}. 
+This allows robots to adapt their strategies dynamically, ensuring that safety considerations are embedded from the outset of task execution.
+\subsubsection{Low-Level Control}
+Low-level safety control focuses on ensuring safe interactions at the actuation and feedback level. This includes real-time enforcement of physical constraints such as force, torque, impedance, and stability, which are especially critical in contact-rich scenarios. 
+Learning-based methods here typically involve adaptive impedance control, learning CBFs, model-predictive safety filters, or robust policy adaptation techniques
+\citep{30}.
+
+\textbf{Compliant control and impedance learning}
+A widely adopted strategy is to learn variable impedance or admittance parameters rather than direct torques \cite{23, 25, 28, 317}. 
+By modulating stiffness and damping online based on contact feedback, these methods ensure compliant behavior that naturally limits interaction forces and absorbs impacts \cite{1, 40, 74}.
+Recent approaches also integrate passivity constraints or energy tanks into the learning process to guarantee coupled stability during dynamic contact \cite{zhang2025passivity, 35}.
+
+\textbf{Safety filters and barriers.}
+To enforce hard safety constraints (e.g., joint limits, friction cones, maximum force), CBFs and safety filters are often employed as a protective layer wrapping the learned policy \cite{29, 152, 235}.
+These mechanisms monitor the control input and minimally deviate it to maintain the system within a forward-invariant safe set.
+Model Predictive Safety Filters (MPSF) extend this by reasoning over a short horizon to prevent inevitable future violations, which is crucial for systems with inertia or actuation limits \cite{21, 212}.
+
+\textbf{Robust and adaptive safety.}
+For scenarios with significant model uncertainty (e.g., unknown friction or payload), robust control techniques such as SMC or adaptive control are combined with learning to maintain safety margins \cite{5, 60, 94}.
+These low-level controllers compensate for disturbances and unmodeled dynamics that might otherwise destabilize a high-level learned policy.
+
+% The safety mechanism is firmly at the low-level control level. By learning to output impedance parameters~\cite{28, 25, 23}, the robot ensures safe, compliant interactions during physical execution, namely, safety is enforced through compliant, impedance-based torque control.
+\subsubsection{End-to-End Safety Enhancement}
+% \suggest{End-to-end safety learning for contact-rich manipulation seeks to map perception to actuation while embedding safety directly into the learned policy. Representative directions include safety-regularized objectives (e.g., barrier functions) that constrain the policy during training and deployment~\cite{287}, planner-augmented pipelines that fuse classical motion planning with an end-to-end controller in cluttered, contact-rich scenes~\cite{99} torque-level end-to-end control for fast dynamics~\cite{236}, and task reductions that exploit physical softness and environmental constraints to yield safer, low-dimensional policies. Multimodal representation learning and neural dynamic policies complement E2E by supplying robust features and structured policy dynamics~\cite{100, 186}}
+End-to-end methods aim to integrate perception, decision-making, and actuation within a unified model while embedding safety either implicitly (e.g., through regularization) or explicitly (e.g., via constrained optimization or safety critics). 
+This includes safe reinforcement learning frameworks that learn both task policies and safety constraints simultaneously from raw sensory data \cite{287, 99, 236}.
+For instance, \citet{100} proposed a neural network-based approach that learns to predict safe actions directly from raw sensory inputs, such as images and proprioceptive data, allowing the robot to adapt its behavior in real-time to avoid unsafe actions during contact-rich tasks.
+
+
+Recently, Vision-Language-Action (VLA) models have emerged as a powerful paradigm for end-to-end safety enhancement. 
+These models bridge perception, reasoning, and control by learning from large-scale multimodal datasets that include language instructions, visual observations, and robot actions \cite{330, 33, 10705419}.
+Safety is enhanced in VLA systems through several mechanisms:
+(i) \textbf{Safety-aware prompting and grounding}: VLA models can be conditioned on safety-specific prompts or rules (e.g., "move slowly near the glass") to generate compliant behaviors \cite{8, 51}.
+(ii) \textbf{Safety critics and filtering}: Auxiliary safety modules or critics can be trained to evaluate the risk of generated actions before execution, filtering out potentially hazardous commands \cite{376, 360, 115}.
+(iii) \textbf{Multimodal alignment}: By aligning visual and linguistic representations with physical safety constraints (e.g., force limits), VLA models can better generalize safety concepts to novel objects and environments \cite{309, 307, 218}.
+While these methods promise scalability and generalization, especially in contact-uncertain environments, they often suffer from limited interpretability and pose challenges in formal safety verification compared to modular architectures.
+
+\subsubsection{Hybrid Methods}
+Hybrid methods combine safety mechanisms across multiple abstraction levels to leverage the strengths of each~\cite{24}. For instance, a high-level planner might filter task options using a safety-aware graph while a low-level controller enforces contact force constraints through learned CBFs. Alternatively, end-to-end models may be guided by high-level logic rules or shielded using low-level safety filters during deployment.
+
+\paragraph{Plan–learn–filter pipelines.} A high‑level planner (graph, sampling, optimization, or semantic decomposition) proposes nominal contact strategies or intermediate sub‑goals; a learned policy (often variable impedance/admittance or residual) generates parameterized actions (pose, force, stiffness); then a runtime safety layer (CBF / reachability / MPC shield/projection) minimally modifies unsafe commands while preserving progress \citep{25,28,29,26,martinez2015safe,yuan2022safe}. This layering reduces unsafe transients at approach, impact, and sustained contact phases and limits over‑conservatism by deferring exact constraint satisfaction to an online filter.
+
+\paragraph{Compliant action abstraction and certified projection.} Rather than outputting raw torques, hybrid methods learn action abstractions (desired Cartesian displacements, force targets, diagonal or structured stiffness gains) that preserve passivity margins and expose explicit hooks for safety modification \citep{zhang2025passivity,zhang2024srl,25,28,317,roveda2020model}. Certified projection (QP with CBF constraints, shield veto, reachability pre‑checks) enforces forward invariance or constraint satisfaction without retraining the core policy \citep{29,26,yuan2022safe,152}.
+
+\paragraph{Generative or residual policies under safety wrappers.} Diffusion or residual RL policies produce candidate motions or compliance updates; a safety critic or barrier/MPC layer evaluates predicted force envelopes, energy flow, or constraint margins before execution (“generate–score–project”) \citep{100,zhang2024srl,29,zhang2025passivity,362,117,12}. Residual admittance and stiffness adaptation compensate for unmodeled contact geometry while the wrapper prevents force spikes \citep{25,28,317,178}.
+
+
+\paragraph{Semantic or VLM–VLA hybrid safety.} Vision–language(-action) and emerging foundation model components parse unstructured instructions and scene context into structured constraint objects (force caps, forbidden surface masks, approach cones) \citep{33,330,10705419}. These are handed to the plan–learn–filter stack: semantic planner produces goal or sequence; learned variable impedance or residual policy outputs compliant parameters~\cite{376, 360}; Runtime CBF, reachability, and MPC shield enforces limits; logging layer records violations for calibration \citep{25,28,29,yuan2022safe}. Multimodal fusion (vision + force) disambiguates occlusions and anticipates risky contact transitions, while structured prompting and action schema reduce hallucination‑induced unsafe commands \citep{100,33,330}. This hybridization aligns high‑level semantic intent with certifiable low‑level execution, enabling scalable yet physically grounded safe manipulation in contact‑rich settings.
+
+
+
+Such multi-layered architectures can offer robustness and flexibility, especially in unstructured contact-rich tasks. However, hybrid methods also introduce complexity in integration and may require careful coordination to avoid conflicts between safety modules operating at different levels.
+
+\subsection{\suggest{Rui}Safety Enforcement Spaces}
+
+In the context of learning for contact-rich manipulation, safety is not only a monolithic concept but also is enforced hierarchically across the robot's control architecture. Constraints can be imposed at the level of physical interaction (task space), internal actuation (joint space), or within the decision-making abstraction (policy space).
+Each of these domains provides distinct opportunities and challenges for incorporating safety. Task-space enforcement directly regulates end-effector motion and contact forces with the environment, joint-space methods shape internal robot behavior to avoid unsafe configurations or torques, while policy-level mechanisms ensure that the agent’s decision-making respects safety constraints from the outset. This section categorizes existing literature based on these architectural levels, synthesizing the dominant control strategies and emerging hybrid paradigms.
+
+\subsubsection{Task Space}
+Task-space mechanisms operate directly at the interface of physical interaction, regulating the kinematics and dynamics of the end-effector. By defining safety in Cartesian coordinates, these methods directly constrain the contact forces and motions exerted on the environment.
+A predominant strategy for task-space safety is the use of compliance and stiffness modulation. Rather than tracking rigid trajectories, impedance and admittance control schemes allow the robot to deviate from reference paths in response to external forces, thereby absorbing impact energy and maintaining stable contact \cite{4, 6, 7, 12, 16}. The works in \cite{1, 3} explicitly bound the forces and torques at the end-effector to prevent excessive contact pressures, integrating such constraints into the controller and learning process. Recent learning-based frameworks have extended this architecture by parameterizing variable impedance policies, where the agent learns to output context-aware stiffness or virtual force targets to ensure gentle interaction \cite{23, 25, 107}. To guarantee stability in these interactions, energy-based approaches often enforce passivity constraints, ensuring that the robot behaves as a passive system and does not inject unbounded energy into the environment \cite{35, 75}.
+
+Beyond inherent compliance, formal constraints are frequently applied to bound the workspace. CBFs and safety filters are employed to strictly confine end-effector states within a safe set, overriding policy actions that threaten to violate positional or force limits \cite{14, 57, 80}. These safe manifolds can be learned from demonstrations or modeled via Gaussian processes, restricting the planner to regions with high probability of safety \cite{21, 102}.
+In reinforcement learning settings, task-space safety is often formulated via reward shaping to penalize excessive contact forces \cite{10, 20, 62, 84}, or by restricting the action space to a safe subset of the workspace to prevent collisions during exploration\cite{11, 22, 96, 98}. The works in \cite{8, 34} also use planning-based approaches to build safety into motion generation. Before execution or learning, they compute contact-rich trajectories that satisfy contact stability, task unrelated collision avoidance, and joint limits, so that any subsequent policy learning begins with inherently safe trajectories.
+
+Notably, in human–robot interaction scenarios, the constraints are adapted to dynamic environments, utilizing safety fields to enforce separation distances, and controllers are designed to comply with industry safety standards, e.g. ISO force limits, during physical contact \cite{15, 51, 93}.
+
+\subsubsection{Joint Space}
+While task-space methods focus on extrinsic interaction, joint-space enforcement prioritizes the robot's intrinsic integrity. These methods operate in the configuration space, constraining joint angles, velocities, and torques to prevent self-collisions, singularity proximity, and actuator saturation. 
+
+Safety in this domain is often realized by augmenting low-level controllers with limiting functions. Joint-level CBFs and saturation filters ensure that commanded torques do not exceed hardware capabilities or result in unsafe kinetic energy, thereby indirectly limiting the force transfer to the environment \cite{44}. Stability is further ensured through Lyapunov-based formulations, such as enforcing positive-definiteness in learned joint stiffness matrices to guarantee system passivity \cite{53, 59}.
+
+To mitigate the risks of dynamic impacts, adaptive joint-torque controllers utilize proprioceptive feedback to dissipate shock through joint compliance \cite{60, 94}. In the context of RL, policies operating in joint space are frequently constrained to prevent erratic high-frequency actuation. Strategies include penalizing proximity to joint limits \cite{97} or employing hierarchical schemes where the RL agent dictates high-level goals while a lower-level motion planner generates smooth, collision-free configuration trajectories \cite{99}. Specific applications, such as robotic massage, have demonstrated that limiting joint-space velocities and applying compliance controls effectively bounds the output torque, ensuring safe physical interaction through intrinsic actuation limits \cite{46}.
+
+\subsubsection{Dual-Space Safety Enforcement}
+Exclusive reliance on either task- or joint-space constraints can create safety blind spots. Task-space control may inadvertently command infeasible joint configurations, while joint-space safety may overlook excessive contact pressures at the end-effector. Consequently, hybrid architectures have emerged to enforce safety concurrently across both domains.
+
+Hierarchical control schemes typically employ a task-space loop to manage environmental interaction forces, coupled with a inner joint-space loop to handle redundancy resolution and torque limits. A Cartesian impedance controller regulate contact stiffness, while a secondary joint-space reflex module monitors for collisions or internal limits, overriding commands to dissipate energy if discrepancies arise \cite{66}. Theoretical guarantees for such dual-loop architectures have been established via Lyapunov analysis, proving that errors in both force tracking and joint deviation remain bounded \cite{56}.
+
+Ensuring stability in the joint space can indirectly enforce task-space safety. In \cite{88}, a model-based actor–critic method confines the joint controller’s behavior within stability limits using an analytical model of the robot and environment stiffness. As a result, the end-effector also never pushes beyond safe force limits. Similarly, in dynamic locomotion tasks like hopping, strictly respecting joint torque and angle limits is shown to inherently stabilize the task-space center-of-mass trajectory, preventing falls \cite{101}.
+
+\subsubsection{Policy Spaces}
+Abstracting away from instantaneous control, safety is also enforced at the decision-making level. Policy-space methods integrate safety considerations directly into the learning objective or planning horizon, aiming to preemptively avoid states that would necessitate low-level emergency intervention.
+
+A standard formalism for this is the Constrained Markov Decision Process (CMDP), where the agent optimizes a reward signal subject to a cost threshold associated with unsafe states. Lagrangian relaxation is commonly used to dynamically weight this cost, training the policy to satisfy safety constraints asymptotically \cite{33}. Alternatively, safety can be encoded into the value function itself. Safety critics or feasibility value functions estimate the long-term probability of constraint violation, guiding the policy to select actions that maximize the margin of safety \cite{45}. To handle potential failures, \cite{91} introduces a separate safety policy that intervenes when the agent approaches a high-risk region, steering the system back to a safe state before returning control to the task policy. 
+
+Implementing such boundaries becomes non-trivial when the state space is high-dimensional or unstructured. In high-dimensional visual manipulation tasks, safety barriers are often learned in latent spaces, allowing the agent to distinguish between safe and unsafe visual manifolds without explicit state estimation \cite{65}. Furthermore, when safety constraints are difficult to formalize mathematically, Human-in-the-Loop paradigms incorporate human oversight to shape the policy's risk sensitivity, utilizing human feedback and intervention to define safety boundaries during the exploration phase \cite{54}. Beyond defining constraints and boundaries, generative models such as diffusion policies have been employed to synthesize action sequences that prioritize smoothness and low uncertainty, thereby reducing the stochasticity that often leads to unsafe behaviors \cite{42}.
+% \suggest{comment by Heng: would be better if we write a short paragraph as a conclusion to elaborate the motivation why safety should be guaranteed from task space, sometimes joint space and both}
+% \subsection{\suggest{Heng}Task mobility contexts}
+% \suggest{consider merging it in Sec. 2}
+% \subsubsection{horizontal contact manipulation}
+% \subsubsection{vertical contact manipulation}
+% \subsubsection{object contact manipulation}
+% \subsubsection{others contact manipulation}
+% \subsection{}\end{figure*}
+
+    \section{\suggest{Arash}Key Challenges} \label{sec:challenges}
+    Despite rapid progress in learning-based methods for contact-rich robotic manipulation, several key challenges remain before these approaches can be deployed safely and reliably at scale. This section outlines major open problems, with particular attention to how emerging VLM/VLA-based methods both amplify and help address these issues.
+
+    \subsection{Fragile Safety and Stability Guarantees}
+    Learning-based controllers, including those using deep networks and VLAs, often lack formal guarantees of passivity, stability, and constraint satisfaction under hard contacts~\citep{zhang2025passivity, spyrakos2020passivity,75}, which can lead to unsafe behaviors and hardware damage. While passivity-centric and energy-constrained formulations offer promising directions, integrating them seamlessly with large, expressive policies remains technically challenging, especially when contact conditions change rapidly or unpredictably.
+    \subsection{Data Scarcity and Biased Supervision}
+    Contact-rich skills require precise force control and tight tolerances, but high-quality demonstrations and interaction data are expensive, brittle, and difficult to scale compared to standard vision–language datasets. VLMs and VLAs promise better generalization through pretraining, yet they are typically supervised by weak or indirect signals that do not capture fine-grained contact events, leading to policies that may look competent visually but fail under subtle force or geometry variations.
+    \subsection{Limited Robustness, Generalization, and Uncertainty Awareness}
+    Learning-based policies for contact-rich manipulation, especially ones trained on narrow task distributions, often overfit to specific layouts, materials, or sensing conditions and degrade sharply under distribution shifts. Although VLAs offer broader prior knowledge, current models typically have weak uncertainty estimation, making it difficult to detect when a contact-rich interaction~\cite{33,369} is entering an unsafe regime and requiring fallback to safer behaviors or human intervention.
+    
+    % \subsection{Hybrid and Discontinuous Contact Dynamics}
+    % Physical interaction induces hybrid and discontinuous phenomena that violate smoothness assumptions embedded in most policy-gradient, model-based rollout, or differentiable safety-filter pipelines. 
+    % Classical impedance/admittance formulations offer stabilizing structure, yet tuning them under unmodeled mode transitions remains fragile \citep{ajoudani2018progress,calanca2015review}. 
+    % Learning-based approaches often absorb these complexities implicitly in deep representations, but provide limited formal guarantees that span pre-contact, approach, impact, and sustained interaction phases. A central challenge is constructing tractable multi-modal models or certifiable abstractions that enable invariant-set or barrier-function synthesis without prohibitive conservatism.
+    
+    % \subsection{Sensing, Estimation, and Semantic Grounding}
+    % Accurate high-bandwidth estimation of contact states under latency, compliance, and partial observability is still unreliable in forceful or cluttered settings \citep{calanca2015review}. Multimodal (vision–force–proprioception) fusion pipelines mitigate occlusion, but introduce calibration drift and alignment uncertainties that degrade safety filters. While foundation and VLA models have begun to demonstrate capabilities in instruction-following and context parsing, their capacity to formalize tasks into executable geometric and force constraints remains underdeveloped, highlighting a critical gap for future research in robotics learning and control. \citep{330}. Unsafe semantic mis-grounding (hallucinated affordances, incorrect contact surface identification) represents a new failure mode.
+    
+    \subsection{Safe Exploration Under Physical Risk}
+    Exploration remains the most safety-critical phase: naive probing causes jamming, surface damage, or tool wear in insertion, polishing, and assembly contexts \citep{yuan2022safe,zhang2024srl}. Existing constrained and risk-sensitive reinforcement learning frameworks provide expectation or probabilistic bounds, yet exhibit weakness under distribution shift. Shielding and action-projection (barrier / reachability / model-predictive) layers offer hard online guarantees, but typically depend on conservative uncertainty sets, limiting data efficiency.
+    
+    \subsection{Safe Execution and Performance Trade-offs}
+    Ensuring sustained constraint satisfaction post-training (safe execution) requires balancing responsiveness, task efficiency, and physical margin. Variable impedance or admittance policies learned from demonstrations or reinforcement signals modulate compliance adaptively \citep{28,25,zhang2024srl}, yet stability margins under rapid re-tuning are seldom quantified. 
+    Runtime safety filters can erode performance through excessive intervention, while soft filtering strategies risk cumulative force violations. There is insufficient methodology for joint optimization over (i) violation probability; (ii) force/energy envelopes; and (iii) efficiency.
+    
+    % \subsection{Uncertainty Quantification and Risk Calibration}
+    % While distributional critics estimate risk, their calibration often degrades under unseen geometries or dynamics changes
+    % such as novel geometries, surface coatings, or wear-induced dynamics shifts \citep{yuan2022safe}. Overconfident critics and data-driven pessimism produce either silent unsafe actions or excessive conservatism. Lightweight, online recalibration protocols—anchored by physically interpretable discrepancy measures (force residuals, contact-mode mismatch)—are scarce, particularly for multi-contact and tool-mediated configurations.
+     
+    \subsection{Benchmark and Dataset Limitations}
+    Existing simulation suites and benchmarks provide limited coverage of deformable objects, multi‑stage processes, tool‑supported tasks, and tasks performed in close collaboration with humans. \citep{towers2024gymnasium,geng2025roboverse,gu2025robust}. Public datasets rarely include (i) high-frequency wrench traces aligned with failure annotations; (ii) rich “near-miss” episodes essential for shaping recovery policies; or (iii) semantic safety labels (forbidden regions, fragile surfaces). This scarcity impedes reproducible comparison of violation metrics, recovery latency, and generalization. Emerging safety-oriented RL frameworks and robust benchmarks partially address constrained exploration but lack standardized contact-force evaluation protocols \citep{152,raffin2021stable}.
+    
+    % \subsection{Generalization and Transfer}
+    % Policies trained on narrow peg geometries, surface textures, or force thresholds often overfit task-specific contact patterns \citep{elguea2023review,das2025towards}. Transfer remains unreliable when simultaneous shifts occur in friction, insertion depth tolerance, and fixture compliance. Skill priors and latent variable action abstractions improve sample efficiency \citep{25,28}, but safety constraints remain in current approaches. Formal bounds on violation probability under structured task perturbations (e.g., bounded pose error, stiffness drift) are a critical open research target.
+    \subsection{Safety Risks Specific to VLMs and VLAs}
+    Generalist VLM/VLA policies introduce new safety concerns, such as misinterpreting language instructions, hallucinating feasible contact strategies, or overconfidently executing plans that violate implicit safety constraints. Recent work on safety-aligned VLAs and failure detection for generalist policies underscores how difficult it is to systematically elicit unsafe behaviors, constrain them during learning, and verify that contact-rich deployments remain within acceptable risk bounds.
+     
+    \subsection{Human-Robot-Collaboration Safety}
+    Human proximity or direct physical collaboration introduces soft constraints (comfort, predictability) alongside hard limits (force, speed). For contact-rich tasks near or with humans, operators must be able to anticipate robot behavior and intervene effectively, yet current learning-based controllers often lack transparency and interpretable failure modes. Existing safe learning pipelines predominantly encode physical thresholds while neglecting temporal predictability or trust metrics central to acceptance \citep{346,253,hanna2020towards}. Adaptive safety frameworks that integrate ergonomic and standard-driven constraints (e.g., force envelopes in ISO/TS 15066 of \cite{ISO15066}) with learning-enabled modulation are limited.
+     Advanced models, including VLAs, can in principle explain intentions or request help, but designing interaction protocols, interfaces, and explanations that are both faithful and useful in high-contact scenarios remains an open challenge.
+    
+    
+    
+    \section{\suggest{Yu}Perspectives}\label{sec:perspectives}
+    Safe robot learning for contact-rich manipulation is entering a phase where systematic advances in data, evaluation, and architectural composability must complement incremental improvements in algorithms. We outline key forward-looking directions.
+    \subsection{Standardized Safe-contact Benchmarks}
+    Current suites under-represent multi-stage forceful interaction, deformables, and human-adjacent
+    tasks \citep{towers2024gymnasium,geng2025roboverse,gu2025robust,yuan2022safe}. Future benchmarks for safe learning in contact-rich robotics should move beyond isolated manipulation tasks to suites that stress high-force interactions, tight clearances, and diverse materials and fixtures. A key opportunity is to design benchmarks where vision–language models (VLMs) and vision–language–action (VLA) models must interpret natural language task descriptions and safety rules, then execute contact-rich skills under explicit constraints on forces, slippage, and failure recovery.
+    
+    \subsection{Safety-aware and Data-efficient Learning Frameworks}
+    Next-generation safe learning frameworks should tightly couple formal safety mechanisms with advanced function approximators, including VLAs and other large policies pretrained on internet-scale multimodal data and robot demonstrations. Promising directions include risk-sensitive and constraint-aware variants of VLA-based controllers, hybrid model-based/model-free schemes that use large models for high-level decision-making while maintaining certified low-level safety filters, and methods that exploit language to specify and verify safety conditions during contact-rich interaction.
+    
+    \subsection{Bridging the Sim-to-real Safety Gap}
+    Closing the sim-to-real gap for safe contact-rich behavior will require simulators that expose robots to realistic contact phenomena while also capturing the perceptual and linguistic variability seen by VLM/VLA policies. This opens the door to leveraging generative models and large-scale VLAs to create rich synthetic curricula of tasks, objects, and safety-critical edge cases, followed by safety-aware adaptation and online refinement on real hardware with strict monitoring of contact forces and failure modes.
+    
+    \subsection{Multimodal Semantic Grounding}
+    VLM/VLA models enable symbolic specification of scene understanding, semantic reasoning\citep{33,330,10705419}, yet robust grounding remains fragile under
+    occlusion and clutter. A promising direction is layered grounding, which proceeds from scene parsing to affordance and constraint extraction, followed by formal constraint compilation (e.g., CBF/MPC sets), and ultimately runtime conformance validation. In addition, safety‑aware prompting and structured action frameworks can reduce the risk of hallucinated unsafe ~\cite{geminiroboticsteam2025evaluatinggeminiroboticspolicies}.
+
+    % \subsection{Composable Safety Architectures}
+    % Stacked planners, skill priors, and low-level compliance/filter layers risk inconsistency (latency,
+    % conflicting constraints). Emerging work on modular impedance and shielded policy components
+    % \citep{25,28,29} motivates formal interface contracts: each layer declares (i) controllable
+    % variables, (ii) admissible constraint transformations, and (iii) timing guarantees for arbitration.
+    % Compositional reasoning could permit local certification reusable across tasks.
+    % \subsection{Lifecycle and Continual Safety}
+    % Gradual changes such as wear, fixture drift, and surface variation induce slow shifts in system dynamics.  Lightweight
+    % discrepancy monitors (force residual statistics, mode-transition divergence) feeding adaptive
+    % shields or conservative expansion policies are needed \citep{yuan2022safe,zhang2025passivity}.
+    % Formal bounds on violation probability under gradual drift remain open.
+    
+    \subsection{Human-Centric and Lifecycle-aware Safety}
+    Physical safety envelopes, such as limits on force and speed, are necessary but not sufficient for collaborative adoption \citep{ajoudani2018progress}. Human-centered safe learning frameworks can benefit from language-conditioned policies that understand instructions, preferences, and corrections expressed in natural language, enabling non-expert users to shape safe behavior even in contact-rich collaboration. Over the system lifecycle, advanced models such as VLAs can support continual learning and self-diagnostics, where robots explain their contact strategies, flag emerging risks, and update policies while preserving guarantees about human safety and equipment integrity.
+    \subsection{Scalable Verification for Learned Controllers}
+    Diffusion, latent variable, and residual impedance policies challenge classical verification.
+    Abstraction of action space (e.g., stiffness, damping) into reachable sets. Data-driven
+    certificates, such as learned barrier functions, need procedures for failure detection and repair to avoid degradation.
+    
+    \subsection{Physically-Aware Foundation Models}
+    Generalist manipulation models often fail to capture the mechanics of physical contact. A promising direction is to integrate structured physical priors such as friction cones, energy tanks, and passivity margins into large‑scale action models to limit unsafe extrapolation. A hybrid generation pipeline: first planning with a foundation model, then refining under impedance and barrier constraints, formalizes a “plan–parameterize–enforce” paradigm \citep{100,330}. Building curated datasets that are rich in contact interactions and include explicit safety annotations is a necessary step toward reliable deployment.
+    % \subsection{Risk Calibration and Uncertainty}
+    % Mis-calibrated critics lead to unsafe optimism or paralyzing conservatism
+    % \citep{zhang2024srl,yuan2022safe}. Standardized calibration tests (out-of-tolerance insertion,
+    % unseen material friction) and domain-shift scorecards should accompany publications. Physically
+    % interpretable priors (stiffness ranges, force bounds) can regularize distributional value functions.
+    % \subsection{Energy- and Impedance-Informed Learning}
+    % Variable impedance and energy-aware control remain central to safe physical interaction
+    % \citep{calanca2015review,ajoudani2018progress}. Future learning should jointly optimize task
+    % reward and energy budget while enforcing passivity envelopes; multi-objective formulations
+    % could surface stable Pareto fronts for decision-makers instead of opaque scalarized trade-offs.
+    
+    \subsection{Open Problems}
+    Key unresolved issues include: (i) certified generalization under simultaneous geometric and
+    material shifts \citep{das2025towards}; (ii) synthesis of minimally conservative multi-contact
+    safe sets; (iii) semantic-to-physical constraint robustness; and (iv) lifecycle adaptation with
+    formal transient bounds. Addressing these will hinge on tighter integration of analytical safety
+    structures with data-driven representations and foundation models.
+    \subsection{Outlook}
+    Future progress will rely on bringing together physically grounded control methods such as impedance and passivity, formal safety tools including barrier functions and reachability analysis, scalable data resources like benchmarks and higher‑level semantic reasoning layers. A growing consensus supports layered “plan–learn–filter–execute” architectures, which provide a practical foundation. Moving toward clear metrics and standardized safety will be key to enabling reliable deployment of learning‑based robotic systems in complex, contact‑rich environments.
+
+\section{\suggest{Heng}Conclusion}
+% In this survey, we have provided a comprehensive overview of safe learning methods for contact-rich robotic tasks. We have categorized existing approaches based on their sensing modalities, data acquisition strategies, simulation environments, safety evaluation metrics, abstraction levels, and task mobility contexts.
+% We have highlighted the importance of integrating multimodal sensing, such as force/torque and vision, to enhance safety and robustness in contact-rich tasks. We have also discussed the role of simulation environments and benchmarks in facilitating the development and evaluation of safe learning algorithms. Furthermore, we have identified key challenges in the field, including the need for better data acquisition methods, improved safety evaluation metrics, and the integration of safety mechanisms across different abstraction levels. 
+% We have also outlined future perspectives, emphasizing the potential of hybrid approaches that combine high-level planning with low-level control, as well as the use of large language models and vision-language models to enhance safety in contact-rich tasks.
+In this survey, a comprehensive overview of safe learning methods for contact-rich robotic tasks has been presented, with a particular focus on how emerging foundation models reshape the landscape. Existing approaches have been organized along multiple dimensions, including sensing modalities, data acquisition strategies, simulation environments, safety evaluation metrics, abstraction levels, and task mobility contexts, to provide a structured view of the design space for safe contact-rich manipulation.
+
+The survey highlights the central role of multimodal sensing, such as force/torque, tactile, and vision, in enabling safe and robust behavior under complex contact conditions. Key challenges persist in data acquisition, safety metrics and certification, modeling of contact-rich interactions, and consistently enforcing safety constraints from high-level reasoning down to low-level control.
+
+Looking forward, hybrid architectures and advanced learning paradigms offer promising avenues. Opportunities include combining high-level planning with low-level compliant control, integrating classical safety mechanisms with learning-based policies, and leveraging VLM and VLA models to interpret safety requirements, ground them in multimodal observations, and support transparent, human-centered interaction in contact-rich scenarios.
+
+
+
+
+
+% \subsection{References}
+% Please note that the files \textsf{SageH.bst} and \textsf{SageV.bst} are included with the class file
+% for those authors using \BibTeX.
+% The files work in a completely standard way, and you just need to uncomment one of the lines in the below example depending on what style you require:
+% \begin{verbatim}
+% %%Harvard (name/date)
+% \bibliographystyle{SageH}
+% %%Vancouver (numbered)
+% \bibliographystyle{SageV}
+% \bibliography{<YourBibfile.bib>}
+% \end{verbatim}
+
+%\section{Support for \textsf{\journalclass}}
+%We offer on-line support to participating authors. Please contact
+%us via e-mail at \dots
+%
+%We would welcome any feedback, positive or otherwise, on your
+%experiences of using \textsf{\journalclass}.
+
+
+\begin{acks}
+This paper was supported by the European Union Horizon Projects TORNADO (Grant GA 101189557).
+\end{acks}
+
+\bibliographystyle{template/sageh}
+\bibliography{reference.bib}
+
+\end{document}
